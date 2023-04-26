@@ -1,11 +1,15 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-function initMap() {
-  const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -33.866, lng: 151.196 },
-    zoom: 15,
-  });
+   function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: { lat: -33.447487, lng: -70.673676 },
+        });
+        
+        setMarkers(map);
+      }
+      
   const request = {
     placeId: "ChIJ-cMnGA7PYpYRz1hGYJ4E5so",
     fields: ["name", "formatted_address", "place_id", "geometry"],
