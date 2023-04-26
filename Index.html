@@ -1,6 +1,8 @@
   <head>
     <title>Mapa de Vacunatorios de Chile</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    
     <script>
       /**
        * @license
@@ -16,13 +18,13 @@
           center: { lat: -33.447487, lng: -70.673676 },
         });
         
-       
         setMarkers(map);
       }
 
       // Data for the markers consisting of a name, a LatLng and a zIndex for the
       // order in which these markers should display on top of each other.
-      const vaccinations = [
+      const vaccinations = 
+      [
         ["Vacunatorio Internacional Inmunitas", -33.42269251621238, -70.60987858557121, 12],
         ["Kiñewen Ltda.", -36.82684827802099, -73.04134071814575, 11],
         ["Vacunatorio Neumann y Bertín ", -34.58507071409237, -70.99013399314826, 10],
@@ -72,30 +74,6 @@
 
       window.initMap = initMap;
     </script>
-    <style>
-      /**
-       * @license
-       * Copyright 2019 Google LLC. All Rights Reserved.
-       * SPDX-License-Identifier: Apache-2.0
-       */
-      /* 
-        * Always set the map height explicitly to define the size of the div element
-        * that contains the map. 
-        */
-      #map {
-        height: 50%;
-      }
-
-      /* 
-      * Optional: Makes the sample page fill the window. 
-      */
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
   </head>
   <body>
     <div id="map"></div>
