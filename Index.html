@@ -21,7 +21,8 @@
 
       // Data for the markers consisting of a name, a LatLng and a zIndex for the
       // order in which these markers should display on top of each other.
-      const beaches = [
+      const vaccinations = [
+        ["Vacunatorio Internacional Inmunitas" -33.42269251621238, -70.60987858557121, 12],
         ["Kiñewen Ltda.", -36.82684827802099, -73.04134071814575, 11],
         ["Vacunatorio Neumann y Bertín ", -34.58507071409237, -70.99013399314826, 10],
         ["Clínica de Salud Sanymed", -23.654581449870122, -70.40194410537413, 9],
@@ -53,8 +54,8 @@
           type: "poly",
         };
 
-        for (let i = 0; i < beaches.length; i++) {
-          const beach = beaches[i];
+        for (let i = 0; i < vaccinations.length; i++) {
+          const beach = vaccinations[i];
 
           new google.maps.Marker({
             position: { lat: beach[1], lng: beach[2] },
