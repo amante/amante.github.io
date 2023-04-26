@@ -1,7 +1,7 @@
   <head>
     <title>Mapa de Vacunatorios de Chile</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script type="module" src="./Scripts/scripts.js"></script>
+    //<script type="module" src="./Scripts/scripts.js"></script>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
     
     
@@ -16,7 +16,7 @@
       // to the base of the flagpole.
       function initMap() {
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 10,
+          zoom: 15,
           center: { lat: -33.447487, lng: -70.673676 },
         });
         
@@ -61,17 +61,59 @@
         };
 
         for (let i = 0; i < vaccinations.length; i++) {
-          const beach = vaccinations[i];
+          const vaccines = vaccinations[i];
 
           new google.maps.Marker({
-            position: { lat: beach[1], lng: beach[2] },
+            position: { lat: vaccines[1], lng: vaccines[2] },
             map,
             icon: image,
             shape: shape,
-            title: beach[0],
-            zIndex: beach[3],
+            title: vaccines[0],
+            zIndex: vaccines[3],
           });
         }
+
+        const request = {
+          placeId: "ChIJ-cMnGA7PYpYRz1hGYJ4E5so",
+          fields: ["name", "formatted_address", "place_id", "geometry"],
+        };
+        
+        const infowindow = new google.maps.InfoWindow();
+        const service = new google.maps.places.PlacesService(map);
+
+        service.getDetails(request, (place, status) => {
+          if (
+            status === google.maps.places.PlacesServiceStatus.OK &&
+            place &&
+            place.geometry &&
+            place.geometry.location
+          ) {
+          const marker = new google.maps.Marker({
+              map,
+              position: place.geometry.location,
+            });
+
+            google.maps.event.addListener(marker, "click", () => {
+              const content = document.createElement("div");
+              const nameElement = document.createElement("h2");
+
+              nameElement.textContent = place.name;
+              content.appendChild(nameElement);
+
+              const placeIdElement = document.createElement("p");
+
+              placeIdElement.textContent = place.place_id;
+              content.appendChild(placeIdElement);
+
+              const placeAddressElement = document.createElement("p");
+
+              placeAddressElement.textContent = place.formatted_address;
+              content.appendChild(placeAddressElement);
+              infowindow.setContent(content);
+              infowindow.open(map, marker);
+            });
+          }
+
       }
 
       window.initMap = initMap;
