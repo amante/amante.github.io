@@ -60,59 +60,17 @@
         };
 
         for (let i = 0; i < vaccinations.length; i++) {
-          const vaccines = vaccinations[i];
+          const beach = vaccinations[i];
 
           new google.maps.Marker({
-            position: { lat: vaccines[1], lng: vaccines[2] },
+            position: { lat: beach[1], lng: beach[2] },
             map,
             icon: image,
             shape: shape,
-            title: vaccines[0],
-            zIndex: vaccines[3],
+            title: beach[0],
+            zIndex: beach[3],
           });
         }
-
-        const request = {
-          placeId: "ChIJ-cMnGA7PYpYRz1hGYJ4E5so",
-          fields: ["name", "formatted_address", "place_id", "geometry"],
-        };
-        
-        const infowindow = new google.maps.InfoWindow();
-        const service = new google.maps.places.PlacesService(map);
-
-        service.getDetails(request, (place, status) => {
-          if (
-            status === google.maps.places.PlacesServiceStatus.OK &&
-            place &&
-            place.geometry &&
-            place.geometry.location
-          ) {
-          const marker = new google.maps.Marker({
-              map,
-              position: place.geometry.location,
-            });
-
-            google.maps.event.addListener(marker, "click", () => {
-              const content = document.createElement("div");
-              const nameElement = document.createElement("h2");
-
-              nameElement.textContent = place.name;
-              content.appendChild(nameElement);
-
-              const placeIdElement = document.createElement("p");
-
-              placeIdElement.textContent = place.place_id;
-              content.appendChild(placeIdElement);
-
-              const placeAddressElement = document.createElement("p");
-
-              placeAddressElement.textContent = place.formatted_address;
-              content.appendChild(placeAddressElement);
-              infowindow.setContent(content);
-              infowindow.open(map, marker);
-            });
-          }
-
       }
 
       window.initMap = initMap;
