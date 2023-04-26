@@ -14,6 +14,14 @@
       // The following example creates complex markers to indicate beaches near
       // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
       // to the base of the flagpole.
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: { lat: -33.447487, lng: -70.673676 },
+        });
+        
+        setMarkers(map);
+      }
 
       // Data for the markers consisting of a name, a LatLng and a zIndex for the
       // order in which these markers should display on top of each other.
@@ -66,7 +74,7 @@
         }
       }
 
- //     window.initMap = initMap;
+      window.initMap = initMap;
     </script>
   </head>
   <body>
