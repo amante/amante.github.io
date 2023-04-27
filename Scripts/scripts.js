@@ -62,7 +62,7 @@ function setMarkers(map) {
         placeAddressElement.textContent = place.formatted_address;
         content.appendChild(placeAddressElement);
 
-        const photoElement = document.createElement("img");
+        const photoElement = document.createElement("p");
         photoElement.textContent = place.photo;
         content.appendChild(photoElement);
         
