@@ -7,20 +7,18 @@ function initMap() {
   setMarkers(map);
 }
 
-// Data for the markers consisting of a name, a LatLng and a zIndex for the
-// order in which these markers should display on top of each other.
-const vaccinations = 
-[
-  ["Vacunatorio Internacional Inmunitas", -33.42269251621238, -70.60987858557121, 12],
-  ["Kiñewen Ltda.", -36.82684827802099, -73.04134071814575, 11],
-  ["Vacunatorio Neumann y Bertín ", -34.58507071409237, -70.99013399314826, 10],
-  ["Clínica de Salud Sanymed", -23.654581449870122, -70.40194410537413, 9],
-  ["Clínica Alemana de Valdivia", -39.818189519002686, -73.2397338044536, 8],
-  ["Clínica Los Andes Chillán", -36.61485354679745, -72.10772415069209, 7],
-  ["Darvax Salud", -33.43101841425493, -70.5661021023559, 6],
-];
-
 function setMarkers(map) {
+
+  const vaccinations = 
+    [
+      ["Vacunatorio Internacional Inmunitas", -33.42269251621238, -70.60987858557121, 12],
+      ["Kiñewen Ltda.", -36.82684827802099, -73.04134071814575, 11],
+      ["Vacunatorio Neumann y Bertín ", -34.58507071409237, -70.99013399314826, 10],
+      ["Clínica de Salud Sanymed", -23.654581449870122, -70.40194410537413, 9],
+      ["Clínica Alemana de Valdivia", -39.818189519002686, -73.2397338044536, 8],
+      ["Clínica Los Andes Chillán", -36.61485354679745, -72.10772415069209, 7],
+      //["Darvax Salud", -33.43101841425493, -70.5661021023559, 6],
+  ];
   // Adds markers to the map.
   // Marker sizes are expressed as a Size of X,Y where the origin of the image
   // (0,0) is located in the top left of the image.
@@ -45,17 +43,59 @@ function setMarkers(map) {
   };
 
   for (let i = 0; i < vaccinations.length; i++) {
-    const beach = vaccinations[i];
+    const vaxcenter = vaccinations[i];
 
     new google.maps.Marker({
-      position: { lat: beach[1], lng: beach[2] },
+      position: { lat: vaxcenter[1], lng: vaxcenter[2] },
       map,
       icon: image,
       shape: shape,
-      title: beach[0],
-      zIndex: beach[3],
+      title: vaxcenter[0],
+      zIndex: vaxcenter[3],
     });
   }
 }
+
+const request = {
+  placeId: "ChIJ-cMnGA7PYpYRz1hGYJ4E5so",
+  fields: ["name", "formatted_address", "place_id", "geometry"],
+};
+const infowindow = new google.maps.InfoWindow();
+const service = new google.maps.places.PlacesService(map);
+
+service.getDetails(request, (place, status) => {
+  if (
+    status === google.maps.places.PlacesServiceStatus.OK &&
+    place &&
+    place.geometry &&
+    place.geometry.location
+  ) {
+    const marker = new google.maps.Marker({
+      map,
+      position: place.geometry.location,
+    });
+
+    google.maps.event.addListener(marker, "click", () => {
+      const content = document.createElement("div");
+      const nameElement = document.createElement("h2");
+
+      nameElement.textContent = place.name;
+      content.appendChild(nameElement);
+
+      const placeIdElement = document.createElement("p");
+
+      placeIdElement.textContent = place.place_id;
+      content.appendChild(placeIdElement);
+
+      const placeAddressElement = document.createElement("p");
+
+
+      placeAddressElement.textContent = place.formatted_address;
+      content.appendChild(placeAddressElement);
+      infowindow.setContent(content);
+      infowindow.open(map, marker);
+    });
+  }
+});
 
 window.initMap = initMap;
