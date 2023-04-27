@@ -8,6 +8,17 @@ function initMap() {
 }
 
 function setMarkers(map) {
+  const vaccinations = 
+    [
+      ["Vacunatorio Internacional Inmunitas", -33.42269251621238, -70.60987858557121, 12],
+      ["Kiñewen Ltda.", -36.82684827802099, -73.04134071814575, 11],
+      ["Vacunatorio Neumann y Bertín ", -34.58507071409237, -70.99013399314826, 10],
+      ["Clínica de Salud Sanymed", -23.654581449870122, -70.40194410537413, 9],
+      ["Clínica Alemana de Valdivia", -39.818189519002686, -73.2397338044536, 8],
+      ["Clínica Los Andes Chillán", -36.61485354679745, -72.10772415069209, 7],
+      //["Darvax Salud", -33.43101841425493, -70.5661021023559, 6],
+  ];
+
   const request = {
     placeId: "ChIJ-cMnGA7PYpYRz1hGYJ4E5so",
     fields: ["name", "formatted_address", "place_id", "geometry"],
@@ -40,10 +51,17 @@ function setMarkers(map) {
         content.appendChild(placeIdElement);
   
         const placeAddressElement = document.createElement("p");
-  
-  
         placeAddressElement.textContent = place.formatted_address;
         content.appendChild(placeAddressElement);
+        
+        const websiteElement = document.createElement("p");
+        websiteElement.textContent = place.url;
+        content.appendChild(websiteElement);
+        
+        const phoneElement = document.createElement("p");
+        phoneElement.textContent =place.formatted_phone_number;
+        content.appendChild(phoneElement);
+
         infowindow.setContent(content);
         infowindow.open(map, marker);
       });
