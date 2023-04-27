@@ -10,8 +10,8 @@ function initMap() {
 function setMarkers(map) {
   const vaccinationsCenterIDs = 
     [
-      [ChIJ-xL7GbXPYpYRYvlfpxLb9gY],
-      [ChIJ-cMnGA7PYpYRz1hGYJ4E5so],
+      ["ChIJ-xL7GbXPYpYRYvlfpxLb9gY"],
+      ["ChIJ-cMnGA7PYpYRz1hGYJ4E5so"],
   ];
 
   for (let i = 0; i < vaccinationsCenterIDs.length; i++) {
