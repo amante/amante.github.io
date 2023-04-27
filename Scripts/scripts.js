@@ -21,7 +21,7 @@ function setMarkers(map) {
 
   const request = {
     placeId: "ChIJ-cMnGA7PYpYRz1hGYJ4E5so",
-    fields: ["name", "formatted_address", "place_id", "geometry", "formatted_phone_number", "website", "photo"],
+    fields: ["name", "formatted_address", "place_id", "geometry", "formatted_phone_number", "website", "icon"],
   };
   const infowindow = new google.maps.InfoWindow();
   const service = new google.maps.places.PlacesService(map);
@@ -45,26 +45,22 @@ function setMarkers(map) {
         nameElement.textContent = place.name;
         content.appendChild(nameElement);
 
-        const websiteElement = document.createElement("a");
-        websiteElement.setAttribute('href', place.website);
-        websiteElement.textContent = place.website;
-        content.appendChild(websiteElement);
+        const placeIdElement = document.createElement("p");
+        placeIdElement.textContent = "ID: "+place.place_id;
+        content.appendChild(placeIdElement);
+
+        const placeAddressElement = document.createElement("p");
+        placeAddressElement.textContent = "Dirección: "+place.formatted_address;
+        content.appendChild(placeAddressElement);
         
         const phoneElement = document.createElement("p");
-        phoneElement.textContent = place.formatted_phone_number;
+        phoneElement.textContent = "Teléfono: "+place.formatted_phone_number;
         content.appendChild(phoneElement);
-  
-        const placeIdElement = document.createElement("p");
-        placeIdElement.textContent = place.place_id;
-        content.appendChild(placeIdElement);
-  
-        const placeAddressElement = document.createElement("p");
-        placeAddressElement.textContent = place.formatted_address;
-        content.appendChild(placeAddressElement);
 
-        const photoElement = document.createElement("p");
-        photoElement.textContent = place.photo;
-        content.appendChild(photoElement);
+        const websiteElement = document.createElement("a");
+        websiteElement.setAttribute('href', place.website);
+        websiteElement.textContent = "Web: "+place.website;
+        content.appendChild(websiteElement);
 
         infowindow.setContent(content);
         infowindow.open(map, marker);
