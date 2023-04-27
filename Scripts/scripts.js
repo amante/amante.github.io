@@ -21,7 +21,7 @@ function setMarkers(map) {
 
   const request = {
     placeId: "ChIJ-cMnGA7PYpYRz1hGYJ4E5so",
-    fields: ["name", "formatted_address", "place_id", "geometry", "formatted_phone_number", "website", "photo"],
+    fields: ["name", "formatted_address", "place_id", "geometry", "formatted_phone_number", "website", "photo", "user_ratings_total"],
   };
   const infowindow = new google.maps.InfoWindow();
   const service = new google.maps.places.PlacesService(map);
@@ -62,10 +62,14 @@ function setMarkers(map) {
         placeAddressElement.textContent = place.formatted_address;
         content.appendChild(placeAddressElement);
 
-        const photoElement = document.createElement("p");
+        const photoElement = document.createElement("picture");
         photoElement.textContent = place.photo;
         content.appendChild(photoElement);
-        
+
+        const ratingElement = document.createElement("p")
+        ratingElement.textContent = place.user_ratings_total;
+        content.appendChild(ratingElement);
+
         infowindow.setContent(content);
         infowindow.open(map, marker);
       });
