@@ -40,26 +40,26 @@ function setMarkers(map) {
   
       google.maps.event.addListener(marker, "click", () => {
         const content = document.createElement("div");
+        
         const nameElement = document.createElement("h2");
-  
         nameElement.textContent = place.name;
         content.appendChild(nameElement);
   
-        const placeIdElement = document.createElement("p");
+        /**const placeIdElement = document.createElement("p");
   
         placeIdElement.textContent = place.place_id;
         content.appendChild(placeIdElement);
   
         const placeAddressElement = document.createElement("p");
         placeAddressElement.textContent = place.formatted_address;
-        content.appendChild(placeAddressElement);
+        content.appendChild(placeAddressElement);**/
         
         const websiteElement = document.createElement("p");
-        websiteElement.textContent = place.url;
+        websiteElement.textContent = place.website;
         content.appendChild(websiteElement);
         
         const phoneElement = document.createElement("p");
-        phoneElement.textContent =place.formatted_phone_number;
+        phoneElement.textContent = place.formatted_phone_number;
         content.appendChild(phoneElement);
 
         infowindow.setContent(content);
