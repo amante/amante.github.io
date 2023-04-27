@@ -46,7 +46,8 @@ function setMarkers(map) {
         content.appendChild(nameElement);
 
         const websiteElement = document.createElement("a");
-        websiteElement.setAttribute('href', place.website);
+        websiteElement.setAttribute('href', "place.website");
+        website.textContent = place.website;
         content.appendChild(websiteElement);
         
         const phoneElement = document.createElement("p");
@@ -62,7 +63,7 @@ function setMarkers(map) {
         content.appendChild(placeAddressElement);
 
         const photoElement = document.createElement("img");
-        placeAddressElement.textContent = place.photo;
+        photoElement.textContent = place.photo;
         content.appendChild(photoElement);
         
         infowindow.setContent(content);
