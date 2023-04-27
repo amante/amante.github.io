@@ -46,7 +46,7 @@ function setMarkers(map) {
         content.appendChild(nameElement);
 
         const websiteElement = document.createElement("a");
-        websiteElement.setAttribute('href', "place.website");
+        websiteElement.setAttribute('href', place.website);
         websiteElement.textContent = place.website;
         content.appendChild(websiteElement);
         
