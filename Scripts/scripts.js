@@ -21,7 +21,7 @@ function setMarkers(map) {
 
   const request = {
     placeId: "ChIJ-cMnGA7PYpYRz1hGYJ4E5so",
-    fields: ["name", "formatted_address", "place_id", "geometry"],
+    fields: ["name", "formatted_address", "place_id", "geometry", "formatted_phone_number", "website" ],
   };
   const infowindow = new google.maps.InfoWindow();
   const service = new google.maps.places.PlacesService(map);
@@ -44,6 +44,14 @@ function setMarkers(map) {
         const nameElement = document.createElement("h2");
         nameElement.textContent = place.name;
         content.appendChild(nameElement);
+
+        const websiteElement = document.createElement("p");
+        websiteElement.textContent = place.website;
+        content.appendChild(websiteElement);
+        
+        const phoneElement = document.createElement("p");
+        phoneElement.textContent = place.formatted_phone_number;
+        content.appendChild(phoneElement);
   
         /**const placeIdElement = document.createElement("p");
   
@@ -54,14 +62,6 @@ function setMarkers(map) {
         placeAddressElement.textContent = place.formatted_address;
         content.appendChild(placeAddressElement);**/
         
-        const websiteElement = document.createElement("p");
-        websiteElement.textContent = place.website;
-        content.appendChild(websiteElement);
-        
-        const phoneElement = document.createElement("p");
-        phoneElement.textContent = place.formatted_phone_number;
-        content.appendChild(phoneElement);
-
         infowindow.setContent(content);
         infowindow.open(map, marker);
       });
