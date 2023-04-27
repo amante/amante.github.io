@@ -10,15 +10,17 @@ function initMap() {
 function setMarkers(map) {
   const vaccinationsCenterIDs = 
     [
-      ["ChIJ-xL7GbXPYpYRYvlfpxLb9gY"],
-      ["ChIJ-cMnGA7PYpYRz1hGYJ4E5so"],
+      ["Vacunatorio Internacional Inmunitas", "ChIJ-xL7GbXPYpYRYvlfpxLb9gY"],
+      ["Darvax Salud", "ChIJ-cMnGA7PYpYRz1hGYJ4E5so"],
+      ["Vacunatorio Alto Tabancura", "ChIJ1xcsQFLJYpYRvju6bhsScfY"],
+      ["Clínica MEDS La Dehesa", "ChIJhcZ4SWTJYpYRt0rzTQhLgRk"],
   ];
 
   for (let i = 0; i < vaccinationsCenterIDs.length; i++) {
     const vaxcenter = vaccinationsCenterIDs[i];
 
   const request = {
-    placeId: vaxcenter[0],
+    placeId: vaxcenter[1],
     fields: ["name", "formatted_address", "place_id", "geometry", "formatted_phone_number", "website", "icon"],
   };
   const infowindow = new google.maps.InfoWindow();
@@ -34,6 +36,7 @@ function setMarkers(map) {
       const marker = new google.maps.Marker({
         map,
         position: place.geometry.location,
+        title: vaxcenter[0],
       });
   
       google.maps.event.addListener(marker, "click", () => {
