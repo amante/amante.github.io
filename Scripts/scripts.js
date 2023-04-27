@@ -47,7 +47,7 @@ function setMarkers(map) {
 
         const websiteElement = document.createElement("a");
         websiteElement.setAttribute('href', "place.website");
-        website.textContent = place.website;
+        websiteElement.textContent = place.website;
         content.appendChild(websiteElement);
         
         const phoneElement = document.createElement("p");
