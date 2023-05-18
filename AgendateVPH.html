@@ -9,8 +9,9 @@
     <p>Google Calendar API Quickstart</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
-    <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+    <button id="authorize_button" onclick="handleAuthClick()">Autorizar</button>
+    <button id="signout_button" onclick="handleSignoutClick()">Salir</button>
+    <button id="addEvent_button" onclick="handleAddEventClick()">Recordar tu próxima Vacuna</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -23,6 +24,7 @@
       // TODO(developer): Set to client ID and API key from the Developer Console
       const CLIENT_ID = '714543194217-6ddd16p6q19i091rh4p05oenlqmon5h5.apps.googleusercontent.com';
       const API_KEY = 'AIzaSyBMML9t0xi8YoqNPz3J8EEWMAavJ_MxlSE';
+      const CALENDAR_ID = 'd9d8dd0ab08b783c2295c7e55d8fde0b3595f94b0994ed04c7bcbd9519df9e7d@group.calendar.google.com';
 
       // Discovery doc URL for APIs used by the quickstart
       const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
@@ -126,7 +128,7 @@
         let response;
         try {
           const request = {
-            'calendarId': 'd9d8dd0ab08b783c2295c7e55d8fde0b3595f94b0994ed04c7bcbd9519df9e7d@group.calendar.google.com',
+            'calendarId': CALENDAR_ID,
             'timeMin': (new Date()).toISOString(),
             'showDeleted': false,
             'singleEvents': true,
@@ -150,9 +152,48 @@
             'Events:\n');
         document.getElementById('content').innerText = output;
       }
+      
+      function handleAddEventClick(){
+        var event = {
+          'summary': 'Google I/O 2015',
+          'location': '800 Howard St., San Francisco, CA 94103',
+          'description': 'No olvides tu próxima Dosis de Gardasil 9',
+          'start': {
+            'dateTime': '2023-05-18T09-05-28T178T09:00:00-07:00',
+            'timeZone': 'America/Los_Angeles'
+          },
+          'end': {
+            'dateTime': '2023-05-18T09-05-28T17:00:00-07:00',
+            'timeZone': 'America/Los_Angeles'
+          },
+          'recurrence': [
+            'RRULE:FREQ=DAILY;COUNT=2'
+          ],
+          'attendees': [
+            {'email': 'lpage@example.com'},
+            {'email': 'sbrin@example.com'}
+          ],
+          'reminders': {
+            'useDefault': false,
+            'overrides': [
+              {'method': 'email', 'minutes': 24 * 60},
+              {'method': 'popup', 'minutes': 10}
+            ]
+          }
+        };
+        
+        var request = gapi.client.calendar.events.insert({
+          'calendarId': CALENDAR_ID,
+          'resource': event
+        });
+        
+        request.execute(function(event) {
+          appendPre('Event created: ' + event.htmlLink);
+        });
+      }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-    <script type="module" src="./Scripts/scheduleevent.js"></script>
+    
   </body>
 </html>

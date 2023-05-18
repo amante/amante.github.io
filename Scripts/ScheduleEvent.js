@@ -32,7 +32,7 @@ function initEvent(){
   };
   
   var request = gapi.client.calendar.events.insert({
-    'calendarId': 'primary',
+    'calendarId': CALENDAR_ID,
     'resource': event
   });
   
