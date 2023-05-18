@@ -39,6 +39,7 @@
 
       document.getElementById('authorize_button').style.visibility = 'hidden';
       document.getElementById('signout_button').style.visibility = 'hidden';
+      document.getElementById('addEvent_button').style.visibility = 'hidden';
 
       /**
        * Callback after api.js is loaded.
@@ -91,7 +92,9 @@
             throw (resp);
           }
           document.getElementById('signout_button').style.visibility = 'visible';
+          document.getElementById('addEvent_button').style.visibility = 'visible';
           document.getElementById('authorize_button').innerText = 'Refresh';
+          
           await listUpcomingEvents();
         };
 
