@@ -159,21 +159,21 @@
       function handleAddEventClick(){
          var event = {
           'summary': 'Google I/O 2015',
-          'location': '800 Howard St., San Francisco, CA 94103',
-          'description': 'A chance to hear more about Google\'s developer products.',
+          'location': 'Mariano Sanchez Fontecilla 310, Piso 5',
+          'description': 'Conozca a Tuco y Tico',
           'start': {
-            'dateTime': '2015-05-19T09:00:00-07:00',
-            'timeZone': 'America/Los_Angeles'
+            'dateTime': '2023-05-19T09:00:00-07:00',
+            'timeZone': 'America/Santiago'
           },
           'end': {
-            'dateTime': '2015-05-19T17:00:00-07:00',
-            'timeZone': 'America/Los_Angeles'
+            'dateTime': '2023-05-19T17:00:00-07:00',
+            'timeZone': 'America/Santiago'
           },
           'recurrence': [
             'RRULE:FREQ=DAILY;COUNT=2'
           ],
           'attendees': [
-            {'email': 'alexis.manuel.mante@meerck.com'},
+            {'email': 'alexis.manuel.mante@merck.com'},
             {'email': 'sbrin@example.com'}
           ],
           'reminders': {
@@ -191,7 +191,7 @@
         });
         
         request.execute(function(event) {
-           document.getElementById('content').innerText = 'Event created: ' + event.htmlLinkutput;
+           document.getElementById('content').innerText = 'Event created: ' + event.htmlLink;
         });
       }
     </script>
