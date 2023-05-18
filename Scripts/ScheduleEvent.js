@@ -8,11 +8,11 @@ function initEvent(){
     'location': '800 Howard St., San Francisco, CA 94103',
     'description': 'A chance to hear more about Google\'s developer products.',
     'start': {
-      'dateTime': '2023-05-28T09:00:00-07:00',
+      'dateTime': '2015-05-28T09:00:00-07:00',
       'timeZone': 'America/Los_Angeles'
     },
     'end': {
-      'dateTime': '2023-05-28T09-05-28T17:00:00-07:00',
+      'dateTime': '2015-05-28T17:00:00-07:00',
       'timeZone': 'America/Los_Angeles'
     },
     'recurrence': [
@@ -32,7 +32,7 @@ function initEvent(){
   };
   
   var request = gapi.client.calendar.events.insert({
-    'calendarId': CALENDAR_ID,
+    'calendarId': 'primary',
     'resource': event
   });
   
