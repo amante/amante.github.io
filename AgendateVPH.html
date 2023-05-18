@@ -126,7 +126,7 @@
         let response;
         try {
           const request = {
-            'calendarId': 'primary',
+            'calendarId': '',
             'timeMin': (new Date()).toISOString(),
             'showDeleted': false,
             'singleEvents': true,
@@ -135,7 +135,7 @@
           };
           response = await gapi.client.calendar.events.list(request);
         } catch (err) {
-          document.getElementById('content').innerText = err.message;
+          document.getElementById('content').innerText = "estoy en el request".err.message;
           return;
         }
 
