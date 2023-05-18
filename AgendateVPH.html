@@ -158,7 +158,7 @@
       
       function handleAddEventClick(){
         var event = {
-          "summary": 'Google I/O 2015',
+          'summary': 'Google I/O 2015',
           'location': '800 Howard St., San Francisco, CA 94103',
           'description': 'No olvides tu próxima Dosis de Gardasil 9',
           'start': {
@@ -186,7 +186,7 @@
         };
         
         var request = gapi.client.calendar.events.insert({
-          'calendarId': 'd9d8dd0ab08b783c2295c7e55d8fde0b3595f94b0994ed04c7bcbd9519df9e7d@group.calendar.google.com',
+          'calendarId': CALENDAR_ID,
           'resource': event
         });
         
