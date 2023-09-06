@@ -58,6 +58,8 @@ body {
   font-size: 48px;
 }
 
-.base-background{
-  background-color: rgba(0,0,0,.5);  
+.base-background {
+  background-color: rgba(0,0,0,.5);
+  width: 300px;
+  height: 300px;
 }
