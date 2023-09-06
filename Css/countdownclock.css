@@ -60,9 +60,7 @@ body {
 
 .base-background{
   background: rgba(0,0,0,.5);
-  left: 0;
   position: fixed;
-  top: 0;
   width: 100%;
   z-index: 10000;
 }
