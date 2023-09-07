@@ -11,13 +11,6 @@ body {
   height: 600px;
 }
 
-.base-timer__button {
-  position: fixed;
-  right: 30%;
-  width: 600px;
-  height: 600px;
-} 
-
 .base-timer__svg {
   transform: scaleX(-1);
 }
