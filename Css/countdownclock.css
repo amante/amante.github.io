@@ -60,7 +60,7 @@ body {
 
 .base-background {
   background-color: rgba(0,0,0,.5);
-  display: none;
+  display: flex;
   height: 100%;
   left: 0;
   position: fixed;
