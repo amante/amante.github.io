@@ -64,7 +64,7 @@ function startTimer() {
 
     if (timeLeft === 0) {
       onTimesUp();
-      window.location.href = "https://www.InfoVPH.cl";
+     // window.location.href = "https://www.InfoVPH.cl";
     }
   }, 1000);
 }
