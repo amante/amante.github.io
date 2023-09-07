@@ -135,13 +135,6 @@ body.custom-background { background-color: #e7e8ea; }
     </div>
 </header>
 
-<script type="module" src="./Scripts/countdownclock.js"></script>
-<link rel="stylesheet" type="text/css" href="./Css/countdownclock.css" />
-
-<!-- DIV with CountdownClock -->  
-  <div id="app" class="base-container__countdownclock" style="display: flex;"></div> 
-<!-- DIV with CountdownClock -->
-
 <div class="mh-primary-side-navigation mh-primary-side-navigation--right-opening" data-opening-direction="right">
     
 <div id="mh_side_navigation_closer" class="mh-side-navigation-closer">
@@ -732,4 +725,13 @@ window.janrain.events.onCaptureRegistrationFailed.eventHandlers.unshift(t),windo
 window.janrain.events.onCaptureValidationComplete.eventHandlers.unshift(B),clearInterval(n)):75>=m?m++:clearInterval(n)},200)})();</script><script type="text/javascript" id="">(function(){function a(){var b=this.dataset.designLabel,d=this.dataset.designCategory,e=this.dataset.designScreen;dataLayer.push({event:"couponFlowInteraction",component_text:b,form_element:d,flow_step:e});this.removeEventListener("input",a);this.removeEventListener("keyup",a)}var c=document.querySelectorAll('form input[data-design-module\x3d"coupon_flow"]');1<=c.length&&c.forEach(function(b){b.addEventListener("input",a);b.addEventListener("keyup",a)})})();</script><script type="text/javascript" id="">(function(){function f(a){switch(a.type){case "timeupdate":b[a.target.id].current=Math.round(a.target.currentTime);var h=Math.floor(100*b[a.target.id].current/a.target.duration);for(g in b[a.target.id]._progress_markers)h>=g&&g>b[a.target.id].greatest_marker&&(b[a.target.id].greatest_marker=g);b[a.target.id].greatest_marker&&!b[a.target.id]._progress_markers[b[a.target.id].greatest_marker]&&(b[a.target.id]._progress_markers[b[a.target.id].greatest_marker]=!0,dataLayer.push({event:"video",eventCategory:"video",
 eventAction:b[a.target.id].greatest_marker+"% played",eventLabel:a.target.getAttribute("data-tracking-video")||a.target.getAttribute("data-video-id")}));break;case "play":dataLayer.push({event:"video",eventCategory:"video",eventAction:"play",eventLabel:a.target.getAttribute("data-tracking-video")||a.target.getAttribute("data-video-id")});break;case "pause":h=a.target.currentTime/a.target.duration*100;var g=99;if(h>=g)return!1;dataLayer.push({event:"video",eventCategory:"video",eventAction:"stop",
 eventLabel:a.target.getAttribute("data-tracking-video")||a.target.getAttribute("data-video-id"),eventValue:b[a.target.id].current});break;case "ended":dataLayer.push({event:"video",eventCategory:"video",eventAction:"complete",eventLabel:a.target.getAttribute("data-tracking-video")||a.target.getAttribute("data-video-id")})}}for(var k=25,b={},d=document.getElementsByTagName("video"),c=0;c<d.length;c++){if(d[c].getAttribute("id"))var e=d[c].getAttribute("id");else e="html5_video_"+Math.random().toString(36).slice(2),
-d[c].setAttribute("id",e);b[e]={};b[e].greatest_marker=0;b[e]._progress_markers={};for(j=0;100>j;j++)b[e].progress_point=k*Math.floor(j/k),b[e]._progress_markers[b[e].progress_point]=!1;b[e].current=0;d[c].addEventListener("play",f,!1);d[c].addEventListener("pause",f,!1);d[c].addEventListener("ended",f,!1);d[c].addEventListener("timeupdate",f,!1);d[c].addEventListener("ended",f,!1)}})();</script></body></html>
+d[c].setAttribute("id",e);b[e]={};b[e].greatest_marker=0;b[e]._progress_markers={};for(j=0;100>j;j++)b[e].progress_point=k*Math.floor(j/k),b[e]._progress_markers[b[e].progress_point]=!1;b[e].current=0;d[c].addEventListener("play",f,!1);d[c].addEventListener("pause",f,!1);d[c].addEventListener("ended",f,!1);d[c].addEventListener("timeupdate",f,!1);d[c].addEventListener("ended",f,!1)}})();</script>
+
+<script type="module" src="./Scripts/countdownclock.js"></script>
+<link rel="stylesheet" type="text/css" href="./Css/countdownclock.css" />
+
+<!-- DIV with CountdownClock -->  
+  <div id="app" class="base-container__countdownclock" style="display: flex;"></div> 
+<!-- DIV with CountdownClock -->
+</body>
+</html>
