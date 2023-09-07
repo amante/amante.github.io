@@ -726,12 +726,5 @@ window.janrain.events.onCaptureValidationComplete.eventHandlers.unshift(B),clear
 eventAction:b[a.target.id].greatest_marker+"% played",eventLabel:a.target.getAttribute("data-tracking-video")||a.target.getAttribute("data-video-id")}));break;case "play":dataLayer.push({event:"video",eventCategory:"video",eventAction:"play",eventLabel:a.target.getAttribute("data-tracking-video")||a.target.getAttribute("data-video-id")});break;case "pause":h=a.target.currentTime/a.target.duration*100;var g=99;if(h>=g)return!1;dataLayer.push({event:"video",eventCategory:"video",eventAction:"stop",
 eventLabel:a.target.getAttribute("data-tracking-video")||a.target.getAttribute("data-video-id"),eventValue:b[a.target.id].current});break;case "ended":dataLayer.push({event:"video",eventCategory:"video",eventAction:"complete",eventLabel:a.target.getAttribute("data-tracking-video")||a.target.getAttribute("data-video-id")})}}for(var k=25,b={},d=document.getElementsByTagName("video"),c=0;c<d.length;c++){if(d[c].getAttribute("id"))var e=d[c].getAttribute("id");else e="html5_video_"+Math.random().toString(36).slice(2),
 d[c].setAttribute("id",e);b[e]={};b[e].greatest_marker=0;b[e]._progress_markers={};for(j=0;100>j;j++)b[e].progress_point=k*Math.floor(j/k),b[e]._progress_markers[b[e].progress_point]=!1;b[e].current=0;d[c].addEventListener("play",f,!1);d[c].addEventListener("pause",f,!1);d[c].addEventListener("ended",f,!1);d[c].addEventListener("timeupdate",f,!1);d[c].addEventListener("ended",f,!1)}})();</script>
-
-<script type="module" src="./Scripts/countdownclock.js"></script>
-<link rel="stylesheet" type="text/css" href="./Css/countdownclock.css" />
-
-<!-- DIV with CountdownClock -->  
-  <div id="app" class="base-container__countdownclock" style="display: flex;"></div> 
-<!-- DIV with CountdownClock -->
 </body>
 </html>
