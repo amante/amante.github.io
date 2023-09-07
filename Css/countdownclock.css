@@ -6,6 +6,7 @@ body {
 
 .base-timer {
   position: fixed;
+  right: 30%;
   width: 600px;
   height: 600px;
 }
