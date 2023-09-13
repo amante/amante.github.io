@@ -1,7 +1,7 @@
 
   document.getElementById("dropdown").innerHTML = `
-  <label for="VaxName" class="dropdown">Escoge tu Vacuna</label> 
-    <select name="Vacuna" id="Vax-Name"> 
+  <label for="VaxName">Escoge tu Vacuna</label> 
+    <select name="Vacuna" id="Vax-Name" class="dropdown-content"> 
         <option value="HepatitisB">Hepatitis B</option> 
         <option value="Hexavalente1">Hexavalente Dosis 1</option>
         <option value="Hexavalente2">Hexavalente Dosis 2</option>
