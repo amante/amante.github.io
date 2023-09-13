@@ -1,7 +1,7 @@
-function initEvent(){
+
   document.getElementById("dropdown").innerHTML = `
-  <div class="vaccines_dd">
-  <label for="dog-names">Choose a dog name:</label> 
+  <div>
+  <label for="VaxName">EScoge tu Vacuna</label> 
     <select name="dog-names" id="dog-names"> 
         <option value="rigatoni">Rigatoni</option> 
         <option value="dave">Dave</option> 
@@ -10,4 +10,3 @@ function initEvent(){
     </select>
 </div>
 `;
-}
