@@ -1,7 +1,9 @@
+const divselectedoption = document.getElementById("vaxselection");
+let divselectedoptiontext;
 
-  document.getElementById("dropdown").innerHTML = `
+document.getElementById("dropdown").innerHTML = `
   <label for="VaxName">Escoge tu Vacuna</label> 
-    <select id="select vax-Name" class="dropdown-content"> 
+    <select id="selectvaxname" class="dropdown-content"> 
         <option value="HepatitisB">Hepatitis B</option> 
         <option value="Hexavalente1">Hexavalente Dosis 1</option>
         <option value="Hexavalente2">Hexavalente Dosis 2</option>
@@ -24,4 +26,6 @@
     </select>
 `;
 
-document.getElementById("vaxSelection").selectV
+selectElement = document.querySelector('#selectvaxname');
+divselectedoptiontext = selectElement.value;
+divselectedoption.style.display = 'block';
