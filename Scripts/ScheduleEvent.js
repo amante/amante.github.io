@@ -4,9 +4,9 @@
 // stored credentials.
 function initEvent(){
   var event = {
-    'summary': 'Google I/O 2015',
-    'location': '800 Howard St., San Francisco, CA 94103',
-    'description': 'A chance to hear more about Google\'s developer products.',
+    'summary': 'No olvides tu próxima dosis ',
+    'location': 'En este centro de vacunación',
+    'description': 'recuerda agendar tu proxima dosis de vacunación',
     'start': {
       'dateTime': '2015-05-28T09:00:00-07:00',
       'timeZone': 'America/Los_Angeles'
