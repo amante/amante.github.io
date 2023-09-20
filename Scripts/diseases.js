@@ -15,9 +15,9 @@ document.getElementById("dropdown").innerHTML = `
         <option value="Rotavirus1">Rotavirus Dosis 1</option>
         <option value="Rotavirus2">Rotavirus Dosis 2</option>
         <option value="Rotavirus3">Rotavirus Dosis 3</option>
-        <option value="Meningoco1">Meningocócica conjugada ACWY  Dosis 1</option>
-        <option value="Meningoco2">Meningocócica conjugada ACWY  Dosis 1</option>
-        <option value="Meningoco3">Meningocócica conjugada ACWY  Dosis 1</option>
+        <option value="Meningoco1">Meningocócica conjugada ACWY Dosis 1</option>
+        <option value="Meningoco2">Meningocócica conjugada ACWY Dosis 1</option>
+        <option value="Meningoco3">Meningocócica conjugada ACWY Dosis 1</option>
         <option value="Meningob1">Meningococo B Dosis 1</option>
         <option value="Meningob2">Meningococo B Dosis 2</option>
         <option value="Meningob3">Meningococo B Dosis 3</option>
@@ -29,3 +29,5 @@ document.getElementById("dropdown").innerHTML = `
 selectElement = document.querySelector('#selectvaxname');
 divselectedoptiontext = selectElement.value;
 divselectedoption.style.display = 'block';
+
+document.getElementById("vaxselection").innerHTML=`<label id="valueselected">${selectElement}</label>`;
