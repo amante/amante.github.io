@@ -28,6 +28,5 @@ document.getElementById("dropdown").innerHTML = `
 
 selectElement = document.querySelector('#selectvaxname');
 divselectedoptiontext = selectElement.value;
-divselectedoption.style.display = 'block';
 
-document.getElementById("vaxselection").innerHTML=`<label id="valueselected">${selectElement}</label>`;
+document.getElementById("vaxselection").innerHTML=`<label for="valueselected">${divselectedoptiontext}</label>`;
