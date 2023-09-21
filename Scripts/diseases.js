@@ -1,5 +1,5 @@
-const divselectedoption = document.getElementById("vaxselection");
 let divselectedoptiontext;
+let selectElement;
 
 document.getElementById("dropdown").innerHTML = `
   <label for="VaxName">Escoge tu Vacuna</label> 
@@ -25,6 +25,7 @@ document.getElementById("dropdown").innerHTML = `
         <option value="Virica2">Tres Virica Dosis 2</option>
     </select>
 `;
+
 
 selectElement = document.querySelector('#selectvaxname');
 divselectedoptiontext = selectElement.value;
