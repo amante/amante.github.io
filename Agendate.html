@@ -11,17 +11,22 @@
   </body>
 </html> -->
 
-<html>
-<head>
-   <script type="module" src="./Scripts/diseases.js"></script>
-</head>
-<body>
-<select onchange="changeLanguage(this.value)">
-    <option value="Choose" selected="selected">Choose</option>
-    <option value="IT" >Italian</option>
-    <option value="FR" >France</option>
-</select>
+<html lang="en">
+  <head>
+    <title>No olvides tu próxima Dosis</title>
+    <meta charset="UTF-8" />
+    <script src="./Scripts/diseases.js"></script>
+  </head>
 
-<a id="url" href="?action=IT">IT</a>
-</body>
+  <body>
+
+    <select id="select" style="font-size: 3rem">
+      <option value="">--Choose an option--</option>
+      <option value="horse">Horse 🐴</option>
+      <option value="wolf">Wolf 🐺</option>
+      <option value="fox">Fox 🦊</option>
+    </select>
+
+   
+  </body>
 </html>
