@@ -1,6 +1,6 @@
 const select = document.getElementById('select');
 
-select.addEventListener('change', handleChange(e));
+select.addEventListener('change', handleChange(Event));
 
 function handleChange(event) {
   console.log(event.target.value); // 👉️ get selected VALUE
