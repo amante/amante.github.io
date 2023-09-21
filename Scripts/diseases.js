@@ -3,7 +3,7 @@ let selectElement;
 
 document.getElementById("dropdown").innerHTML = `
   <label for="VaxName">Escoge tu Vacuna</label> 
-    <select id="selectvaxname" class="dropdown-content"> 
+    <select id="selectvaxname" class="dropdown-content" onchange="changeLanguage(this.value)"> 
         <option value="HepatitisB">Hepatitis B</option> 
         <option value="Hexavalente1">Hexavalente Dosis 1</option>
         <option value="Hexavalente2">Hexavalente Dosis 2</option>
@@ -27,7 +27,14 @@ document.getElementById("dropdown").innerHTML = `
 `;
 
 
-selectElement = document.querySelector('#selectvaxname');
-divselectedoptiontext = selectElement.value;
+  function changeLanguage(language) {
+   var element = document.getElementById("vaxselection");
+   element.value = language;
+   element.innerHTML = language;
+  }
 
-document.getElementById("vaxselection").innerHTML = `<label for="valueselected">"Seleccionaste la vacuna: "${divselectedoptiontext}</label>`;
+//selectElement = document.querySelector('#selectvaxname');
+//divselectedoptiontext = selectElement.value;
+
+//document.getElementById("vaxselection").innerHTML = `<label for="valueselected">"Seleccionaste la vacuna: "${divselectedoptiontext}</label>`;
+
