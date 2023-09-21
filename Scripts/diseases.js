@@ -30,4 +30,4 @@ document.getElementById("dropdown").innerHTML = `
 selectElement = document.querySelector('#selectvaxname');
 divselectedoptiontext = selectElement.value;
 
-document.getElementById("vaxselection").innerHTML = `<label for="valueselected">Hola Mundo</label>`;
+document.getElementById("vaxselection").innerHTML = `<label for="valueselected">"Seleccionaste la vacuna: "${divselectedoptiontext}</label>`;
