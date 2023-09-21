@@ -1,7 +1,7 @@
 const select = document.getElementById('select');
 
-select.addEventListener('change', handleChange(Event));
+select.addEventListener('click', handleChange(Event));
 
 function handleChange(e) {
-  console.log(e.value);
+  document.getElementById("demo").innerHTML = `<label>${e.currentTarget.value}</label>`;
 };
