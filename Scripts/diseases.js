@@ -2,6 +2,6 @@ const select = document.getElementById('select');
 
 select.addEventListener('change', handleChange(Event));
 
-function handleChange(event) {
-  console.log(event);
+function handleChange(e) {
+  console.log(e.value);
 };
