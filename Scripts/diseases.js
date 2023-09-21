@@ -1,5 +1,4 @@
 const select = document.getElementById('select');
-const text = document.getElementById('text');
 
 select.addEventListener('change', function handleChange(event) {
   console.log(event.target.value); // 👉️ get selected VALUE
