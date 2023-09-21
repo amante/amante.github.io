@@ -5,7 +5,7 @@ let selectElement;
    var element = document.getElementById("vaxselection");
    element.value = language;
    element.innerHTML = language;
-  }
+  };
 
 //selectElement = document.querySelector('#selectvaxname');
 //divselectedoptiontext = selectElement.value;
