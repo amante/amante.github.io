@@ -25,9 +25,9 @@ function ShowRightMessage(indice){
 
 select.addEventListener('change', function handleChange(event) {
   if (event.target.selectedIndex !== 0){
-    console.log("Event target index" + event.target.selectedIndex);
-    console.log("Select Index" +select.selectedIndex);
-    document.getElementById("SelectedVaccine").innerHTML = `<label> has seleccionado la vacuna = ${event.target.text}</label>`;
+    console.log("Event target index " + event.target.selectedIndex);
+    console.log("Select Index " +select.selectedIndex);
+    document.getElementById("SelectedVaccine").innerHTML = `<label> has seleccionado la vacuna = ${select.text}</label>`;
     ShowRightMessage(select.selectedIndex);
   }
 }); 
