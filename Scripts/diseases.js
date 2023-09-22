@@ -27,7 +27,7 @@ select.addEventListener('change', function handleChange(event) {
   if (event.target.selectedIndex !== 0){
     console.log("Event target index " + event.target.selectedIndex);
     console.log("Select Index " +select.selectedIndex);
-    document.getElementById("SelectedVaccine").innerHTML = `<label> has seleccionado la vacuna = ${select.text}</label>`;
+    document.getElementById("SelectedVaccine").innerHTML = `<label> has seleccionado la vacuna = ${select.innerText}</label>`;
     ShowRightMessage(select.selectedIndex);
   }
-}); 
+});
