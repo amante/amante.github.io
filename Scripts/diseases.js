@@ -1,6 +1,6 @@
 const select = document.getElementById('select');
 
-function showRightMessage(indice){
+function ShowRightMessage(indice){
   switch(indice){
   case 0:
     document.getElementById("Messages").innerHTML = `<p>¿Quieres que te recordemos tu proxima Vacuna?, debes agendarte para 1 mes mas</p>`;
