@@ -4,11 +4,11 @@ function ShowRightMessage(indice){
   switch(indice){
   case 1:
     document.getElementById("Messages").innerHTML = `<p>¿Quieres que te recordemos tu proxima Vacuna?, debes agendarte para 1 mes mas</p>`;
-    document.getElementById("Recordarme").innerHTML = `<form method="POST" action="AgendateVPH.html"><input type="submit"/>Recordarme</form>`; 
+    document.getElementById("Recordarme").innerHTML = `<button type="button">Recordarme</button>`; 
     break;
    case 2:
      document.getElementById("Messages").innerHTML = `<p>¿Quieres que te recordemos tu proxima Vacuna?, debes agendarte para 6 meses mas</p>`;
-     document.getElementById("Recordarme").innerHTML = `<form method="POST" action="AgendateVPH.html"><input type="submit"/>Recordarme</form>`;
+     document.getElementById("Recordarme").innerHTML = `<button type="button">Recordarme</button>`;
      break;
    }
   };

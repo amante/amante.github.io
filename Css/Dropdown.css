@@ -1,6 +1,6 @@
-.title{
+.title {
   font-family: Arial, sans-serif;
-  
+  padding: 15px;
 }
 
 .dropdown { 
@@ -31,4 +31,10 @@
 .dropdown-content a:hover {
       color: #FFFFFF;
       background-color: #00A4BD;
+}
+
+.div {
+      color: #00A4BD;
+      background-color: whitesmoke;
+      padding: 15px;
 }
