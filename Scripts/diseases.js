@@ -6,14 +6,14 @@ function ShowRightMessage(indice){
     document.getElementById("SelectedVaccine").style.display = "block";
     document.getElementById("Messages").style.display = "block";
     document.getElementById("Recordarme").style.display = "block";
-    document.getElementById("Messages").innerHTML = `<p>¿Quieres que te recordemos tu proxima Vacuna?, deberás agendarte para 1 mes mas</p>`;
+    document.getElementById("Messages").innerHTML = `<p class="text">¿Quieres que te recordemos tu proxima Vacuna?, deberás agendarte para 1 mes mas</p>`;
     document.getElementById("Recordarme").innerHTML = `<button type="button" class="text">Recordarme</button>`; 
     break;
    case 2:
     document.getElementById("SelectedVaccine").style.display = "block";
     document.getElementById("Messages").style.display = "block";
     document.getElementById("Recordarme").style.display = "block";
-    document.getElementById("Messages").innerHTML = `<p>¿Quieres que te recordemos tu proxima Vacuna?, deberás agendarte para 4 meses mas</p>`;
+    document.getElementById("Messages").innerHTML = `<p class="text">¿Quieres que te recordemos tu proxima Vacuna?, deberás agendarte para 4 meses mas</p>`;
     document.getElementById("Recordarme").innerHTML = `<button type="button" class="text">Recordarme</button>`;
      break;
    }
