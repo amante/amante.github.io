@@ -4,7 +4,7 @@
 }
 
 .dropdown { 
-      align-self: center;
+      align-self: auto;
       position: static;
       width: 50%;
       overflow: auto;
@@ -15,7 +15,7 @@
 }
   
 .dropdown-content {
-      display: inline-block;
+      display: block;
       position: absolute;
       width: 50%;
       overflow: auto;
@@ -46,4 +46,11 @@
       width: 50%;
       align-self: center;
       text-align: center;
+}
+
+.text{
+      font-family: Arial, sans-serif;
+      padding: 15px;
+      background-color: whitesmoke;
+      color: #00A4bd;
 }

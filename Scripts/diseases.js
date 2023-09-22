@@ -2,10 +2,6 @@ const select = document.getElementById('select');
 
 function ShowRightMessage(indice){
   switch(indice){
-    case 0:
-      document.getElementById("SelectedVaccine").style.display = "none";
-      document.getElementById("Messages").style.display = "none";
-      document.getElementById("Recordarme").style.display = "none"; 
   case 1:
     document.getElementById("SelectedVaccine").style.display = "block";
     document.getElementById("Messages").style.display = "block";
