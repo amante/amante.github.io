@@ -1,3 +1,6 @@
-const select = document.getElementById('select').onChange = function () {
-  console.log(this.value);
-};
+const select = document.getElementById('select');
+console.log(select.selectedIndex);
+
+select.addEventListener('change', function handleChange(event) {
+  console.log(select.selectedIndex);
+});
