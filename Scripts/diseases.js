@@ -1,7 +1,8 @@
 const select = document.getElementById('select');
 
-select.addEventListener('click', handleChange(Event));
+select.addEventListener('change', handleChange(Event));
 
 function handleChange(e) {
-  document.getElementById("demo").innerHTML = `<label>Hola Mundo</label>`;
+  console.log(e.target.value);
 };
+
