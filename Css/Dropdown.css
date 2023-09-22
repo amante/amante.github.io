@@ -4,9 +4,8 @@
 }
 
 .dropdown { 
-    display: inline-block; 
     position: static;
-    width: 100%;
+    width: 50%;
     overflow: auto;
     color: #FFFFFF;
     background-color: #00A4BD;
