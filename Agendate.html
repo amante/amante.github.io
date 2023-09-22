@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title class="title">No olvides tu próxima Dosis</title>
+    <title>No olvides tu próxima Dosis</title>
     <link rel="stylesheet" type="text/css" href="./Css/Dropdown.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
   </head>
 
   <body>
+    <title class="title">Recordatorio de Vacunación</title>
     <select id="select" class="dropdown">
       <option value="opciones" class="dropdown-content">Escoge una opción</option>
       <option value="VPH 2" class="dropdown-content">Gardasil 2da dosis</option>
       <option value="VPH 3" class="dropdown-content">Gardasil 3ra dosis</option>
     </select>
-<div id="SelectedVaccine" class="div"></div>
-<div id="Messages" class="div"></div>
-<div id="Recordarme" class="div"></div>
+<div id="SelectedVaccine" class="div" style= display:none></div>
+<div id="Messages" class="div" style= display:none></div>
+<div id="Recordarme" class="div" style= display:none></div>
     <script src="./Scripts/diseases.js"></script>
   </body>
 </html>
