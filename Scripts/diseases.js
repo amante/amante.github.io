@@ -4,16 +4,18 @@ function ShowRightMessage(indice){
   switch(indice){
   case 1:
     document.getElementById("Messages").innerHTML = `<p>¿Quieres que te recordemos tu proxima Vacuna?, debes agendarte para 1 mes mas</p>`;
-     break;
+    document.getElementById("Recordarme").innerHTML = `<button type="button">Recordarme</button>`; 
+    break;
    case 2:
      document.getElementById("Messages").innerHTML = `<p>¿Quieres que te recordemos tu proxima Vacuna?, debes agendarte para 6 meses mas</p>`;
+     document.getElementById("Recordarme").innerHTML = `<button type="button">Recordarme</button>`;
      break;
    }
-   document.getElementById("Recordarme").innerHTML = `<div><button type="button">Recordarme</button></div>`;
   };
 
 select.addEventListener('change', function handleChange(event) {
   if (event.selectedIndex != 0){
+    console.log(event.selectedIndex);
     document.getElementById("SelectedVaccine").innerHTML = `<label> has seleccionado la vacuna = ${event.target.value}</label>`;
     ShowRightMessage(select.selectedIndex);
   }
