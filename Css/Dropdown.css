@@ -2,11 +2,10 @@
   font-family: Arial, sans-serif;
   padding: 15px;
   display: grid;
-  align-self: center;
+  justify-content: center;
 }
 
 .dropdown { 
-      align-self: auto;
       position: static;
       width: 100%;
       overflow: auto;
@@ -28,29 +27,23 @@
 .dropdown-content a {
       display: block;
       color: #000000;
-      padding: 5px;
       text-decoration: none;
-      width: 50%;
-      align-self: center;
+      width: 100%;
 }
 
 .dropdown-content a:hover {
       color: #FFFFFF;
       background-color: #00A4BD;
       width: 100%;
-      align-self: center;
 }
 
 .ol {
       color: #00A4BD;
-      padding: 5px;
       width: 100%;
-      align-self: center;
       text-align: center;
 }
 
 .text{
       font-family: Arial, sans-serif;
-      padding: 5px;
       color: #00A4bd;
 }
