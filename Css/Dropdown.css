@@ -2,13 +2,12 @@
   font-family: Arial, sans-serif;
   padding: 15px;
   display: grid;
-  align-self: center;
 }
 
 .dropdown { 
       align-self: auto;
       position: static;
-      width: 50%;
+      width: 100%;
       overflow: auto;
       color: #FFFFFF;
       background-color: #00A4BD;
@@ -37,7 +36,7 @@
 .dropdown-content a:hover {
       color: #FFFFFF;
       background-color: #00A4BD;
-      width: 50%;
+      width: 100%;
       align-self: center;
 }
 
@@ -45,7 +44,7 @@
       color: #00A4BD;
       background-color: whitesmoke;
       padding: 5px;
-      width: 50%;
+      width: 100%;
       align-self: center;
       text-align: center;
 }
