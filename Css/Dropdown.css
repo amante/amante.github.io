@@ -5,8 +5,8 @@
   justify-content: center;
 }
 
-.dropdown { 
-      position: static;
+.dropdown {
+      justify-content: center;
       width: 100%;
       overflow: auto;
       color: #FFFFFF;
