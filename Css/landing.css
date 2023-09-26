@@ -6,12 +6,16 @@
 .text-center{
   text-align: center;
   margin: auto;
-  padding: 10px;  
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  color: #00A4bd;
 }
 .title-center{
   text-align: center;
   margin: auto;
   padding: 10px;
+  font-family: Arial, sans-serif;
+  color: #00A4bd;
 }
 .image-center{
   display: block;
