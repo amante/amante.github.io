@@ -4,15 +4,18 @@
   padding: 10px;
 }
 .text-center{
-  margin:auto;
-    
+  text-align: center;
+  margin: auto;
+  padding: 10px;  
 }
 .title-center{
   text-align: center;
   margin: auto;
+  padding: 10px;
 }
 .image-center{
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
 }
