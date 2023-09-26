@@ -1,6 +1,18 @@
 .center {
   margin: auto;
-  width: 60%;
-  border: 3px solid #73AD21;
+  width: 50%;
   padding: 10px;
+}
+.text-center{
+  margin:auto;
+    
+}
+.title-center{
+  text-align: center;
+  margin: auto;
+}
+.image-center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
