@@ -1,7 +1,6 @@
 .center {
   margin: auto;
   width: 50%;
-  padding: 10px;
 }
 .text-center{
   text-align: center;
@@ -27,6 +26,4 @@
   width: 300px;
   border: 15px;
   background-color: #00a4bd;
-  padding: 10px;
-  margin: 20px;
 }
