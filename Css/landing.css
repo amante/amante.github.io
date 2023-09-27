@@ -8,20 +8,19 @@
   margin: auto;
   padding: 10px;
   font-family: Arial, sans-serif;
-  color: #00A4bd;
+  color: whitesmoke;
 }
 .title-center{
   text-align: center;
   margin: auto;
   padding: 10px;
   font-family: Arial, sans-serif;
-  color: #00A4bd;
+  color: whitesmoke;
 }
 .image-center{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding: 10px;
 }
 .box-model{
   display: block;
@@ -29,7 +28,6 @@
   margin-right: auto;
   width: 300px;
   border: 15px;
-  color: #00A4bd;
   background-color: #00a4bd;
   padding: 50px;
   margin: 20px;
