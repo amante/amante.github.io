@@ -6,14 +6,12 @@
 .text-center{
   text-align: center;
   margin: auto;
-  padding: 10px;
   font-family: Arial, sans-serif;
   color: whitesmoke;
 }
 .title-center{
   text-align: center;
   margin: auto;
-  padding: 10px;
   font-family: Arial, sans-serif;
   color: whitesmoke;
 }
@@ -29,6 +27,6 @@
   width: 300px;
   border: 15px;
   background-color: #00a4bd;
-  padding: 50px;
+  padding: 10px;
   margin: 20px;
 }
