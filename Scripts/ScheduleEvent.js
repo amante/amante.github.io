@@ -133,12 +133,13 @@ document.getElementById('message');
       ]
     }
   };
-  
+  console.log("me estan llamando desde el HTML")
+
   var request = gapi.client.calendar.events.insert({
     'calendarId': 'primary',
     'resource': event
   });
-  
+  console.log("me estan llamando despeus del request")
   request.execute(function(event) {
     appendPre('Event created: ' + event.htmlLink);
   });
