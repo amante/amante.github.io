@@ -73,7 +73,6 @@ function handleAuthClick() {
     }
     document.getElementById('signout_button').style.visibility = 'visible';
     document.getElementById('authorize_button').innerText = 'Refresh';
-    await listUpcomingEvents();
   };
 
   if (gapi.client.getToken() === null) {
@@ -104,8 +103,7 @@ function handleSignoutClick() {
 // https://developers.google.com/calendar/quickstart/js
 // Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
 // stored credentials.
-function initEvent(){
-document.getElementById('message');
+function initEvent() {
   var event = {
     'summary': 'No olvides tu próxima dosis ',
     'location': 'En este centro de vacunación',
