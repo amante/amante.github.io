@@ -105,6 +105,7 @@ function handleSignoutClick() {
 // Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
 // stored credentials.
 function initEvent(){
+document.getElementById('message');
   var event = {
     'summary': 'No olvides tu próxima dosis ',
     'location': 'En este centro de vacunación',
