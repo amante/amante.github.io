@@ -122,8 +122,8 @@ document.getElementById('message');
       'RRULE:FREQ=DAILY;COUNT=2'
     ],
     'attendees': [
-      {'email': 'lpage@example.com'},
-      {'email': 'sbrin@example.com'}
+      {'email': 'alexis.mante@gmail.com'},
+      {'email': 'alexis.manuel.mante@merck.com'}
     ],
     'reminders': {
       'useDefault': false,
