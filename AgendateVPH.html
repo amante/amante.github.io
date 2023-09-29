@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>No olvides tu próxima dosis</title>
-    <link rel="stylesheet" type="text/css" href="./Css/landing.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Google Calendar API Quickstart</title>
+    <meta charset="utf-8" />
   </head>
   <body>
-    <div class="box-model">
-    <p>Autorizacion de envio via Google calendar</p>
+    <p>Google Calendar API Quickstart</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" onclick="handleAuthClick()">Autorizar</button>
-    <button id="signout_button" onclick="handleSignoutClick()">Salir</button>
-  </div>
+    <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
+    <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -27,7 +23,6 @@
       const CLIENT_ID = '918312040395-rbia11gk2shf8m39ecjehmm6ibv4921v.apps.googleusercontent.com';
       const API_KEY = 'AIzaSyC2ppfKT1VPuFKvA4NJEKAJs2wicGcf9SI';
 
-
       // Discovery doc URL for APIs used by the quickstart
       const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
 
@@ -39,8 +34,8 @@
       let gapiInited = false;
       let gisInited = false;
 
-      //document.getElementById('authorize_button').style.visibility = 'hidden';
-      //document.getElementById('signout_button').style.visibility = 'hidden';
+      document.getElementById('authorize_button').style.visibility = 'hidden';
+      document.getElementById('signout_button').style.visibility = 'hidden';
 
       /**
        * Callback after api.js is loaded.
