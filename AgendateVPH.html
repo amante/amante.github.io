@@ -67,7 +67,9 @@
         tokenClient = google.accounts.oauth2.initTokenClient({
           client_id: CLIENT_ID,
           scope: SCOPES,
-          callback: '', // defined later
+          callback: (tokenResponse) => {
+                    access_token = tokenResponse.access_token;
+                }, // defined later
         });
         gisInited = true;
         maybeEnableButtons();
