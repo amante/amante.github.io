@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <!-- Google Identity Service see https://developers.google.com/identity/oauth2/web/guides/migration-to-gis#gis-and-gapi -->
+    <script src="https://accounts.google.com/gsi/client" onload="initTokenClient()" async defer></script>
+    <script>
+        var tokenClient;
+        var access_token;
+        var clientId = '918312040395-rbia11gk2shf8m39ecjehmm6ibv4921v.apps.googleusercontent.com';
+        var email = 'florian.feldhaus@gmail.com'
+        var bucket = 'private-bucket'
+        var object = 'private-object.json'
+
+        function initTokenClient() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: clientId,
+                scope: 'https://www.googleapis.com/auth/devstorage.full_control',
+                prompt: '',
+                callback: (tokenResponse) => {
+                    access_token = tokenResponse.access_token;
+                },
+            });
+        }
+
+        function getToken() {
+            // Re-entrant function to request user consent.
+            // Returns an access token to the callback specified in google.accounts.oauth2.initTokenClient
+            // Use a user gesture to call this function and obtain a new, valid access token
+            // when the previous token expires and a 401 status code is returned by Google API calls.
+            tokenClient.requestAccessToken();
+        }
+
+        function getObject() {
+            fetch('https://storage.googleapis.com/storage/v1/b/' + bucket + '/o/' + object + '?alt=media', {
+               headers: {
+                   'Authorization': 'Bearer ' + access_token
+                }
+            })
+            .then(response => response.json())
+            .then(content => console.log(content))
+            .catch(err => { console.log(err) });
+        }
+    </script>
+  </head>
+  <body>      
+    <button onclick="getToken();">Get access token</button>
+    <button onclick="getObject()">Load Object</button>    
+  </body>
+</html>
