@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Autorizacion Calendario de Google</p>
+    <p>Autorización Calendario de Google</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Autorizar</button>
@@ -119,25 +119,22 @@
         }
       }
 
-      /**
-       * Print the summary and start datetime/date of the next ten events in
-       * the authorized user's calendar. If no events are found an
-       * appropriate message is printed.
-       */
       
       function makeApiCall() {
         gapi.client.load('calendar', 'v3', function() {
         var request = gapi.client.calendar.events.list({
         'calendarId': 'primary'
       });
-          
-    request.execute(function(resp) {
+      
+      request.execute(function(resp) {
       for (var i = 0; i < resp.items.length; i++) {
-        console.log(resp);
-        var li = document.createElement('li');
-        li.appendChild(document.createTextNode(resp.items[i].summary));
-        document.getElementById('content').appendChild(li);
-        
+        console.log(resp.items[i].summary);
+        console.log(resp.items[i].organizer.email);
+        console.log(resp.items[i].start.dateTime);
+        console.log(resp.items[i].start.timeZone);
+        //var li = document.createElement('li');
+        //li.appendChild(document.createTextNode(resp.items[i].summary));
+        //document.getElementById('content').appendChild(li); 
       }
     });
   });
