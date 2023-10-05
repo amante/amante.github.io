@@ -1,48 +1,67 @@
-
-
-
-
-
-
-<script src="https://apis.google.com/js/api.js"></script>
 <script>
-  /**
-   * Sample JavaScript code for calendar.events.list
-   * See instructions for running APIs Explorer code samples locally:
-   * https://developers.google.com/explorer-help/code-samples#javascript
-   */
 
-  function authenticate() {
-    return gapi.auth2.getAuthInstance()
-        .signIn({scope: "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.events.readonly https://www.googleapis.com/auth/calendar.readonly"})
-        .then(function() { console.log("Sign-in successful"); },
-              function(err) { console.error("Error signing in", err); });
+var clientId = '918312040395-rbia11gk2shf8m39ecjehmm6ibv4921v.apps.googleusercontent.com';
+var apiKey = 'AIzaSyC2ppfKT1VPuFKvA4NJEKAJs2wicGcf9SI';
+var scopes = 'https://www.googleapis.com/auth/calendar';
+
+
+function handleClientLoad() {
+    gapi.client.setApiKey(apiKey);
+    window.setTimeout(checkAuth,1);
+    checkAuth();
   }
-  function loadClient() {
-    gapi.client.setApiKey('AIzaSyC2ppfKT1VPuFKvA4NJEKAJs2wicGcf9SI');
-    return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest")
-        .then(function() { console.log("GAPI client loaded for API"); },
-              function(err) { console.error("Error loading GAPI client for API", err); });
+  
+  function checkAuth() {
+    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true},
+        handleAuthResult);
   }
-  // Make sure the client is loaded and sign-in is complete before calling this method.
-  function execute() {
-    return gapi.client.calendar.events.list({
-      "calendarId": "primary",
-      "alwaysIncludeEmail": true,
-      "orderBy": "startTime",
-      "showDeleted": false,
-      "showHiddenInvitations": false,
-      "singleEvents": true
-    })
-        .then(function(response) {
-                // Handle the results here (response.result has the parsed body).
-                console.log("Response", response);
-              },
-              function(err) { console.error("Execute error", err); });
+  
+  function handleAuthResult(authResult) {
+    var authorizeButton = document.getElementById('authorize-button');
+    if (authResult) {
+      authorizeButton.style.visibility = 'hidden';
+      makeApiCall();
+    } else {
+      authorizeButton.style.visibility = '';
+      authorizeButton.onclick = handleAuthClick;
+     }
   }
-  gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: '918312040395-rbia11gk2shf8m39ecjehmm6ibv4921v.apps.googleusercontent.com'});
-  });
+  
+  function handleAuthClick(event) {
+    gapi.auth.authorize(
+        {client_id: clientId, scope: scopes, immediate: false},
+        handleAuthResult);
+    return false;
+  }
+
+  function makeApiCall() {
+    gapi.client.load('calendar', 'v3', function() {
+      var request = gapi.client.calendar.events.list({
+        'calendarId': 'primary'
+      });
+            
+      request.execute(function(resp) {
+        for (var i = 0; i < resp.items.length; i++) {
+          var li = document.createElement('li');
+          li.appendChild(document.createTextNode(resp.items[i].summary));
+          document.getElementById('events').appendChild(li);
+        }
+      });
+    });
+  }
 </script>
-<button onclick="authenticate().then(loadClient)">authorize and load</button>
-<button onclick="execute()">execute</button>
+
+  <html>
+  <body>
+    <div id='content'>
+      <h1>Events</h1>
+      <ul id='events'></ul>
+    </div>
+    <a href='#' id='authorize-button' onclick='handleAuthClick();'>Login</a>
+    
+    <script>
+      // Insert the JS from above, here.
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+  </body>
+</html>
