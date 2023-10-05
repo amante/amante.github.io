@@ -11,10 +11,6 @@
    * See instructions for running APIs Explorer code samples locally:
    * https://developers.google.com/explorer-help/code-samples#javascript
    */
-   // TODO(developer): Set to client ID and API key from the Developer Console
-   const CLIENT_ID = '918312040395-rbia11gk2shf8m39ecjehmm6ibv4921v.apps.googleusercontent.com';
-   const API_KEY = 'AIzaSyC2ppfKT1VPuFKvA4NJEKAJs2wicGcf9SI';
-
 
   function authenticate() {
     return gapi.auth2.getAuthInstance()
@@ -23,7 +19,7 @@
               function(err) { console.error("Error signing in", err); });
   }
   function loadClient() {
-    gapi.client.setApiKey(API_KEY);
+    gapi.client.setApiKey('AIzaSyC2ppfKT1VPuFKvA4NJEKAJs2wicGcf9SI');
     return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest")
         .then(function() { console.log("GAPI client loaded for API"); },
               function(err) { console.error("Error loading GAPI client for API", err); });
@@ -45,7 +41,7 @@
               function(err) { console.error("Execute error", err); });
   }
   gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: CLIENT_ID});
+    gapi.auth2.init({client_id: '918312040395-rbia11gk2shf8m39ecjehmm6ibv4921v.apps.googleusercontent.com'});
   });
 </script>
 <button onclick="authenticate().then(loadClient)">authorize and load</button>
