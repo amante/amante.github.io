@@ -157,16 +157,12 @@
       function makeApiCall() {
   gapi.client.load('calendar', 'v3', function() {
     var request = gapi.client.calendar.events.list({
-      'calendarId': 'primary',
-      'timeMin': (new Date()).toISOString(),
-            'showDeleted': false,
-            'singleEvents': true,
-            'maxResults': 10,
-            'orderBy': 'startTime',
+      'calendarId': 'primary'
     });
           
     request.execute(function(resp) {
       for (var i = 0; i < resp.items.length; i++) {
+        console.log(resp);
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(resp.items[i].summary));
         document.getElementById('content').appendChild(li);
