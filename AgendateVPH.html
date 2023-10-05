@@ -3,6 +3,7 @@
   <head>
     <title>No olvides tu próxima dosis</title>
     <meta charset="utf-8" />
+    <script type="module" src="./Scripts/ScheduleEvent.js"></script>
   </head>
   <body>
     <p>Autorización Calendario de Google</p>
@@ -22,6 +23,10 @@
       // TODO(developer): Set to client ID and API key from the Developer Console
       const CLIENT_ID = '918312040395-rbia11gk2shf8m39ecjehmm6ibv4921v.apps.googleusercontent.com';
       const API_KEY = 'AIzaSyC2ppfKT1VPuFKvA4NJEKAJs2wicGcf9SI';
+
+      // Vaccination Data
+      const vacuna = 'Gardasil';
+      const Vacunatorio = 'Darvax Salud';
    
 
       // Discovery doc URL for APIs used by the quickstart
@@ -132,6 +137,9 @@
         console.log(resp.items[i].organizer.email);
         console.log(resp.items[i].start.dateTime);
         console.log(resp.items[i].start.timeZone);
+        
+        var email = respo.items[i].summary;
+        initEvent(email, vacuna, Vacunatorio);
         //var li = document.createElement('li');
         //li.appendChild(document.createTextNode(resp.items[i].summary));
         //document.getElementById('content').appendChild(li); 
