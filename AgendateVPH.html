@@ -77,8 +77,6 @@
       function maybeEnableButtons() {
         if (gapiInited && gisInited) {
           document.getElementById('authorize_button').style.visibility = 'visible';
-          console.log(gapiInited);
-          console.log(gisInited);
         }
       }
 
@@ -138,7 +136,7 @@
           response = await gapi.client.calendar.events.list(request);
           console.log(response);
         } catch (err) {
-          document.getElementById('content').innerText = err.message;
+          document.getElementById('content').innerText = err.message + "Estamos en problemas";
           return;
         }
 
