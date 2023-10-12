@@ -30,6 +30,9 @@
 
       // Discovery doc URL for APIs used by the quickstart
       const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
+
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
       const SCOPES = 'https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.settings.readonly https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events.readonly';
 
       let tokenClient;
@@ -120,6 +123,47 @@
         }
       }
 
+      function initEvent(email, vacunatorio, vacuna) {
+  var event = {
+    'summary': 'No olvides tu próxima dosis de' + vacuna,
+    'location': 'En el centro de vacunación:' + vacunatorio,
+    'description': 'No olvides agendar tu próxima dosis de vacunación de' + vacuna,
+    'start': {
+      'dateTime': '2023-10-28T09:00:00-07:00',
+      'timeZone': 'America/Chile/Santiago'
+    },
+    'end': {
+      'dateTime': '2023-10-28T17:00:00-07:00',
+      'timeZone': 'America/Chile/Santiago'
+    },
+    'recurrence': [
+      'RRULE:FREQ=DAILY;COUNT=2'
+    ],
+    'attendees': [
+
+      {'email': 'monomaldito@hotmail.com'},
+      {'email': email}
+    ],
+    'reminders': {
+      'useDefault': false,
+      'overrides': [
+        {'method': 'email', 'minutes': 24 * 60},
+        {'method': 'popup', 'minutes': 10}
+      ]
+    }
+  };
+
+  var request = gapi.client.calendar.events.insert({
+    'calendarId': 'primary',
+    'resource': event
+  });
+
+  request.execute(function(event) {
+    appendPre('Event created: ' + event.htmlLink);
+  });
+}
+
+      
       function makeApiCall() {
         gapi.client.load('calendar', 'v3', function() {
         var request = gapi.client.calendar.events.list({
@@ -138,6 +182,7 @@
         //li.appendChild(document.createTextNode(resp.items[i].summary));
         //document.getElementById('content').appendChild(li); 
       }
+      initEvent(email, vacuna, Vacunatorio);
     });
   });
 }
