@@ -85,7 +85,7 @@
           }
           document.getElementById('signout_button').style.visibility = 'visible';
           document.getElementById('addEvent_button').style.visibility = 'visible';
-          document.getElementById('authorize_button').innerText = 'Refresh';
+          document.getElementById('authorize_button').innerText = 'Refrescar';
           
           await listUpcomingEvents();
         };
@@ -167,7 +167,6 @@
         }
 
         request.execute(function(event) {
-           document.getElementById('content').innerText = 'Event created: ' + event.htmlLinkutput;
            document.getElementById('content').innerText = 'Event created: ' + event.htmlLink;
         });
       }
