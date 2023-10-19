@@ -1,54 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>No olvides tu próxima dosis</title>
+    <title>Google Calendar API Quickstart</title>
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Autorización Calendario de Google</p>
-
+    <p>Google Calendar API Quickstart</p>
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Autorizar</button>
     <button id="signout_button" onclick="handleSignoutClick()">Salir</button>
-
+    <button id="addEvent_button" onclick="handleAddEventClick()">Recordar tu próxima Vacuna</button>
     <pre id="content" style="white-space: pre-wrap;"></pre>
-    <script type="module" src="./Scripts/ScheduleEvent.js"></script>
     <script type="text/javascript">
       /* exported gapiLoaded */
       /* exported gisLoaded */
       /* exported handleAuthClick */
       /* exported handleSignoutClick */
-
-      // TODO(developer): Set to client ID and API key from the Developer Console
+         // TODO(developer): Set to client ID and API key from the Developer Console
       const CLIENT_ID = '918312040395-rbia11gk2shf8m39ecjehmm6ibv4921v.apps.googleusercontent.com';
       const API_KEY = 'AIzaSyC2ppfKT1VPuFKvA4NJEKAJs2wicGcf9SI';
+      const CALENDAR_ID = 'primary';
 
       // Vaccination Data
       const vacuna = 'Gardasil';
       const Vacunatorio = 'Darvax Salud';
-   
 
+     
       // Discovery doc URL for APIs used by the quickstart
       const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
-
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      const SCOPES = 'https://www.googleapis.com/auth/devstorage.full_control https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.settings.readonly https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events.readonly';
-
+      const SCOPES = 'https://www.googleapis.com/auth/calendar';
       let tokenClient;
       let gapiInited = false;
       let gisInited = false;
-
       document.getElementById('authorize_button').style.visibility = 'hidden';
       document.getElementById('signout_button').style.visibility = 'hidden';
-
+      document.getElementById('addEvent_button').style.visibility = 'hidden';
       /**
        * Callback after api.js is loaded.
        */
       function gapiLoaded() {
         gapi.load('client', initializeGapiClient);
       }
-
       /**
        * Callback after the API client is loaded. Loads the
        * discovery doc to initialize the API.
@@ -61,7 +55,6 @@
         gapiInited = true;
         maybeEnableButtons();
       }
-
       /**
        * Callback after Google Identity Services are loaded.
        */
@@ -69,14 +62,11 @@
         tokenClient = google.accounts.oauth2.initTokenClient({
           client_id: CLIENT_ID,
           scope: SCOPES,
-          callback: (tokenResponse) => {
-                    access_token = tokenResponse.access_token;
-                }, // defined later
+          callback: '', // defined later
         });
         gisInited = true;
         maybeEnableButtons();
       }
-
       /**
        * Enables user interaction after all libraries are loaded.
        */
@@ -85,7 +75,6 @@
           document.getElementById('authorize_button').style.visibility = 'visible';
         }
       }
-
       /**
        *  Sign in the user upon button click.
        */
@@ -95,10 +84,11 @@
             throw (resp);
           }
           document.getElementById('signout_button').style.visibility = 'visible';
-          document.getElementById('authorize_button').innerText = 'Refrescar';
-          await makeApiCall();
+          document.getElementById('addEvent_button').style.visibility = 'visible';
+          document.getElementById('authorize_button').innerText = 'Refresh';
+          
+          await listUpcomingEvents();
         };
-
         if (gapi.client.getToken() === null) {
           // Prompt the user to select a Google Account and ask for consent to share their data
           // when establishing a new session.
@@ -108,7 +98,6 @@
           tokenClient.requestAccessToken({prompt: ''});
         }
       }
-
       /**
        *  Sign out the user upon button click.
        */
@@ -118,76 +107,75 @@
           google.accounts.oauth2.revoke(token.access_token);
           gapi.client.setToken('');
           document.getElementById('content').innerText = '';
-          document.getElementById('authorize_button').innerText = 'Autorizar';
+          document.getElementById('authorize_button').innerText = 'Authorize';
           document.getElementById('signout_button').style.visibility = 'hidden';
         }
       }
-
-      function initEvent(email, vacunatorio, vacuna) {
-  var event = {
-    'summary': 'No olvides tu próxima dosis de' + vacuna,
-    'location': 'En el centro de vacunación:' + vacunatorio,
-    'description': 'No olvides agendar tu próxima dosis de vacunación de' + vacuna,
-    'start': {
-      'dateTime': '2023-10-28T09:00:00-07:00',
-      'timeZone': 'America/Chile/Santiago'
-    },
-    'end': {
-      'dateTime': '2023-10-28T17:00:00-07:00',
-      'timeZone': 'America/Chile/Santiago'
-    },
-    'recurrence': [
-      'RRULE:FREQ=DAILY;COUNT=2'
-    ],
-    'attendees': [
-
-      {'email': 'monomaldito@hotmail.com'},
-      {'email': email}
-    ],
-    'reminders': {
-      'useDefault': false,
-      'overrides': [
-        {'method': 'email', 'minutes': 24 * 60},
-        {'method': 'popup', 'minutes': 10}
-      ]
-    }
-  };
-
-  var request = gapi.client.calendar.events.insert({
-    'calendarId': 'primary',
-    'resource': event
-  });
-
-  request.execute(function(event) {
-    appendPre('Event created: ' + event.htmlLink);
-  });
-}
-
-      
-      function makeApiCall() {
-        gapi.client.load('calendar', 'v3', function() {
-        var request = gapi.client.calendar.events.list({
-        'calendarId': 'primary'
-      });
-      
-      request.execute(function(resp) {
-      for (var i = 0; i < resp.items.length; i++) {
-        console.log(resp.items[i].summary);
-        console.log(resp.items[i].organizer.email);
-        console.log(resp.items[i].start.dateTime);
-        console.log(resp.items[i].start.timeZone);
-        
-        var email = resp.items[i].summary;
-        //var li = document.createElement('li');
-        //li.appendChild(document.createTextNode(resp.items[i].summary));
-        //document.getElementById('content').appendChild(li); 
+      /**
+       * Print the summary and start datetime/date of the next ten events in
+       * the authorized user's calendar. If no events are found an
+       * appropriate message is printed.
+       */
+      async function listUpcomingEvents() {
+        let response;
+        try {
+          const request = {
+            'calendarId': CALENDAR_ID,
+            'timeMin': (new Date()).toISOString(),
+            'showDeleted': false,
+            'singleEvents': true,
+            'maxResults': 10,
+            'orderBy': 'startTime',
+          };
+          response = await gapi.client.calendar.events.list(request);
+        } catch (err) {
+          document.getElementById('content').innerText = err.message;
+          return;
+        }
+        const events = response.result.items;
+        if (!events || events.length == 0) {
+          document.getElementById('content').innerText = 'No events found.';
+          return;
+        }
+        // Flatten to string to display
+        const output = events.reduce(
+            (str, event) => `${str}${event.summary} (${event.start.dateTime || event.start.date})\n`,
+            'Events:\n');
+        document.getElementById('content').innerText = output;
       }
-      initEvent(email, vacuna, Vacunatorio);
-    });
-  });
-}
+      
+      function handleAddEventClick(){
+         var event = {
+          'summary': 'No olvides tu proxima Vacunación',
+          'location': Vacunatorio,
+          'description': 'no olvides tu vacunacion ',
+          'start': {
+            'dateTime': '2023-10-20T09:00:00-07:00',
+            'timeZone': 'America/Santiago'
+          },
+          'end': {
+            'dateTime': '2023-05-19T17:00:00-07:00',
+            'timeZone': 'America/Santiago'
+          },
+          'recurrence': [
+            'RRULE:FREQ=DAILY;COUNT=2'
+          ],
+          'attendees': [
+            {'email': 'alexis.manuel.mante@merck.com'},
+            {'email': 'alexis.mante@gmail.com'},
+          ],
+          'reminders': {
+@@ -191,7 +191,7 @@
+        });
+
+        request.execute(function(event) {
+           document.getElementById('content').innerText = 'Event created: ' + event.htmlLinkutput;
+           document.getElementById('content').innerText = 'Event created: ' + event.htmlLink;
+        });
+      }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    
   </body>
 </html>
