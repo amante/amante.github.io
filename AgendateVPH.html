@@ -109,7 +109,7 @@
           document.getElementById('content').innerText = '';
           document.getElementById('authorize_button').innerText = 'Authorize';
           document.getElementById('signout_button').style.visibility = 'hidden';
-          window.top.close();
+          open(location, '_self').close();
         }
       }
       /**
