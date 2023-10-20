@@ -147,34 +147,34 @@
       
       function handleAddEventClick(){
         var event = {
-        'summary': 'Recordatorio de Vacunación',
-        'location': Vacunatorio,
-        'description': 'Recuerda tu proxima dosis de '+ vacuna,
-        'start': {
-          'dateTime': '2024-05-28T09:00:00-07:00',
-          'timeZone': 'America/Santiago'
-        },
-        'end': {
-          'dateTime': '2024-05-28T17:00:00-07:00',
-          'timeZone': 'America/Santiago'
-        },
-        'attendees': [
-          {'email': 'alexis.mante@gmail.com'}
-        ],
-        'reminders': {
-          'useDefault': false,
-          'overrides': [
-            {'method': 'email', 'minutes': 24 * 60},
-            {'method': 'popup', 'minutes': 10}
+          'summary': 'Recordatorio de Vacunación',
+          'location': Vacunatorio,
+          'description': 'Recuerda tu proxima dosis de '+ vacuna,
+          'start': {
+            'dateTime': '2024-05-28T09:00:00-07:00',
+            'timeZone': 'America/Santiago'
+          },
+          'end': {
+            'dateTime': '2024-05-28T17:00:00-07:00',
+            'timeZone': 'America/Santiago'
+          },
+          'attendees': [
+            {'email': 'alexis.mante@gmail.com'}
           ],
-          'transparency':'opaque',
-          'visibility': 'private',
-          'sendUpdates': 'all'
-        }
-      };
+          'reminders': {
+            'useDefault': false,
+            'overrides': [
+              {'method': 'email', 'minutes': 24 * 60},
+              {'method': 'popup', 'minutes': 10}
+            ],
+            'transparency':'opaque',
+            'visibility': 'private'
+          }
+        };
         var request = gapi.client.calendar.events.insert({
-        'calendarId': CALENDAR_ID,
-        'resource': event
+          'calendarId': CALENDAR_ID,
+          'resource': event,
+          'sendUpdates': 'all'
         });
       
       request.execute(function(event) {
