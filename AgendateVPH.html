@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Google Calendar API Quickstart</title>
+    <title>Autorización para crear evento</title>
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Google Calendar API Quickstart</p>
+    <p>Autorización para crear evento recordatorio en tu Calendario</p>
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Autorizar</button>
     <button id="signout_button" onclick="handleSignoutClick()">Salir</button>
@@ -109,6 +109,7 @@
           document.getElementById('content').innerText = '';
           document.getElementById('authorize_button').innerText = 'Authorize';
           document.getElementById('signout_button').style.visibility = 'hidden';
+          window.top.close();
         }
       }
       /**
