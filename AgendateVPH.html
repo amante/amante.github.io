@@ -169,8 +169,8 @@
         'calendarId': 'primary',
         'resource': event
         });
+        console.log(request);
       }
-      console.log(request);
 
       request.execute(function(event) {
         document.getElementById('content').innerText = 'Event created: ' + event.htmlLink;
