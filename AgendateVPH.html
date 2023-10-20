@@ -158,8 +158,7 @@
     'timeZone': 'America/Santiago'
   },
   'attendees': [
-    {'email': 'alexis.mante@gmail.com'},
-    {'email': 'alexis.manuel.mante@merck.com'}
+    {'email': 'alexis.mante@gmail.com'}
   ],
   'reminders': {
     'useDefault': false,
@@ -179,7 +178,7 @@
         console.log(request);
       
       request.execute(function(event) {
-        document.getElementById('content').innerText = 'Event created: ' + event.htmlLink;
+        document.getElementById('content').innerText = 'Hemos creado un evento recordatorio en tu calendario';
       });
     }
     </script>
