@@ -166,7 +166,10 @@
     'overrides': [
       {'method': 'email', 'minutes': 24 * 60},
       {'method': 'popup', 'minutes': 10}
-    ]
+    ],
+    'transparency':'opaque',
+    'visibility': 'private',
+    'sendUpdates': 'all'
   }
 };
         var request = gapi.client.calendar.events.insert({
