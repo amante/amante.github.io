@@ -166,16 +166,16 @@
           ]
         }
         var request = gapi.client.calendar.events.insert({
-  'calendarId': 'primary',
-  'resource': event
-});
-
-request.execute(function(event) {
-  document.getElementById('content').innerText = 'Event created: ' + event.htmlLink;
-});
-
-           
+        'calendarId': 'primary',
+        'resource': event
+        });
       }
+      console.log(request);
+
+      request.execute(function(event) {
+        document.getElementById('content').innerText = 'Event created: ' + event.htmlLink;
+      });
+
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
