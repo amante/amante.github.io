@@ -144,6 +144,14 @@
             'Events:\n');
         document.getElementById('content').innerText = output;
       }
+
+      function getValues(){
+        var valores = window.location.search;
+        console.log(valores);
+        var parametros = new URLSearchParams(valores);
+        var seleccion = parametros.get('seleccion');
+        console.log(seleccion);
+      }
       
       function handleAddEventClick(){
         var event = {
