@@ -147,10 +147,10 @@
 
       function getValues(){
         var valores = window.location.search;
-        console.log(valores);
+        console.log("valores:" + valores);
         var parametros = new URLSearchParams(valores);
-        var seleccion = parametros.get('selection');
-        console.log(seleccion);
+        var selection = parametros.get('selection');
+        console.log("selection:" + selection);
       }
       
       function handleAddEventClick(){
