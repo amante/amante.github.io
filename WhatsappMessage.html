@@ -14,11 +14,11 @@
     
       let reader = new FileReader();
     
-      let text = reader.readAsText(file);
+      reader.readAsText(file);
     
       reader.onload = function() {
-        console.log(text);
-        document.getElementById('text') = text;  
+        console.log(reader.result);
+        document.getElementById('text').value = reader.result; 
       };
     
       reader.onerror = function() {
