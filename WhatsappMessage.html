@@ -6,6 +6,7 @@
 <body>
     <title>Enviar Recordatorio de Vacuanción</title>
     <input type="file" onchange="showFile(this)">
+    <p id="text"></p>
 
 <script>
     function showFile(input) {
@@ -17,6 +18,7 @@
     
       reader.onload = function() {
         console.log(reader.result);
+        document.getElementById('text') = reader.result; 
       };
     
       reader.onerror = function() {
