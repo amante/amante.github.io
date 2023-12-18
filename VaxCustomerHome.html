@@ -544,20 +544,6 @@ arguments)}catch(c){return console.error("Error: "+c),l.apply(this,arguments)}}}
 		<script type="text/javascript" src="/_ui/addons/smarteditaddon/shared/common/js/adjustComponentRenderingToSE.js"></script>
 		<script type="text/javascript" src="/_ui/addons/smarteditaddon/responsive/common/js/smarteditaddon.js"></script>
 	  	<script type="text/javascript" src="https://xiecomm.paymetric.com/DIeComm/Scripts/XIPlugin/XIPlugin-1.0.0.js"></script>
-		
-	<script type="text/javascript">
-function recaptchaCallback(){
-    	  document.getElementById('recaptchaResponse').value=grecaptcha.getResponse();
-    	  var captcha_response = $(".hiddenRecaptcha").val();
-  		 if(grecaptcha.getResponse().length!==0 && captcha_response!==null && captcha_response!=="" ){
-  			 ACC.secureportal._enableRegisterButton();
-			}
-  		 }
-		
- </script>
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script type="text/javascript" src=""></script>
-		
 
 
 <div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div><div role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><script type="text/javascript" id="">(function(){function m(d){return(d||document.location.search).replace(/(^\?)/,"").split("\x26").map(function(b){return b=b.split("\x3d"),this[b[0]]=decodeURIComponent(b[1]),this}.bind({}))[0]}function n(d){return Object.keys(d).map(function(b){return b+"\x3d"+encodeURIComponent(d[b])}).join("\x26")}function q(d){var b=m(d),e;for(e in b)p.forEach(function(a){b[e].match(a.regex)&&(b[e]=b[e].replace(a.regex,a.group+"[REDACTED "+a.name+"]"))});return n(b)}var p=[{name:"EMAIL",regex:/[^\/]*(@|%40)(?!example\.com)[^\/]*/gi,
