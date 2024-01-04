@@ -6,7 +6,7 @@
     "configurations": [
     {
         "name": "Attach to Chrome",
-        "port": 80,
+        "port": 5000,
         "request": "attach",
         "type": "chrome",
         "webRoot": "${workspaceFolder}"
@@ -14,7 +14,7 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
+            "name": "Launch VCP Landing Menu",
             "url": "https://amante.github.io/VCPLandingMenu.html",
             "webRoot": "${workspaceFolder}"
         }
