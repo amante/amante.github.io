@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Style for the login popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .popup-content {
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            max-width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .close {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<button onclick="showPopup()">Login</button>
+
+<div id="loginPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="hidePopup()">&times;</span>
+        <h2>Login</h2>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <br><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+
+<script>
+    function showPopup() {
+        document.getElementById("loginPopup").style.display = "block";
+    }
+
+    function hidePopup() {
+        document.getElementById("loginPopup").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
