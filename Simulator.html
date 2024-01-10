@@ -17,8 +17,13 @@
 		<link rel="stylesheet" type="text/css" media="all" href="/wro/mhh_responsive.css">
 		<link rel="stylesheet" type="text/css" media="all" href="/wro/addons_responsive.css">
 		<link rel="stylesheet" type="text/css" media="all" href="/_ui/responsive/theme-mhh/css/font-awesome/css/all.css">
-	<link rel="stylesheet" type="text/css" href="">
-		
+<link rel="stylesheet" type="text/css" href="">
+<!-- PyScript CSS -->
+<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+
+<!-- This script tag bootstraps PyScript -->
+<script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
 	<script type="text/javascript" src="/_ui/shared/js/analyticsmediator.js"></script>
 </head>
 
@@ -259,7 +264,8 @@
 	</div>
 </div>
   	<div class="container home-middle-panel t-3">
-		<embed type="text/html" src="https://demo-vax-clink-3.streamlit.app?embedded=true" width="1024" height="768">
+		<script type="py" src="./Simulator.py"></script>
+		<!--<embed type="text/html" src="https://demo-vax-clink-3.streamlit.app?embedded=true" width="1024" height="768">-->
 	</div>
 </div>
 
