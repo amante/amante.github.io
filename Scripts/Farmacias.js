@@ -4,16 +4,16 @@ function initMap() {
     center: { lat: -33.447487, lng: -70.673676 },
   });
   
-  function createMarker(place) {
-    if (!place.geometry || !place.geometry.location) return;
-  
     const marker = new google.maps.Marker({
-      map,
       position: { lat: -33.522345, lng: -70.579265 },
+      map,
+    });
+
+    const infowindow = new google.maps.InfoWindow({
+      content: "<p>Ubicación Farmacia:" + marker.getPosition() + "</p>",
     });
   
     google.maps.event.addListener(marker, "click", () => {
-      infowindow.setContent(place.name || "");
       infowindow.open(map, marker);
     });
   }
