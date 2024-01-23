@@ -17,5 +17,4 @@ function initMap() {
       infowindow.open(map, marker);
     });
   }
-}
 window.initMap = initMap;
