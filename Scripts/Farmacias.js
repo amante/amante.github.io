@@ -99,8 +99,8 @@ function initMap() {
       const vaxcenter = vaccinationsCenterIDs[i];
   
     const request = {
-        //placeId: vaxcenter[1],
-        //fields: ["name", "formatted_address", "place_id", "geometry", "formatted_phone_number", "website", "icon"],
+        placeId: vaxcenter[1],
+        fields: "placeholder",
     };
     const infowindow = new google.maps.InfoWindow();
     const service = new google.maps.places.PlacesService(map);
