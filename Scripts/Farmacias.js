@@ -14,7 +14,7 @@ function initMap() {
   
     google.maps.event.addListener(marker, "click", () => {
       infowindow.setContent(place.name || "");
-      infowindow.open(map);
+      infowindow.open(map, marker);
     });
   }
 }
