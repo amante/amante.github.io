@@ -26,7 +26,9 @@ function initMap() {
     ];
   
     for (let i = 0; i < Pharmacies.length; i++) {
+      console.log("Arrrglo 1" + Pharmacies.length);
       for (let j = 0; j < Pharmacies[i].length; j++) {
+        console.log("Arreglo 2" + Pharmacies[i].length);
         console.log(Pharmacies[i][j]);
       }
    
