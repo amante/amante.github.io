@@ -49,6 +49,8 @@ function initMap() {
     const stockElement = document.createElement("p");
     stockElement.textContent = "Stock de Gardasil 9: 10 unidades ";
     content.appendChild(regionElement);
+
+    infowindow.setContent(content);
     infowindow.open(map, marker);
   });
 }
