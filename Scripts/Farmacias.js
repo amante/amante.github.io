@@ -1,7 +1,3 @@
-// In this example, we center the map, and add a marker, using a LatLng object
-// literal instead of a google.maps.LatLng object. LatLng object literals are
-// a convenient way to add a LatLng coordinate and, in most cases, can be used
-// in place of a google.maps.LatLng object.
 let map;
 
 function initMap() {
@@ -16,16 +12,23 @@ function initMap() {
     position: { lat: -33.522345, lng: -70.579265 },
     map: map,
   });
-  // You can use a LatLng literal in place of a google.maps.LatLng object when
-  // creating the Marker object. Once the Marker object is instantiated, its
-  // position will be available as a google.maps.LatLng object. In this case,
-  // we retrieve the marker's position using the
-  // google.maps.LatLng.getPosition() method.
+
+  setMarkers(map);
+}
+
+  function setMarkers(map) {
+    const Pharmacies = 
+      [
+        //["Nombre", direccion, region, comuna, latitud, longitud]
+        ["Farmacia Iberia", "VICTORIA Nº 3092","Valparaiso", "Valparaiso", "-33.0507821994016","-71.6029768890481"],
+        ["Botica Unión",	"CONDELL 1205",	"VALPARAISO",	"VALPARAISO",	"-33.0436526830044",	"-71.6243601197905"],
+        ["Farmacia Galénica",	"ARLEGUI N° 580 L - 7 OF. 201",	"VALPARAISO",	"VIÑA DEL MAR",	"-33.0236943992421",	"-71.5542400534807"]
+    ];
   
-  //const infowindow = new google.maps.InfoWindow({
-  //  content: "<p>Marker Location:" + marker.getPosition() + "</p>",
-  //});
-  const infowindow = new google.maps.InfoWindow();
+    for (let i = 0; i < Pharmacies.length; i++) {
+      console.log(Pharmacies[i]);
+
+    const infowindow = new google.maps.InfoWindow();
 
   google.maps.event.addListener(marker, "click", () => {
     const content = document.createElement("div");
