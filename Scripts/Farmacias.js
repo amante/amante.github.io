@@ -5,13 +5,11 @@
 let map;
 
 function initMap() {
-  const mapOptions = {
-    zoom: 15,
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 12,
     center: { lat: -33.447487, lng: -70.673676 },
-  };
-}
-
-  map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    });
+  }
 
   const marker = new google.maps.Marker({
     position: { lat: -33.522345, lng: -70.579265 },
