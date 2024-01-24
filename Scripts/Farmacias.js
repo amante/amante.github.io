@@ -30,7 +30,7 @@ function initMap() {
 
     const infowindow = new google.maps.InfoWindow();
 
-  google.maps.event.addListener(marker, "click", () => {
+    google.maps.event.addListener(marker, "click", () => {
     const content = document.createElement("div");
   
     const nameElement = document.createElement("h2");
@@ -55,7 +55,7 @@ function initMap() {
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
-  });
+    });
+  }
 }
-
 window.initMap = initMap;
