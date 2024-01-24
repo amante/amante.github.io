@@ -16,7 +16,7 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch VCP Landing Menu",
+            "name": "Launch Farmacias",
             "url": "https://amante.github.io/Farmacias.html",
             "webRoot": "${workspaceFolder}"
         }
