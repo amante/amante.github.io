@@ -26,7 +26,10 @@ function initMap() {
     ];
   
     for (let i = 0; i < Pharmacies.length; i++) {
-      console.log(Pharmacies[i]);
+      for (let j = 0; j < Pharmacies[i].length; j++) {
+        console.log(Pharmacies[i][j]);
+      }
+   
 
     const infowindow = new google.maps.InfoWindow();
 
