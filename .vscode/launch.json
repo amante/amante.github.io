@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         
     {
         "name": "Attach to Chrome",
@@ -16,7 +17,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch VCP Landing Menu",
-            "url": "https://amante.github.io/VCPLandingMenu.html",
+            "url": "https://amante.github.io/Farmacias.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
