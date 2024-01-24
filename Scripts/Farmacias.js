@@ -24,7 +24,7 @@ function initMap() {
   // we retrieve the marker's position using the
   // google.maps.LatLng.getPosition() method.
   const infowindow = new google.maps.InfoWindow({
-    content: "<p>Marker Location:" + marker.getPosition() + "</p>",
+    content: "<p>Stock Disponible:" + "10 unidades" + "</p>",
   });
 
   google.maps.event.addListener(marker, "click", () => {
