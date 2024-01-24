@@ -13,7 +13,7 @@ function initMap() {
     map: map,
   });
 
-  setMarkers(map);
+  //setMarkers(map);
 }
 
   function setMarkers(map) {
