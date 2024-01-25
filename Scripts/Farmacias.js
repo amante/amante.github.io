@@ -22,7 +22,7 @@ function initMap() {
   
     for (let i = 0; i < Pharmacies.length; i++) {
       for (let j = 0; j < Pharmacies[i].length; j++) {
-        let latitud; longitud;
+        let latitud, longitud;
         if (j = 4) {latitud = j;}
         if (j = 5) {longitud = j;}
        
