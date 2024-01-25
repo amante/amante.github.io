@@ -34,21 +34,26 @@ function initMap() {
       for (let j = 0; j < Pharmacies[i].length; j++) {
         switch (j){
           case 0: nombre = Pharmacies[i][j];
+          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
           case 1: direccion = Pharmacies[i][j];
+          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
           case 2: region = Pharmacies[i][j];
+          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
           case 3: ciudad = Pharmacies[i][j]; 
+          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
           case 4: latitud = parseFloat(Pharmacies[i][j]); 
+          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
           case 5: longitud = parseFloat(Pharmacies[i][j]);
+          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
+          break;
         }
         
-        console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
- 
-      let marker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
         position: { lat: latitud, lng: longitud },
         map: map,
       });
