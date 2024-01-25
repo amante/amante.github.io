@@ -8,11 +8,6 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-  const marker = new google.maps.Marker({
-    position: { lat: -33.522345, lng: -70.579265 },
-    map: map,
-  });
-
   setMarkers(map);
 }
 
@@ -27,8 +22,14 @@ function initMap() {
   
     for (let i = 0; i < Pharmacies.length; i++) {
       for (let j = 0; j < Pharmacies[i].length; j++) {
-        console.log(Pharmacies[i][j]);
-        
+        let latitud; longitud;
+        if (j = 4) {latitud = j;}
+        if (j = 5) {longitud = j;}
+       
+          const marker = new google.maps.Marker({
+          position: { lat: latitud, lng: longitud },
+          map: map,
+        });
       }
     }
   }
