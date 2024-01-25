@@ -12,6 +12,9 @@ function initMap() {
 }
 
   function setMarkers(map) {
+    let latitud; 
+    let longitud;
+
     const Pharmacies = 
       [
         //["Nombre", direccion, region, comuna, latitud, longitud]
@@ -22,15 +25,13 @@ function initMap() {
   
     for (let i = 0; i < Pharmacies.length; i++) {
       for (let j = 0; j < Pharmacies[i].length; j++) {
-        let latitud, longitud;
         if (j = 4) {latitud = j;}
-        if (j = 5) {longitud = j;}
-       
-          const marker = new google.maps.Marker({
-          position: { lat: latitud, lng: longitud },
-          map: map,
-        });
+        if (j = 5) {longitud = j;}    
       }
+      const marker = new google.maps.Marker({
+        position: { lat: latitud, lng: longitud },
+        map: map,
+      });
     }
   }
    
