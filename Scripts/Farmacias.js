@@ -34,36 +34,31 @@ function initMap() {
       for (let j = 0; j < Pharmacies[i].length; j++) {
         switch (j){
           case 0: nombre = Pharmacies[i][j];
-          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
           case 1: direccion = Pharmacies[i][j];
-          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
           case 2: region = Pharmacies[i][j];
-          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
-          case 3: ciudad = Pharmacies[i][j]; 
-          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
+          case 3: ciudad = Pharmacies[i][j];
           break;
-          case 4: latitud = parseFloat(Pharmacies[i][j]); 
-          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
+          case 4: latitud = parseFloat(Pharmacies[i][j]);
           break;
           case 5: longitud = parseFloat(Pharmacies[i][j]);
-          console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
           break;
         }
         
-        let marker = new google.maps.Marker({
-        position: { lat: latitud, lng: longitud },
-        map: map,
-      });
+        const marker = new google.maps.Marker({
+          map: map,
+          position: { lat: latitud, lng: longitud },
+          title: nombre
+        });
       
         google.maps.event.addListener(marker, "click", () => {
         const content = document.createElement("div");
         
-        const nameElement = document.createElement("h2");
-        nameElement.textContent = "Nombre: " + nombre;
-        content.appendChild(nameElement);
+        //const nameElement = document.createElement("h2");
+        //nameElement.textContent = "Nombre: " + nombre;
+        //content.appendChild(nameElement);
 
         const placeAddressElement = document.createElement("p");
         placeAddressElement.textContent = "Dirección: " + direccion;
