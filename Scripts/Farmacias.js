@@ -8,12 +8,19 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-  //setMarkers(map);
+  setMarkers(map);
 }
 
   function setMarkers(map) {
+    
+    let nombre;
+    let direccion;
+    let region;
+    let ciudad;
     let latitud; 
     let longitud;
+
+    const infowindow = new google.maps.InfoWindow();
 
     const Pharmacies = 
       [
@@ -25,16 +32,51 @@ function initMap() {
   
     for (let i = 0; i < Pharmacies.length; i++) {
       for (let j = 0; j < Pharmacies[i].length; j++) {
-        if (j = 4) {latitud = parseFloat(Pharmacies[i][j]);
-        console.log(latitud)}
-        if (j = 5) {longitud = parseFloat(Pharmacies[i][j]);
-        console.log(longitud)}    
-      }
-      const marker = new google.maps.Marker({
+        switch (j){
+          case 0: nombre = Pharmacies[i][j];
+          break;
+          case 1: direccion = Pharmacies[i][j];
+          break;
+          case 2: region = Pharmacies[i][j];
+          break;
+          case 3: ciudad = Pharmacies[i][j]; 
+          break;
+          case 4: latitud = parseFloat(Pharmacies[i][j]); 
+          break;
+          case 5: longitud = parseFloat(Pharmacies[i][j]);
+        }
+        
+        console.log ("Datos del Arreglo:" + nombre, direccion, region, ciudad, latitud, longitud);
+ 
+      let marker = new google.maps.Marker({
         position: { lat: latitud, lng: longitud },
         map: map,
       });
-    }
+      
+        google.maps.event.addListener(marker, "click", () => {
+        const content = document.createElement("div");
+        
+        const nameElement = document.createElement("h2");
+        nameElement.textContent = "Nombre: " + nombre;
+        content.appendChild(nameElement);
+
+        const placeAddressElement = document.createElement("p");
+        placeAddressElement.textContent = "Dirección: " + direccion;
+        content.appendChild(placeAddressElement);
+        
+        const regionElement = document.createElement("p");
+        regionElement.textContent = "Region: " + region;
+        content.appendChild(regionElement);
+
+        const cityElement = document.createElement("p");
+        cityElement.textContent = "Ciudad: " + ciudad;
+        content.appendChild(cityElement);
+
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+      });
+  }
+}
   }
    
 window.initMap = initMap;
