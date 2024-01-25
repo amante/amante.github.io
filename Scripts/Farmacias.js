@@ -25,8 +25,8 @@ function initMap() {
   
     for (let i = 0; i < Pharmacies.length; i++) {
       for (let j = 0; j < Pharmacies[i].length; j++) {
-        if (j = 4) {latitud = j;}
-        if (j = 5) {longitud = j;}    
+        if (j = 4) {latitud = Pharmacies[i][j];}
+        if (j = 5) {longitud = Pharmacies[i][j];}    
       }
       const marker = new google.maps.Marker({
         position: { lat: latitud, lng: longitud },
