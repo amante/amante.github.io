@@ -108,35 +108,37 @@ function setMarkers(map) {
         case 5: longitud = parseFloat(Pharmacies[i][j]);
           break;
       }
+      const marker = new google.maps.Marker({
+        map: map,
+        position: { lat: latitud, lng: longitud },
+        title: nombre
+      });
+  
+      google.maps.event.addListener(marker, "click", () => {
+        const content = document.createElement("div");
+  
+        const nameElement = document.createElement("h2");
+        nameElement.textContent = "Nombre: " + nombre;
+        content.appendChild(nameElement);
+  
+        const placeAddressElement = document.createElement("p");
+        placeAddressElement.textContent = "Dirección: " + direccion;
+        content.appendChild(placeAddressElement);
+  
+        const regionElement = document.createElement("p");
+        regionElement.textContent = "Region: " + region;
+        content.appendChild(regionElement);
+  
+        const cityElement = document.createElement("p");
+        cityElement.textContent = "Ciudad: " + ciudad;
+        content.appendChild(cityElement);
+  
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+      });
+
     }
-    const marker = new google.maps.Marker({
-      map: map,
-      position: { lat: latitud, lng: longitud },
-      title: nombre
-    });
-
-    google.maps.event.addListener(marker, "click", () => {
-      const content = document.createElement("div");
-
-      const nameElement = document.createElement("h2");
-      nameElement.textContent = "Nombre: " + nombre;
-      content.appendChild(nameElement);
-
-      const placeAddressElement = document.createElement("p");
-      placeAddressElement.textContent = "Dirección: " + direccion;
-      content.appendChild(placeAddressElement);
-
-      const regionElement = document.createElement("p");
-      regionElement.textContent = "Region: " + region;
-      content.appendChild(regionElement);
-
-      const cityElement = document.createElement("p");
-      cityElement.textContent = "Ciudad: " + ciudad;
-      content.appendChild(cityElement);
-
-      infowindow.setContent(content);
-      infowindow.open(map, marker);
-    });
+    
   }
 }
 
