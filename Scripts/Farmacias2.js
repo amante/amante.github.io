@@ -45,7 +45,7 @@ function createMarker(place) {
 
   google.maps.event.addListener(marker, "click", () => {
     infowindow.setContent();
-    infowindow.open(map);
+    infowindow.open(map, marker);
   });
 }
 
