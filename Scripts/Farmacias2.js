@@ -6,6 +6,7 @@ let service;
 let infowindow;
 let latitud;
 let longitud;
+let nombre;
 
 
 function initMap() {
@@ -31,7 +32,7 @@ function initMap() {
 
 function createMarker(place) {
     for (let j = 0; j < place.length; j++){
-        if (j = 0) {place.name = place[j];}
+        if (j = 0) {nombre = place[j];}
         if (j = 4) {latitud = place[j];}
         if (j = 5) {longitud = place[j];}   
     } 
@@ -39,10 +40,11 @@ function createMarker(place) {
   const marker = new google.maps.Marker({
     map,
     position: { lat: latitud, lng: longitud },
+    name: nombre,
   });
 
   google.maps.event.addListener(marker, "click", () => {
-    infowindow.setContent(place.name || "");
+    infowindow.setContent();
     infowindow.open(map);
   });
 }
