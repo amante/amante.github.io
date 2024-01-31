@@ -44,7 +44,13 @@ function createMarker(place) {
   });
 
   google.maps.event.addListener(marker, "click", () => {
-    infowindow.setContent();
+    const content = document.createElement("div");
+
+    const nameElement = document.createElement("h2");
+    nameElement.textContent = "Nombre: " + nombre;
+    content.appendChild(nameElement);
+
+    infowindow.setContent(content);
     infowindow.open(map, marker);
   });
 }
