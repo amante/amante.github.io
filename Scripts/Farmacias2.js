@@ -7,6 +7,9 @@ let infowindow;
 let latitud;
 let longitud;
 let nombre;
+let direccion;
+let comuna;
+let region;
 
 
 function initMap() {
@@ -32,9 +35,12 @@ function initMap() {
 
 function createMarker(place) {
     for (let j = 0; j < place.length; j++){
-        if (j = 0) {nombre = place[j];}
-        if (j = 4) {latitud = place[j];}
-        if (j = 5) {longitud = place[j];}   
+        if (j=0){nombre = place[j];}
+        if (j=1){direccion = place[j];}
+        if (j=2){region = place[j];}
+        if (j=3){comuna = place[j];}
+        if (j=4){latitud = place[j];}
+        if (j=5){longitud = place[j];}   
     } 
 
   const marker = new google.maps.Marker({
@@ -49,6 +55,18 @@ function createMarker(place) {
     const nameElement = document.createElement("h2");
     nameElement.textContent = "Nombre: " + nombre;
     content.appendChild(nameElement);
+
+    const placeAddressElement = document.createElement("p");
+    placeAddressElement.textContent = "Dirección: " + direccion;
+    content.appendChild(placeAddressElement);
+
+    const regionElement = document.createElement("p");
+    regionElement.textContent = "Region: " + region;
+    content.appendChild(regionElement);
+
+    const cityElement = document.createElement("p");
+    cityElement.textContent = "Ciudad: " + ciudad;
+    content.appendChild(cityElement);
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
