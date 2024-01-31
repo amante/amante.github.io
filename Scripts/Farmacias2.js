@@ -34,7 +34,7 @@ function initMap() {
 //}
 
 function createMarker(place) {
-    for (let j = 0; j < place.length; j++){
+    for (let j=0; j <= place.length; j++){
         if (j=0){nombre = place[j];}
         if (j=1){direccion = place[j];}
         if (j=2){region = place[j];}
