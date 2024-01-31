@@ -6,10 +6,10 @@ let service;
 let infowindow;
 let latitud;
 let longitud;
-let nombre;
-let direccion;
-let comuna;
-let region;
+let address;
+let name;
+
+
 
 
 function initMap() {
@@ -18,7 +18,7 @@ function initMap() {
   infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById("map"), {
     center: santiago,
-    zoom: 15,
+    zoom: 8,
   });
 
    const results = [
@@ -35,7 +35,7 @@ function initMap() {
 
 function createMarker(place) {
     for (let j=0; j <= place.length; j++){
-        if (j=0){nombre = place[j];}
+        if (j=0){name = place[j];}
         if (j=1){direccion = place[j];}
         if (j=2){region = place[j];}
         if (j=3){comuna = place[j];}
@@ -46,14 +46,13 @@ function createMarker(place) {
   const marker = new google.maps.Marker({
     map,
     position: { lat: latitud, lng: longitud },
-    name: nombre,
   });
 
   google.maps.event.addListener(marker, "click", () => {
     const content = document.createElement("div");
 
     const nameElement = document.createElement("h2");
-    nameElement.textContent = "Nombre: " + nombre;
+    nameElement.textContent = "Nombre: " + name;
     content.appendChild(nameElement);
 
     const placeAddressElement = document.createElement("p");
