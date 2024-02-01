@@ -40,6 +40,7 @@ function createMarker(place) {
   const marker = new google.maps.Marker({
     map,
     position: { lat: latitud, lng: longitud },
+    title: nombre
   });
 
   google.maps.event.addListener(marker, "click", () => {
