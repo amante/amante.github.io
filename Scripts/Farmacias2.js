@@ -1,16 +1,13 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
 let map;
 let service;
 let infowindow;
 let latitud;
 let longitud;
-let address;
-let name;
-
-
-
+let direccion;
 
 function initMap() {
   const santiago = new google.maps.LatLng(-33.447487,-70.673676);
@@ -35,7 +32,6 @@ function initMap() {
 
 function createMarker(place) {
     for (let j=0; j <= place.length; j++){
-        if (j=0){name = place[j];}
         if (j=1){direccion = place[j];}
         if (j=2){region = place[j];}
         if (j=3){comuna = place[j];}
@@ -51,21 +47,9 @@ function createMarker(place) {
   google.maps.event.addListener(marker, "click", () => {
     const content = document.createElement("div");
 
-    const nameElement = document.createElement("h2");
-    nameElement.textContent = "Nombre: " + name;
-    content.appendChild(nameElement);
-
     const placeAddressElement = document.createElement("p");
     placeAddressElement.textContent = "Dirección: " + direccion;
     content.appendChild(placeAddressElement);
-
-    const regionElement = document.createElement("p");
-    regionElement.textContent = "Region: " + region;
-    content.appendChild(regionElement);
-
-    const cityElement = document.createElement("p");
-    cityElement.textContent = "Ciudad: " + ciudad;
-    content.appendChild(cityElement);
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
