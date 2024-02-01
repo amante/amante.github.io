@@ -32,6 +32,7 @@ function createMarker(place) {
   let direccion;
 
     for (let j=0; j <= place.length; j++){
+      if(j=0){ nombre = place[j];}
       if(j=1){ direccion = place[j];}
         if (j=4){latitud = place[j];}
         if (j=5){longitud = place[j];}   
