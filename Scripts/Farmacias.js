@@ -8,6 +8,20 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+  setMarkers(map);
+}
+
+function setMarkers(map) {
+
+  let nombre;
+  let direccion;
+  let region;
+  let ciudad;
+  let latitud;
+  let longitud;
+
+  const infowindow = new google.maps.InfoWindow();
+
   const Pharmacies =
     [
       //["Nombre", direccion, region, comuna, latitud, longitud]
@@ -77,26 +91,10 @@ function initMap() {
       ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573], 
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056]
     ];
-    
-  for (let i = 0; i < Pharmacies.length; i++) {
-      setMarkers(map,Pharmacies[i]);
-    }
-}
-
-function setMarkers(mapa,Pharmacies) {
-
-  let nombre;
-  let direccion;
-  let region;
-  let ciudad;
-  let latitud;
-  let longitud;
-
-  const infowindow = new google.maps.InfoWindow();
 
     for (let i = 0; i < Pharmacies.length; i++) {  
       const marker = new google.maps.Marker({
-      map: mapa,
+      map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre
     });
@@ -117,28 +115,28 @@ function setMarkers(mapa,Pharmacies) {
           break;
       }
       
-      google.maps.event.addListener(marker, "click", () => {
-        const content = document.createElement("div");
-  
-        const nameElement = document.createElement("h2");
-        nameElement.textContent = "Nombre: " + nombre;
-        content.appendChild(nameElement);
-  
-        const placeAddressElement = document.createElement("p");
-        placeAddressElement.textContent = "Dirección: " + direccion;
-        content.appendChild(placeAddressElement);
-  
-        const regionElement = document.createElement("p");
-        regionElement.textContent = "Region: " + region;
-        content.appendChild(regionElement);
-  
-        const cityElement = document.createElement("p");
-        cityElement.textContent = "Ciudad: " + ciudad;
-        content.appendChild(cityElement);
-  
-        infowindow.setContent(content);
-        infowindow.open(map, marker);
-      });       
+          google.maps.event.addListener(marker, "click", () => {
+            const content = document.createElement("div");
+      
+            const nameElement = document.createElement("h2");
+            nameElement.textContent = "Nombre: " + nombre;
+            content.appendChild(nameElement);
+      
+            const placeAddressElement = document.createElement("p");
+            placeAddressElement.textContent = "Dirección: " + direccion;
+            content.appendChild(placeAddressElement);
+      
+            const regionElement = document.createElement("p");
+            regionElement.textContent = "Region: " + region;
+            content.appendChild(regionElement);
+      
+            const cityElement = document.createElement("p");
+            cityElement.textContent = "Ciudad: " + ciudad;
+            content.appendChild(cityElement);
+      
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+          });       
     }
   }    
 }
