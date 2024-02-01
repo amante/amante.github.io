@@ -14,15 +14,16 @@ function initMap() {
     zoom: 8,
   });
 
-   const results = [
+  const results = [
     ['IBERIA', 'VICTORIA Nº 3092', 'VALPARAISO', 'VALPARAISO', -33.0507821994016, -71.6029768890481], 
     ['BOTICA UNIÓN', 'CONDELL 1205', 'VALPARAISO', 'VALPARAISO', -33.0436526830044, -71.6243601197905], 
     ['GALENICA', 'ARLEGUI N° 580 L - 7 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0236943992421, -71.5542400534807]
-];
-      for (let i = 0; i < results.length; i++) {
-        createMarker(results[i]);
-      }
-    }
+  ];
+      
+  for (let i = 0; i < results.length; i++) {
+    createMarker(results[i]);
+  }
+}
 
 function createMarker(place) {
 
