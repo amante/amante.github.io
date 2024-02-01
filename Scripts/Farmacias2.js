@@ -6,7 +6,7 @@ let map;
 let infowindow;
 let latitud;
 let longitud;
-let name;
+let nombre;
 let direccion;
 
 function initMap() {
@@ -41,7 +41,7 @@ function createMarker(place) {
   const marker = new google.maps.Marker({
     map,
     position: { lat: latitud, lng: longitud },
-    name: nombre 
+    name: nombre, 
   });
 
   google.maps.event.addListener(marker, "click", () => {
