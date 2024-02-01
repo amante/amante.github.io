@@ -7,9 +7,8 @@ let service;
 let infowindow;
 let latitud;
 let longitud;
+let nombre;
 let direccion;
-let region;
-let comuna;
 
 function initMap() {
   const santiago = new google.maps.LatLng(-33.447487,-70.673676);
@@ -44,6 +43,7 @@ function createMarker(place) {
   const marker = new google.maps.Marker({
     map,
     position: { lat: latitud, lng: longitud },
+    name: nombre; 
   });
 
   google.maps.event.addListener(marker, "click", () => {
