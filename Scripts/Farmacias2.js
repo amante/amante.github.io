@@ -23,8 +23,6 @@ function initMap() {
         createMarker(results[i]);
       }
     }
-  //});
-//}
 
 function createMarker(place) {
 
@@ -34,7 +32,6 @@ function createMarker(place) {
   let direccion;
 
     for (let j=0; j <= place.length; j++){
-      if(j=0){nombre = place[j];}
       if(j=1){ direccion = place[j];}
         if (j=4){latitud = place[j];}
         if (j=5){longitud = place[j];}   
@@ -43,7 +40,6 @@ function createMarker(place) {
   const marker = new google.maps.Marker({
     map,
     position: { lat: latitud, lng: longitud },
-    name: nombre, 
   });
 
   google.maps.event.addListener(marker, "click", () => {
