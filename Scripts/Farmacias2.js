@@ -4,10 +4,6 @@
 
 let map;
 let infowindow;
-let latitud;
-let longitud;
-let nombre;
-let direccion;
 
 function initMap() {
   const santiago = new google.maps.LatLng(-33.447487,-70.673676);
@@ -31,6 +27,12 @@ function initMap() {
 //}
 
 function createMarker(place) {
+
+  let latitud;
+  let longitud;
+  let nombre;
+  let direccion;
+
     for (let j=0; j <= place.length; j++){
       if(j=0){nombre = place[j];}
       if(j=1){ direccion = place[j];}
