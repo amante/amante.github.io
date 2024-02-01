@@ -8,6 +8,8 @@ let infowindow;
 let latitud;
 let longitud;
 let direccion;
+let region;
+let comuna;
 
 function initMap() {
   const santiago = new google.maps.LatLng(-33.447487,-70.673676);
