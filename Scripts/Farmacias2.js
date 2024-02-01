@@ -3,11 +3,10 @@
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 let map;
-let service;
 let infowindow;
 let latitud;
 let longitud;
-let nombre;
+let name;
 let direccion;
 
 function initMap() {
@@ -33,9 +32,8 @@ function initMap() {
 
 function createMarker(place) {
     for (let j=0; j <= place.length; j++){
-        if (j=1){direccion = place[j];}
-        if (j=2){region = place[j];}
-        if (j=3){comuna = place[j];}
+      if(j=0){nombre = place[j];}
+      if(j=1){ direccion = place[j];}
         if (j=4){latitud = place[j];}
         if (j=5){longitud = place[j];}   
     } 
@@ -43,7 +41,7 @@ function createMarker(place) {
   const marker = new google.maps.Marker({
     map,
     position: { lat: latitud, lng: longitud },
-    name: nombre; 
+    name: nombre 
   });
 
   google.maps.event.addListener(marker, "click", () => {
