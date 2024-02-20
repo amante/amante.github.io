@@ -1,15 +1,15 @@
 var obj = { "label":"value", "nestedLabel":{"nestedLabel2":"value2"} }
 function iterateObject(obj) {
   var value = '', header = '';
-          for (name in obj) {
-            if (obj.hasOwnProperty(name)) {
-              if (isObject(obj[name])) {
-                var out = iterateObject(obj[name]);
+          for (let array in obj) {
+            if (obj.hasOwnProperty(array)) {
+              if (isObject(obj[array])) {
+                var out = iterateObject(obj[array]);
                 value += out.value;
                 header += out.header;
               } else {
-                value += removeNewLine(obj[name]) + '; ';
-                header += name + '; ';
+                value += removeNewLine(obj[array]) + '; ';
+                header += array + '; ';
               }
             }
           }
