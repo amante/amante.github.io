@@ -1,9 +1,12 @@
 function convertToCSV(arr) {
-    const array = [Object.keys(arr[0])].concat(arr)
+    
+    for (let i = 0; i < arr.length; i++) {  
+        const array = [Object.keys(arr[i])].concat(arr)
   
-    return array.map(it => {
-      return Object.values(it).toString()
-    }).join('\n')
+        return array.map(it => {
+          return Object.values(it).toString()
+        }).join('\n')
+      }  
   }
   
   
