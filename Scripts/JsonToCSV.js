@@ -1,8 +1,7 @@
 function convertToCSV(arr) {
     
     for (let i = 0; i < arr.length; i++) { 
-        console.log(i); 
-        console.log(arr.length);
+        
         const array = [Object.keys(arr[i])].concat(arr)
   
         return array.map(it => {
@@ -10,6 +9,9 @@ function convertToCSV(arr) {
         }).join('\n')
       }  
   }
+
+  console.log(i); 
+        console.log(arr.length);
   
   
   console.log(
