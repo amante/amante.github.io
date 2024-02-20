@@ -1,18 +1,16 @@
 function convertToCSV(arr) {
     
     for (let i = 0; i < arr.length; i++) { 
-        
-        const array = [Object.keys(arr[i])].concat(arr)
+        for (let j = 0; j < arr[i].length; j++)
+            {
+            const array = [Object.keys(arr[i][j])].concat(arr)
   
-        return array.map(it => {
-          return Object.values(it).toString()
-        }).join('\n')
-      }  
+            return array.map(it => {
+            return Object.values(it).toString()
+            }).join('\n')
+            }
+        }  
   }
-
-  console.log(i); 
-        console.log(arr.length);
-  
   
   console.log(
     convertToCSV( 
