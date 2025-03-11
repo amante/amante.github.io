@@ -21,6 +21,7 @@ function setMarkers(map) {
   let longitud;
 
   const infowindow = new google.maps.InfoWindow();
+  const CruzVerdeIcon = "https://play.google.com/store/apps/details?id=com.cruzverde.cl.ecommerce";
 
   const Pharmacies =
     [
@@ -91,10 +92,13 @@ function setMarkers(map) {
       ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573], 
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056]
     ];
+  
+    
 
     for (let i = 0; i < Pharmacies.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
+      icon: CruzVerdeIcon,
       position: { lat: latitud, lng: longitud },
       title: nombre
     });
