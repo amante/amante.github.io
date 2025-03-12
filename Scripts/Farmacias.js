@@ -74,19 +74,22 @@ function setMarkers(map) {
         case 6: stock = Pharmacies[i][j];
           break;
       }
-if (nombre = "CRUZ VERDE"){
-  const marker = new google.maps.Marker({
-    map: map,
-    position: { lat: latitud, lng: longitud },
-    title: nombre,
-  icon: CruzVerdeIcon});
-}; elseIf (nombre = "SALCOBRAND")
-{const marker = new google.maps.Marker({
-  map: map,
-  position: { lat: latitud, lng: longitud },
-  title: nombre,
-icon: SalcoBrandIcon});}
+
+      if (nombre = "CRUZ VERDE"){
+      const marker = new google.maps.Marker({
+      map: map,
+      position: { lat: latitud, lng: longitud },
+      title: nombre,
+      icon: CruzVerdeIcon});
+      }; 
       
+      if (nombre = "SALCOBRAND"){
+        const marker = new google.maps.Marker({
+        map: map,
+        position: { lat: latitud, lng: longitud },
+        title: nombre,
+        icon: SalcoBrandIcon});
+      };
       
           google.maps.event.addListener(marker, "click", () => {
             const content = document.createElement("div");
