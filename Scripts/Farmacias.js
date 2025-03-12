@@ -1,9 +1,12 @@
 let map;
 
+
+
+async function initMap() {
+  
 const { Map } = await google.maps.importLibrary("maps");
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-function initMap() {
   const mapOptions = {
     zoom: 15,
     center: { lat: -33.447487, lng: -70.673676 },
