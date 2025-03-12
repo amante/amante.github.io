@@ -19,39 +19,91 @@ function setMarkers(map) {
   let ciudad;
   let latitud;
   let longitud;
+  let stock;
 
   const infowindow = new google.maps.InfoWindow();
 
   const Pharmacies =
     [
-      //["Nombre", direccion, region, comuna, latitud, longitud]
-      ['IBERIA', 'VICTORIA Nº 3092', 'VALPARAISO', 'VALPARAISO', -33.0507821994016, -71.6029768890481], 
-      ['BOTICA UNIÓN', 'CONDELL 1205', 'VALPARAISO', 'VALPARAISO', -33.0436526830044, -71.6243601197905], 
-      ['GALENICA', 'ARLEGUI N° 580 L - 7 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0236943992421, -71.5542400534807], 
-      ['GALENICA', 'AV. PEDRO MONTT N° 2060', 'VALPARAISO', 'VALPARAISO', -33.0471602357967, -71.615342743841], 
-      ['GALENICA', 'AMERICO VESPUCIO 7500 LOCAL B3-1B', 'METROPOLITANA', 'LA FLORIDA', -33.52163, -70.597311], 
-      ['GALENICA', 'IRARRAZAVAL 2661', 'METROPOLITANA', 'ÑUÑOA', -33.45427, -70.603641], 
-      ['GALENICA', 'TENIENTE CRUZ 540. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'PUDAHUEL', -33.458155, -70.738266], 
-      ['GALENICA', 'AV. CONCHA Y TORO 157', 'METROPOLITANA', 'PUENTE ALTO', -33.610491, -70.575739], 
-      ['GALENICA', 'AV. CARRASCAL 4436. INTERIOR EKONO', 'METROPOLITANA', 'QUINTA NORMAL', -33.422899, -70.694128], 
-      ['GALENICA', 'AV. CARRASCAL 6001. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'QUINTA NORMAL', -33.4164, -70.711824], 
-      ['GALENICA', 'EYZAGUIRRE  523', 'METROPOLITANA', 'SAN BERNARDO', -33.59314, -70.705474], 
-      ['GALENICA', 'SAN ANTONIO 380', 'METROPOLITANA', 'SANTIAGO', -33.438483, -70.648308], 
-      ['GALENICA', 'PROVIDENCIA 2592', 'METROPOLITANA', 'PROVIDENCIA', -33.41856159674302, -70.6031911075224], 
-      ['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917], 
-      ['CENTRAL DE HOMEOPATIA SAN ANTONIO', 'PEDRO MONTT Nº 129 L - 3', 'VALPARAISO', 'SAN ANTONIO', -33.5800344387736, -71.6114727596172], 
-      ['HOSPITAL 1', 'CARRERA N° 737', 'VALPARAISO', 'LA CALERA', -32.7872809066268, -71.1913238392171], 
-      ['SAN NICOLAS', 'J.J. PEREZ N° 396', 'VALPARAISO', 'LA CALERA', -32.7862582411004, -71.189985617592], 
-      ['FAMIFARMA', 'CHACABUCO Nº 208', 'VALPARAISO', 'CASABLANCA', -33.3200990278442, -71.406862450338], 
-      ['DR. SIMI', 'O"HIGGINS N°293', 'VALPARAISO', 'LOS ANDES', -32.8344438188261, -70.5975221792207], 
-      ['DR SIMI', 'ESMERALDA N°286', 'VALPARAISO', 'LOS ANDES', -32.8334836244902, -70.5971417561781], 
-      ['NUEVA MODERNA', 'PORTUS Nº1194, LOCAL 2', 'VALPARAISO', 'SAN FELIPE', -32.7504946484281, -70.7239589333067], 
-      ['CRUZ VERDE', 'WALKER MARTINEZ 1786', 'METROPOLITANA', 'LA FLORIDA', -33.522345, -70.579265], 
-      ['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603], 
-      ['CRUZ VERDE', 'CENTRAL 129 (EX 145)', 'METROPOLITANA', 'MAIPU', -33.513669, -70.826522], 
-      ['CRUZ VERDE', 'AV. WALKER MARTINEZ 1642. INTERIOR MONTSERRAT', 'METROPOLITANA', 'QUINTA NORMAL', -33.430501, -70.692356], 
-      ['CRUZ VERDE', 'AV. DOMINGO SANTA MARIA 4112. INTERIOR MONTSERRAT', 'METROPOLITANA', 'RENCA', -33.405687, -70.704351], 
-      ['LIGA CONTRA LA EPILEPSIA', 'ARLEGUI N° 646 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0238793831336, -71.5531322426683], 
+      //["Nombre", direccion, region, comuna, latitud, longitud, stock]
+      ['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603,'Si'], 
+      ['CRUZ VERDE', 'CENTRAL 129 (EX 145)', 'METROPOLITANA', 'MAIPU', -33.513669, -70.826522, 'Si'], 
+      ['CRUZ VERDE', 'AV. WALKER MARTINEZ 1642. INTERIOR MONTSERRAT', 'METROPOLITANA', 'QUINTA NORMAL', -33.430501, -70.692356,'Si'], 
+      ['CRUZ VERDE', 'AV. DOMINGO SANTA MARIA 4112. INTERIOR MONTSERRAT', 'METROPOLITANA', 'RENCA', -33.405687, -70.704351, 'Si'],      
+      ['CRUZ VERDE', 'OHIGGINS 195, LOCAL 1', 'VALPARAISO', 'QUILLOTA', -32.8793428949969, -71.2467871500868, 'NO'], 
+      ['CRUZ VERDE', 'J.J. PEREZ 202', 'VALPARAISO', 'LA CALERA', -32.788066282624, -71.1897310126255, 'Si'], 
+      ['CRUZ VERDE', 'URMENETA 99', 'VALPARAISO', 'LIMACHE', -32.9849921792696, -71.2757177058683, 'Si'], 
+      ['CRUZ VERDE', 'REPUBLICA 281', 'VALPARAISO', 'LIMACHE', -33.0025007197382, -71.2654977848501, 'NO'], 
+      ['CRUZ VERDE', 'CHACABUCO 281', 'VALPARAISO', 'QUILLOTA', -32.878335491624, -71.246141889165, 'Si'], 
+      ['CRUZ VERDE', 'URMENETA 96', 'VALPARAISO', 'LIMACHE', -32.9853313679932, -71.2759083062112, 'Si'], 
+      ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573, 'Si'], 
+      ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056, 'No']
+    ];
+  
+    
+
+    for (let i = 0; i < Pharmacies.length; i++) {  
+      const marker = new google.maps.Marker({
+      map: map,
+      position: { lat: latitud, lng: longitud },
+      icon: "https://image.mail.cs.msd.com/lib/fe9a13737664057c73/m/1/icono_vacunatorios_publicosyprivados.png",
+      title: nombre
+    });
+
+    for (let j = 0; j < Pharmacies[i].length; j++) {
+      switch (j) {
+        case 0: nombre = Pharmacies[i][j];
+          break;
+        case 1: direccion = Pharmacies[i][j];
+          break;
+        case 2: region = Pharmacies[i][j];
+          break;
+        case 3: ciudad = Pharmacies[i][j];
+          break;
+        case 4: latitud = parseFloat(Pharmacies[i][j]);
+          break;
+        case 5: longitud = parseFloat(Pharmacies[i][j]);
+          break;
+        case 6: stock = Pharmacies[i][j];
+          break;
+      }
+      
+          google.maps.event.addListener(marker, "click", () => {
+            const content = document.createElement("div");
+      
+            const nameElement = document.createElement("h2");
+            nameElement.textContent = "Nombre: " + nombre;
+            content.appendChild(nameElement);
+      
+            const placeAddressElement = document.createElement("p");
+            placeAddressElement.textContent = "Dirección: " + direccion;
+            content.appendChild(placeAddressElement);
+      
+            const regionElement = document.createElement("p");
+            regionElement.textContent = "Region: " + region;
+            content.appendChild(regionElement);
+      
+            const cityElement = document.createElement("p");
+            cityElement.textContent = "Ciudad: " + ciudad;
+            content.appendChild(cityElement);
+
+            const stockElement = document.createElement("p");
+            stockElement.textContent = "Stock Disponible: " + stock;
+            content.appendChild(stockElement);
+      
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+          });       
+    }
+  }    
+}
+
+window.initMap = initMap;
+
+
+
+
+/* ['LIGA CONTRA LA EPILEPSIA', 'ARLEGUI N° 646 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0238793831336, -71.5531322426683], 
       ['CONAC', 'BLAS CUEVAS N° 965', 'VALPARAISO', 'VALPARAISO', -33.0524290091146, -71.609599253029], 
       ['POLICLINICO CONAC', 'EDUARDO LEFORT N°1638', 'ANTOFAGASTA', 'ANTOFAGASTA', -23.660025, -70.3949386], 
       ['FARMACIA CONAC CONCEPCIÓN', 'CAUPOLICAN N° 518 OFICINA 301', 'BIOBIO', 'CONCEPCION', -36.82646, -73.05121], 
@@ -81,67 +133,26 @@ function setMarkers(map) {
       ['DR. SIMI', 'O´HIGGINS 186', 'VALPARAISO', 'QUILLOTA', -32.8790642414584, -71.2467373690042], 
       ['MASTER', 'LUIS REUS Nª 273 L.4', 'VALPARAISO', 'SAN ANTONIO', -33.5883437717979, -71.6082114019404], 
       ['DR. SIMI', 'PORTUS N° 239', 'VALPARAISO', 'SAN FELIPE', -32.7514425073796, -70.7232407620542], 
-      ['DR SIMI', 'TRASLAVIÑA N°221', 'VALPARAISO', 'SAN FELIPE', -32.7500106610513, -70.7270127009622], 
-      ['CRUZ VERDE', 'OHIGGINS 195, LOCAL 1', 'VALPARAISO', 'QUILLOTA', -32.8793428949969, -71.2467871500868], 
-      ['CRUZ VERDE', 'J.J. PEREZ 202', 'VALPARAISO', 'LA CALERA', -32.788066282624, -71.1897310126255], 
-      ['CRUZ VERDE', 'URMENETA 99', 'VALPARAISO', 'LIMACHE', -32.9849921792696, -71.2757177058683], 
-      ['CRUZ VERDE', 'REPUBLICA 281', 'VALPARAISO', 'LIMACHE', -33.0025007197382, -71.2654977848501], 
-      ['CRUZ VERDE', 'CHACABUCO 281', 'VALPARAISO', 'QUILLOTA', -32.878335491624, -71.246141889165], 
-      ['CRUZ VERDE', 'URMENETA 96', 'VALPARAISO', 'LIMACHE', -32.9853313679932, -71.2759083062112], 
-      ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573], 
-      ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056]
-    ];
-  
-    
-
-    for (let i = 0; i < Pharmacies.length; i++) {  
-      const marker = new google.maps.Marker({
-      map: map,
-      position: { lat: latitud, lng: longitud },
-      icon: "https://image.mail.cs.msd.com/lib/fe9a13737664057c73/m/1/icono_vacunatorios_publicosyprivados.png",
-      title: nombre
-    });
-
-    for (let j = 0; j < Pharmacies[i].length; j++) {
-      switch (j) {
-        case 0: nombre = Pharmacies[i][j];
-          break;
-        case 1: direccion = Pharmacies[i][j];
-          break;
-        case 2: region = Pharmacies[i][j];
-          break;
-        case 3: ciudad = Pharmacies[i][j];
-          break;
-        case 4: latitud = parseFloat(Pharmacies[i][j]);
-          break;
-        case 5: longitud = parseFloat(Pharmacies[i][j]);
-          break;
-      }
-      
-          google.maps.event.addListener(marker, "click", () => {
-            const content = document.createElement("div");
-      
-            const nameElement = document.createElement("h2");
-            nameElement.textContent = "Nombre: " + nombre;
-            content.appendChild(nameElement);
-      
-            const placeAddressElement = document.createElement("p");
-            placeAddressElement.textContent = "Dirección: " + direccion;
-            content.appendChild(placeAddressElement);
-      
-            const regionElement = document.createElement("p");
-            regionElement.textContent = "Region: " + region;
-            content.appendChild(regionElement);
-      
-            const cityElement = document.createElement("p");
-            cityElement.textContent = "Ciudad: " + ciudad;
-            content.appendChild(cityElement);
-      
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
-          });       
-    }
-  }    
-}
-
-window.initMap = initMap;
+      ['DR SIMI', 'TRASLAVIÑA N°221', 'VALPARAISO', 'SAN FELIPE', -32.7500106610513, -70.7270127009622],
+      ['IBERIA', 'VICTORIA Nº 3092', 'VALPARAISO', 'VALPARAISO', -33.0507821994016, -71.6029768890481, 'Si'], 
+      ['BOTICA UNIÓN', 'CONDELL 1205', 'VALPARAISO', 'VALPARAISO', -33.0436526830044, -71.6243601197905, 'Si'], 
+      ['GALENICA', 'ARLEGUI N° 580 L - 7 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0236943992421, -71.5542400534807, 'Si'], 
+      ['GALENICA', 'AV. PEDRO MONTT N° 2060', 'VALPARAISO', 'VALPARAISO', -33.0471602357967, -71.615342743841, 'Si'], 
+      ['GALENICA', 'AMERICO VESPUCIO 7500 LOCAL B3-1B', 'METROPOLITANA', 'LA FLORIDA', -33.52163, -70.597311], 
+      ['GALENICA', 'IRARRAZAVAL 2661', 'METROPOLITANA', 'ÑUÑOA', -33.45427, -70.603641], 
+      ['GALENICA', 'TENIENTE CRUZ 540. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'PUDAHUEL', -33.458155, -70.738266], 
+      ['GALENICA', 'AV. CONCHA Y TORO 157', 'METROPOLITANA', 'PUENTE ALTO', -33.610491, -70.575739], 
+      ['GALENICA', 'AV. CARRASCAL 4436. INTERIOR EKONO', 'METROPOLITANA', 'QUINTA NORMAL', -33.422899, -70.694128], 
+      ['GALENICA', 'AV. CARRASCAL 6001. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'QUINTA NORMAL', -33.4164, -70.711824], 
+      ['GALENICA', 'EYZAGUIRRE  523', 'METROPOLITANA', 'SAN BERNARDO', -33.59314, -70.705474], 
+      ['GALENICA', 'SAN ANTONIO 380', 'METROPOLITANA', 'SANTIAGO', -33.438483, -70.648308], 
+      ['GALENICA', 'PROVIDENCIA 2592', 'METROPOLITANA', 'PROVIDENCIA', -33.41856159674302, -70.6031911075224], 
+      ['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917], 
+      ['CENTRAL DE HOMEOPATIA SAN ANTONIO', 'PEDRO MONTT Nº 129 L - 3', 'VALPARAISO', 'SAN ANTONIO', -33.5800344387736, -71.6114727596172], 
+      ['HOSPITAL 1', 'CARRERA N° 737', 'VALPARAISO', 'LA CALERA', -32.7872809066268, -71.1913238392171], 
+      ['SAN NICOLAS', 'J.J. PEREZ N° 396', 'VALPARAISO', 'LA CALERA', -32.7862582411004, -71.189985617592], 
+      ['FAMIFARMA', 'CHACABUCO Nº 208', 'VALPARAISO', 'CASABLANCA', -33.3200990278442, -71.406862450338], 
+      ['DR. SIMI', 'O"HIGGINS N°293', 'VALPARAISO', 'LOS ANDES', -32.8344438188261, -70.5975221792207], 
+      ['DR SIMI', 'ESMERALDA N°286', 'VALPARAISO', 'LOS ANDES', -32.8334836244902, -70.5971417561781], 
+      ['NUEVA MODERNA', 'PORTUS Nº1194, LOCAL 2', 'VALPARAISO', 'SAN FELIPE', -32.7504946484281, -70.7239589333067], 
+      ['CRUZ VERDE', 'WALKER MARTINEZ 1786', 'METROPOLITANA', 'LA FLORIDA', -33.522345, -70.579265, 'Si'],  */
