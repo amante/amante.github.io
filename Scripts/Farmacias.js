@@ -1,17 +1,15 @@
 let map;
 
-
 async function initMap() {
   
 const { Map } = await google.maps.importLibrary("maps");
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  const mapOptions = {
-    zoom: 15,
-    center: { lat: -33.447487, lng: -70.673676 },
-  };
-
-  const map = new Map(document.getElementById("map"), mapOptions);
+const map = new Map(document.getElementById("map"), {
+  zoom: 15,
+  center: { lat: -33.447487, lng: -70.673676 },
+  }
+);
 
   setMarkers(map);
 }
@@ -99,7 +97,7 @@ function setMarkers(map) {
    
     for (let i = 0; i < Pharmacies.length; i++) {
       const CruzVerdeIcon = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.araucoestacion.cl%2Ftiendas%2Ffarmacias-cruz-verde&psig=AOvVaw3VP25-gkhkKEHwYjjhqkkP&ust=1741869960724000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKC1_KLKhIwDFQAAAAAdAAAAABAE";
-      const marker = new AdvancedMarkerElement ({
+      const marker = new AdvancedMarkerElement({
       map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre,
