@@ -76,20 +76,13 @@ function setMarkers(map) {
       }
 
       if (nombre = "CRUZ VERDE"){
-      var marker = new google.maps.Marker({
+      const marker = new google.maps.Marker({
       map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre,
       icon: CruzVerdeIcon});
-      }; 
-      
-      if (nombre = "SALCOBRAND"){
-        var marker = new google.maps.Marker({
-        map: map,
-        position: { lat: latitud, lng: longitud },
-        title: nombre,
-        icon: SalcoBrandIcon});
-      };
+      } 
+   
       
           google.maps.event.addListener(marker, "click", () => {
             const content = document.createElement("div");
