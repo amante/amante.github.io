@@ -21,8 +21,6 @@ function setMarkers(map) {
   let longitud;
 
   const infowindow = new google.maps.InfoWindow();
-  const CruzVerdeIcon = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.araucoestacion.cl%2Ftiendas%2Ffarmacias-cruz-verde&psig=AOvVaw3VP25-gkhkKEHwYjjhqkkP&ust=1741869960724000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKC1_KLKhIwDFQAAAAAdAAAAABAE";
-
   const Pharmacies =
     [
       //["Nombre", direccion, region, comuna, latitud, longitud]
@@ -92,15 +90,16 @@ function setMarkers(map) {
       ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573], 
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056]
     ];
-  
+
+    const CruzVerdeIcon = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.araucoestacion.cl%2Ftiendas%2Ffarmacias-cruz-verde&psig=AOvVaw3VP25-gkhkKEHwYjjhqkkP&ust=1741869960724000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKC1_KLKhIwDFQAAAAAdAAAAABAE";
     
 
     for (let i = 0; i < Pharmacies.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
-      icon: CruzVerdeIcon,
       position: { lat: latitud, lng: longitud },
-      title: nombre
+      title: nombre,
+      icon: CruzVerdeIcon
     });
 
     for (let j = 0; j < Pharmacies[i].length; j++) {
