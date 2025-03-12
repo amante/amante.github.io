@@ -1,0 +1,94 @@
+h2#firstHeading {
+font-size: 20px;
+}
+
+body{
+ margin:0;
+}
+
+footer{
+ margin: 12px; 
+}
+
+#map {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;  
+  height:100vh;
+}
+
+.custom-map-control-button {
+appearance: button;
+background-color: #fff;
+border: 0;
+border-radius: 2px;
+box-shadow: 0 1px 4px -1px rgb(0 0 0 / 30%);
+cursor: pointer;
+margin: 10px;
+padding: 0 0.5em;
+height: 40px;
+font: 400 18px Roboto, Arial, sans-serif;
+overflow: hidden;
+}
+
+.container {
+  position: relative;
+  max-height: none; /* Establecer la altura máxima en "none" para mostrar todo el contenido */
+}
+
+.paragraph {
+  margin: 0;
+  padding: 10px;
+  font-size: 12px;
+  color: gray;
+   font-family: Arial, sans-serif;
+}
+
+.more-link {
+  display: none;
+}
+
+.hidden-content {
+  padding: 10px;
+}
+
+.container{
+ display:none;
+}
+
+.container-wide{
+ display:block;
+}
+
+@media (max-width: 768px) {
+  .more-link {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .hidden-content {
+ display: none;
+ padding: 0px;
+ }
+  
+  .container.expanded .more-link {
+    display: none; /* Ocultar el enlace "más" cuando el contenedor tiene la clase "expanded" */
+  }
+
+  .container.expanded .hidden-content {
+    display: block; /* Mostrar el contenido oculto solo en modo responsive cuando el contenedor tiene la clase "expanded" */
+  }
+  
+  .container-wide{
+   display:none;
+  }
+  
+  .container{
+   display: block;
+  }
+}
