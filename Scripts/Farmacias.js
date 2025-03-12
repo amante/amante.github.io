@@ -81,7 +81,7 @@ function setMarkers(map) {
       position: { lat: latitud, lng: longitud },
       title: nombre,
       icon: CruzVerdeIcon});
-      } 
+       
    
       
           google.maps.event.addListener(marker, "click", () => {
@@ -109,7 +109,8 @@ function setMarkers(map) {
       
             infowindow.setContent(content);
             infowindow.open(map, marker);
-          });       
+          });
+        }       
     }
   }    
 }
