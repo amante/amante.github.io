@@ -21,7 +21,7 @@ function setMarkers(map) {
   let longitud;
 
   const infowindow = new google.maps.InfoWindow();
-  const CruzVerdeIcon = "https://play.google.com/store/apps/details?id=com.cruzverde.cl.ecommerce";
+  const CruzVerdeIcon = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.araucoestacion.cl%2Ftiendas%2Ffarmacias-cruz-verde&psig=AOvVaw3VP25-gkhkKEHwYjjhqkkP&ust=1741869960724000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKC1_KLKhIwDFQAAAAAdAAAAABAE";
 
   const Pharmacies =
     [
