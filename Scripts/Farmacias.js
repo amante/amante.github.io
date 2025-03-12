@@ -1,37 +1,12 @@
-/**
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
-async function initMap() {
-  // Request needed libraries.
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-  const map = new Map(document.getElementById("map"), {
-    center: { lat: 37.4239163, lng: -122.0947209 },
-    zoom: 14,
-    mapId: "4504f8b37365c3d0",
-  });
-  const marker = new AdvancedMarkerElement({
-    map,
-    position: { lat: 37.4239163, lng: -122.0947209 },
-  });
-}
+let map;
 
-initMap();
+function initMap() {
+  const mapOptions = {
+    zoom: 15,
+    center: { lat: -33.447487, lng: -70.673676 },
+  };
 
-/*let map;
-
-async function initMap() {
-  
-const { Map } = await google.maps.importLibrary("maps");
-const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-const map = new Map(document.getElementById("map"), {
-  zoom: 15,
-  center: { lat: -33.447487, lng: -70.673676 },
-  }
-);
+  map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
   setMarkers(map);
 }
@@ -46,6 +21,8 @@ function setMarkers(map) {
   let longitud;
 
   const infowindow = new google.maps.InfoWindow();
+  const CruzVerdeIcon = "https://play.google.com/store/apps/details?id=com.cruzverde.cl.ecommerce";
+
   const Pharmacies =
     [
       //["Nombre", direccion, region, comuna, latitud, longitud]
@@ -115,15 +92,15 @@ function setMarkers(map) {
       ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573], 
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056]
     ];
+  
+    
 
-   
-    for (let i = 0; i < Pharmacies.length; i++) {
-      const CruzVerdeIcon = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.araucoestacion.cl%2Ftiendas%2Ffarmacias-cruz-verde&psig=AOvVaw3VP25-gkhkKEHwYjjhqkkP&ust=1741869960724000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKC1_KLKhIwDFQAAAAAdAAAAABAE";
-      const marker = new AdvancedMarkerElement({
+    for (let i = 0; i < Pharmacies.length; i++) {  
+      const marker = new google.maps.Marker({
       map: map,
-      position: { lat: latitud, lng: longitud },
-      title: nombre,
       icon: CruzVerdeIcon,
+      position: { lat: latitud, lng: longitud },
+      title: nombre
     });
 
     for (let j = 0; j < Pharmacies[i].length; j++) {
@@ -168,5 +145,4 @@ function setMarkers(map) {
   }    
 }
 
-window.initMap = initMap();*/
-
+window.initMap = initMap;
