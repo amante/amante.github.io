@@ -40,13 +40,18 @@ function setMarkers(map) {
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056, 'No']
     ];
   
-    
+    const icon = {
+      url: "https://images.ctfassets.net/ca03ioli1ast/1xGMXLosdwfK6wU6a8Gf4T/99daa806070e94667a3dd9c67a35c8ee/Logo_Cruz_FondoBlanco__3_.svg",
+      scaledSize: new google.maps.Size(35, 35),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0)
+  };
 
     for (let i = 0; i < Pharmacies.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
       position: { lat: latitud, lng: longitud },
-      icon: "https://image.mail.cs.msd.com/lib/fe9a13737664057c73/m/1/icono_vacunatorios_publicosyprivados.png",
+      icon: icon,
       title: nombre
     });
 
