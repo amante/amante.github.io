@@ -76,7 +76,7 @@ function setMarkers(map) {
       }
 
       if (nombre = "CRUZ VERDE"){
-      const marker = new google.maps.Marker({
+      var marker = new google.maps.Marker({
       map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre,
@@ -84,7 +84,7 @@ function setMarkers(map) {
       }; 
       
       if (nombre = "SALCOBRAND"){
-        const marker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
         map: map,
         position: { lat: latitud, lng: longitud },
         title: nombre,
