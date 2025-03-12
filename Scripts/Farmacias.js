@@ -93,7 +93,7 @@ function setMarkers(map) {
             content.appendChild(cityElement);
 
             const stockElement = document.createElement("p");
-            stockElement.textContent = "Stock Disponible: " + stock;
+            stockElement.textContent = "Stock: " + stock + "Disponible";
             content.appendChild(stockElement);
       
             infowindow.setContent(content);
