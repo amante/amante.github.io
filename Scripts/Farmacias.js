@@ -21,7 +21,6 @@ function setMarkers(map) {
   let longitud;
 
   const infowindow = new google.maps.InfoWindow();
-  const CruzVerdeIcon = "https://play.google.com/store/apps/details?id=com.cruzverde.cl.ecommerce";
 
   const Pharmacies =
     [
@@ -98,7 +97,6 @@ function setMarkers(map) {
     for (let i = 0; i < Pharmacies.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
-      icon: CruzVerdeIcon,
       position: { lat: latitud, lng: longitud },
       title: nombre
     });
