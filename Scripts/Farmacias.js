@@ -98,6 +98,7 @@ function setMarkers(map) {
       const marker = new google.maps.Marker({
       map: map,
       position: { lat: latitud, lng: longitud },
+      icon: "https://image.mail.cs.msd.com/lib/fe9a13737664057c73/m/1/icono_vacunatorios_publicosyprivados.png",
       title: nombre
     });
 
