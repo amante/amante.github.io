@@ -148,6 +148,7 @@ function setMarkers(map) {
 
 window.initMap = initMap();*/
 
+let map;
 async function initMap() {
   // Request needed libraries.
   const { Map } = await google.maps.importLibrary("maps");
@@ -155,7 +156,6 @@ async function initMap() {
   const map = new Map(document.getElementById("map"), {
     center: { lat: 37.4239163, lng: -122.0947209 },
     zoom: 14,
-    mapId: "4504f8b37365c3d0",
   });
   const marker = new AdvancedMarkerElement({
     map,
