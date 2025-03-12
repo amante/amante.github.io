@@ -99,7 +99,7 @@ function setMarkers(map) {
       map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre,
-      icon: CruzVerdeIcon
+      //icon: CruzVerdeIcon
     });
 
     for (let j = 0; j < Pharmacies[i].length; j++) {
