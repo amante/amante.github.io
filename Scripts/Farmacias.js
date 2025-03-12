@@ -26,7 +26,16 @@ function setMarkers(map) {
   const Pharmacies =
     [
       //["Nombre", direccion, region, comuna, latitud, longitud, stock]
-      ['SALCOBRAND', 'CHORRILLOS N°93', 'VALPARAISO', 'PAPUDO', -32.5072043868488, -71.4471110053879, "No"],
+      ['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603,'Si'], 
+      ['CRUZ VERDE', 'CENTRAL 129 (EX 145)', 'METROPOLITANA', 'MAIPU', -33.513669, -70.826522, 'Si'], 
+      ['CRUZ VERDE', 'AV. WALKER MARTINEZ 1642. INTERIOR MONTSERRAT', 'METROPOLITANA', 'QUINTA NORMAL', -33.430501, -70.692356,'Si'], 
+      ['CRUZ VERDE', 'AV. DOMINGO SANTA MARIA 4112. INTERIOR MONTSERRAT', 'METROPOLITANA', 'RENCA', -33.405687, -70.704351, 'Si'],      
+      ['CRUZ VERDE', 'OHIGGINS 195, LOCAL 1', 'VALPARAISO', 'QUILLOTA', -32.8793428949969, -71.2467871500868, 'NO'], 
+      ['CRUZ VERDE', 'J.J. PEREZ 202', 'VALPARAISO', 'LA CALERA', -32.788066282624, -71.1897310126255, 'Si'], 
+      ['CRUZ VERDE', 'URMENETA 99', 'VALPARAISO', 'LIMACHE', -32.9849921792696, -71.2757177058683, 'Si'], 
+      ['CRUZ VERDE', 'REPUBLICA 281', 'VALPARAISO', 'LIMACHE', -33.0025007197382, -71.2654977848501, 'NO'], 
+      ['CRUZ VERDE', 'CHACABUCO 281', 'VALPARAISO', 'QUILLOTA', -32.878335491624, -71.246141889165, 'Si'], 
+      ['CRUZ VERDE', 'URMENETA 96', 'VALPARAISO', 'LIMACHE', -32.9853313679932, -71.2759083062112, 'Si'], 
       ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573, 'Si'], 
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056, 'No']
     ];
@@ -46,7 +55,14 @@ function setMarkers(map) {
 };
   
 
-    for (let i = 0; i < Pharmacies.length; i++) {
+    for (let i = 0; i < Pharmacies.length; i++) {  
+      const marker = new google.maps.Marker({
+      map: map,
+      position: { lat: latitud, lng: longitud },
+      title: nombre,
+      icon: SalcoBrandIcon,
+    });
+
     for (let j = 0; j < Pharmacies[i].length; j++) {
       switch (j) {
         case 0: nombre = Pharmacies[i][j];
@@ -64,15 +80,6 @@ function setMarkers(map) {
         case 6: stock = Pharmacies[i][j];
           break;
       }
-
-      if (nombre = "CRUZ VERDE"){
-      const marker = new google.maps.Marker({
-      map: map,
-      position: { lat: latitud, lng: longitud },
-      title: nombre,
-      icon: CruzVerdeIcon});
-       
-   
       
           google.maps.event.addListener(marker, "click", () => {
             const content = document.createElement("div");
@@ -99,8 +106,7 @@ function setMarkers(map) {
       
             infowindow.setContent(content);
             infowindow.open(map, marker);
-          });
-        }       
+          });       
     }
   }    
 }
@@ -110,17 +116,7 @@ window.initMap = initMap;
 
 
 
-/*   ['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603,'Si'], 
-      ['CRUZ VERDE', 'CENTRAL 129 (EX 145)', 'METROPOLITANA', 'MAIPU', -33.513669, -70.826522, 'Si'], 
-      ['CRUZ VERDE', 'AV. WALKER MARTINEZ 1642. INTERIOR MONTSERRAT', 'METROPOLITANA', 'QUINTA NORMAL', -33.430501, -70.692356,'Si'], 
-      ['CRUZ VERDE', 'AV. DOMINGO SANTA MARIA 4112. INTERIOR MONTSERRAT', 'METROPOLITANA', 'RENCA', -33.405687, -70.704351, 'Si'],      
-      ['CRUZ VERDE', 'OHIGGINS 195, LOCAL 1', 'VALPARAISO', 'QUILLOTA', -32.8793428949969, -71.2467871500868, 'NO'], 
-      ['CRUZ VERDE', 'J.J. PEREZ 202', 'VALPARAISO', 'LA CALERA', -32.788066282624, -71.1897310126255, 'Si'], 
-      ['CRUZ VERDE', 'URMENETA 99', 'VALPARAISO', 'LIMACHE', -32.9849921792696, -71.2757177058683, 'Si'], 
-      ['CRUZ VERDE', 'REPUBLICA 281', 'VALPARAISO', 'LIMACHE', -33.0025007197382, -71.2654977848501, 'NO'], 
-      ['CRUZ VERDE', 'CHACABUCO 281', 'VALPARAISO', 'QUILLOTA', -32.878335491624, -71.246141889165, 'Si'], 
-      ['CRUZ VERDE', 'URMENETA 96', 'VALPARAISO', 'LIMACHE', -32.9853313679932, -71.2759083062112, 'Si'],  
-      ['LIGA CONTRA LA EPILEPSIA', 'ARLEGUI N° 646 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0238793831336, -71.5531322426683], 
+/* ['LIGA CONTRA LA EPILEPSIA', 'ARLEGUI N° 646 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0238793831336, -71.5531322426683], 
       ['CONAC', 'BLAS CUEVAS N° 965', 'VALPARAISO', 'VALPARAISO', -33.0524290091146, -71.609599253029], 
       ['POLICLINICO CONAC', 'EDUARDO LEFORT N°1638', 'ANTOFAGASTA', 'ANTOFAGASTA', -23.660025, -70.3949386], 
       ['FARMACIA CONAC CONCEPCIÓN', 'CAUPOLICAN N° 518 OFICINA 301', 'BIOBIO', 'CONCEPCION', -36.82646, -73.05121], 
