@@ -26,6 +26,7 @@ function setMarkers(map) {
   const Pharmacies =
     [
       //["Nombre", direccion, region, comuna, latitud, longitud, stock]
+      ['SALCOBRAND', 'CHORRILLOS N°93', 'VALPARAISO', 'PAPUDO', -32.5072043868488, -71.4471110053879],
       ['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603,'Si'], 
       ['CRUZ VERDE', 'CENTRAL 129 (EX 145)', 'METROPOLITANA', 'MAIPU', -33.513669, -70.826522, 'Si'], 
       ['CRUZ VERDE', 'AV. WALKER MARTINEZ 1642. INTERIOR MONTSERRAT', 'METROPOLITANA', 'QUINTA NORMAL', -33.430501, -70.692356,'Si'], 
@@ -40,21 +41,22 @@ function setMarkers(map) {
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056, 'No']
     ];
   
-    const icon = {
+    const CruzVerdeIcon = {
       url: "https://images.ctfassets.net/ca03ioli1ast/1xGMXLosdwfK6wU6a8Gf4T/99daa806070e94667a3dd9c67a35c8ee/Logo_Cruz_FondoBlanco__3_.svg",
       scaledSize: new google.maps.Size(35, 35),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(0, 0)
   };
 
-    for (let i = 0; i < Pharmacies.length; i++) {  
-      const marker = new google.maps.Marker({
-      map: map,
-      position: { lat: latitud, lng: longitud },
-      icon: icon,
-      title: nombre
-    });
+  const SalcoBrandIcon = {
+    url: "https://static.salcobrandonline.cl/assets/logo-73fe73eb9cf65adf981684077f38a616190d7759b74439763a45b9b985fc36e5.svg",
+    scaledSize: new google.maps.Size(35, 35),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(0, 0)
+};
+  
 
+    for (let i = 0; i < Pharmacies.length; i++) {
     for (let j = 0; j < Pharmacies[i].length; j++) {
       switch (j) {
         case 0: nombre = Pharmacies[i][j];
@@ -72,6 +74,19 @@ function setMarkers(map) {
         case 6: stock = Pharmacies[i][j];
           break;
       }
+if (nombre = "CRUZ VERDE"){
+  const marker = new google.maps.Marker({
+    map: map,
+    position: { lat: latitud, lng: longitud },
+    title: nombre,
+  icon: CruzVerdeIcon});
+}; elseIf (nombre = "SALCOBRAND")
+{const marker = new google.maps.Marker({
+  map: map,
+  position: { lat: latitud, lng: longitud },
+  title: nombre,
+icon: SalcoBrandIcon});}
+      
       
           google.maps.event.addListener(marker, "click", () => {
             const content = document.createElement("div");
