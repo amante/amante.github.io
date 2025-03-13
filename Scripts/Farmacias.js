@@ -23,7 +23,7 @@ function setMarkers(map) {
 
   const infowindow = new google.maps.InfoWindow();
 
-  const Pharmacies =
+  const PharmaciesCruzVerde =
     [
       //["Nombre", direccion, region, comuna, latitud, longitud, stock]
       ['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603,'Si'], 
@@ -55,7 +55,7 @@ function setMarkers(map) {
 };
   
 
-    for (let i = 0; i < Pharmacies.length; i++) {  
+    for (let i = 0; i < PharmaciesCruzVerde.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
       position: { lat: latitud, lng: longitud },
@@ -63,21 +63,21 @@ function setMarkers(map) {
       icon: SalcoBrandIcon,
     });
 
-    for (let j = 0; j < Pharmacies[i].length; j++) {
+    for (let j = 0; j < PharmaciesCruzVerde[i].length; j++) {
       switch (j) {
-        case 0: nombre = Pharmacies[i][j];
+        case 0: nombre = PharmaciesCruzVerde[i][j];
           break;
-        case 1: direccion = Pharmacies[i][j];
+        case 1: direccion = PharmaciesCruzVerde[i][j];
           break;
-        case 2: region = Pharmacies[i][j];
+        case 2: region = PharmaciesCruzVerde[i][j];
           break;
-        case 3: ciudad = Pharmacies[i][j];
+        case 3: ciudad = PharmaciesCruzVerde[i][j];
           break;
-        case 4: latitud = parseFloat(Pharmacies[i][j]);
+        case 4: latitud = parseFloat(PharmaciesCruzVerde[i][j]);
           break;
-        case 5: longitud = parseFloat(Pharmacies[i][j]);
+        case 5: longitud = parseFloat(PharmaciesCruzVerde[i][j]);
           break;
-        case 6: stock = Pharmacies[i][j];
+        case 6: stock = PharmaciesCruzVerde[i][j];
           break;
       }
       
