@@ -14,54 +14,42 @@
     <link rel="stylesheet" type="text/css" href="./styles.css" />
     
     <body>
+        <div class="header">
+            <h1>Mapa de Farmacias de Chile</h1>
+            <p>Encuentra la farmacia más cercana a tu ubicación</p>
+        </div>
+        <div class="search">
+            <input type="text" id="search" placeholder="Buscar farmacia">
+            <button id="searchButton">Buscar</button>
+        </div>
+        <div class="filters">
+            <label for="region">Región:</label>
+            <select id="region">
+                <option value="todas">Todas</option>
+                <option value="Arica y Parinacota">Arica y Parinacota</option>
+                <option value="Tarapacá">Tarapacá</option>
+                <option value="Antofagasta">Antofagasta</option>
+                <option value="Atacama">Atacama</option>
+                <option value="Coquimbo">Coquimbo</option>
+                <option value="Valparaíso">Valparaíso</option>
+                <option value="Metropolitana">Metropolitana</option>
+                <option value="O'Higgins">O'Higgins</option>
+                <option value="Maule">Maule</option>
+                <option value="Ñuble">Ñuble</option>
+                <option value="Biobío">Biobío</option>
+                <option value="Araucanía">Araucanía</option>
+                <option value="Los Ríos">Los Ríos</option>
+                <option value="Los Lagos">Los Lagos</option>
+                <option value="Aysén">Aysén</option>
+                <option value="Magallanes">Magallanes</option>
+            </select>
+            <label for="comuna">Comuna:</label>
+            <select id="comuna">
+                <option value="todas">Todas</option>
+            </select>
+            <button id="filterButton">Filtrar</button>
         <div id="map"></div> 
-          <form>
-            <!--
-                Note that the names of these "SELECT" menus match the keys
-                within the JSON source data. This is important with the above
-                code as the name is used to filter the data.
-                
-                If the elements cannot be so named then a lookup matrix
-                would be required which just adds another layer of complexity.
-            -->
-            <select name='project_type' class='filter'>
-                <option selected>Please select "Project Type"
-                <option>Engineering
-                <option>Construction
-            </select>
-            
-            
-            <select name='project_title' class='filter'>
-                <option selected>Please select "Project Title"
-                <option>Project #1 Title
-                <option>Project #2 Title
-                <option>Project #3 Title
-                <option>Project #4 Title
-                <option>Project #5 Title
-            </select>
-        
-
-            <select name='region' class='filter'>
-                <option selected>Please select "Region"
-                <option>France
-                <option>Italy
-            </select>
-
-        
-
-            <select name='company_name' class='filter'>
-                <option selected>Please select "Company Name"
-                <option>Google
-                <option>Yahoo
-            </select>
-            
-
-            <select name='value' class='filter'>
-                <option selected>Please select "Value"
-                <option>1000000
-                <option>2000000
-            </select>
-        </form>
+          
             <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&callback=initMap&libraries=places&v=weekly"
             defer
