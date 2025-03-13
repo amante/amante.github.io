@@ -39,6 +39,23 @@ function setMarkers(map) {
       ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573, 'Si'], 
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056, 'No']
     ];
+
+    const PharmaciesGalenica =
+    [
+      //["Nombre", direccion, region, comuna, latitud, longitud, stock]
+      ['GALENICA', 'ARLEGUI N° 580 L - 7 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0236943992421, -71.5542400534807, 'Si'], 
+      ['GALENICA', 'AV. PEDRO MONTT N° 2060', 'VALPARAISO', 'VALPARAISO', -33.0471602357967, -71.615342743841, 'Si'], 
+      ['GALENICA', 'AMERICO VESPUCIO 7500 LOCAL B3-1B', 'METROPOLITANA', 'LA FLORIDA', -33.52163, -70.597311, 'Si'], 
+      ['GALENICA', 'IRARRAZAVAL 2661', 'METROPOLITANA', 'ÑUÑOA', -33.45427, -70.603641, 'NO'], 
+      ['GALENICA', 'TENIENTE CRUZ 540. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'PUDAHUEL', -33.458155, -70.738266, 'Si'], 
+      ['GALENICA', 'AV. CONCHA Y TORO 157', 'METROPOLITANA', 'PUENTE ALTO', -33.610491, -70.575739, 'Si'], 
+      ['GALENICA', 'AV. CARRASCAL 4436. INTERIOR EKONO', 'METROPOLITANA', 'QUINTA NORMAL', -33.422899, -70.694128, 'Si'], 
+      ['GALENICA', 'AV. CARRASCAL 6001. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'QUINTA NORMAL', -33.4164, -70.711824, 'NO'], 
+      ['GALENICA', 'EYZAGUIRRE  523', 'METROPOLITANA', 'SAN BERNARDO', -33.59314, -70.705474, 'Si'], 
+      ['GALENICA', 'SAN ANTONIO 380', 'METROPOLITANA', 'SANTIAGO', -33.438483, -70.648308, 'Si'], 
+      ['GALENICA', 'PROVIDENCIA 2592', 'METROPOLITANA', 'PROVIDENCIA', -33.41856159674302, -70.6031911075224,'Si'],
+      ['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917,'NO'] 
+      ];
   
     const CruzVerdeIcon = {
       url: "https://images.ctfassets.net/ca03ioli1ast/1xGMXLosdwfK6wU6a8Gf4T/99daa806070e94667a3dd9c67a35c8ee/Logo_Cruz_FondoBlanco__3_.svg",
@@ -47,8 +64,8 @@ function setMarkers(map) {
       anchor: new google.maps.Point(0, 0)
   };
 
-  const SalcoBrandIcon = {
-    url: "https://static.salcobrandonline.cl/assets/logo-73fe73eb9cf65adf981684077f38a616190d7759b74439763a45b9b985fc36e5.svg",
+  const GalenicaIcon = {
+    url: "https://farmaciagalenica.cl/wp-content/uploads/2023/03/lg_gl_n_.svg",
     scaledSize: new google.maps.Size(35, 35),
     origin: new google.maps.Point(0, 0),
     anchor: new google.maps.Point(0, 0)
@@ -60,7 +77,7 @@ function setMarkers(map) {
       map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre,
-      icon: SalcoBrandIcon,
+      icon: CruzVerdeIcon,
     });
 
     for (let j = 0; j < PharmaciesCruzVerde[i].length; j++) {
@@ -78,6 +95,60 @@ function setMarkers(map) {
         case 5: longitud = parseFloat(PharmaciesCruzVerde[i][j]);
           break;
         case 6: stock = PharmaciesCruzVerde[i][j];
+          break;
+      }
+      
+          google.maps.event.addListener(marker, "click", () => {
+            const content = document.createElement("div");
+      
+            const nameElement = document.createElement("h2");
+            nameElement.textContent = "Nombre: " + nombre;
+            content.appendChild(nameElement);
+      
+            const placeAddressElement = document.createElement("p");
+            placeAddressElement.textContent = "Dirección: " + direccion;
+            content.appendChild(placeAddressElement);
+      
+            const regionElement = document.createElement("p");
+            regionElement.textContent = "Region: " + region;
+            content.appendChild(regionElement);
+      
+            const cityElement = document.createElement("p");
+            cityElement.textContent = "Ciudad: " + ciudad;
+            content.appendChild(cityElement);
+
+            const stockElement = document.createElement("p");
+            stockElement.textContent = "Stock: " + stock + "Disponible";
+            content.appendChild(stockElement);
+      
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+          });       
+    }
+
+    for (let i = 0; i < PharmaciesGalenica.length; i++) {  
+      const marker = new google.maps.Marker({
+      map: map,
+      position: { lat: latitud, lng: longitud },
+      title: nombre,
+      icon: GalenicaIcon,
+    });
+
+    for (let j = 0; j < PharmaciesGalenica[i].length; j++) {
+      switch (j) {
+        case 0: nombre = PharmaciesGalenica[i][j];
+          break;
+        case 1: direccion = PharmaciesGalenica[i][j];
+          break;
+        case 2: region = PharmaciesGalenica[i][j];
+          break;
+        case 3: ciudad = PharmaciesGalenica[i][j];
+          break;
+        case 4: latitud = parseFloat(PharmaciesGalenica[i][j]);
+          break;
+        case 5: longitud = parseFloat(PharmaciesGalenica[i][j]);
+          break;
+        case 6: stock = PharmaciesGalenica[i][j];
           break;
       }
       
@@ -149,18 +220,6 @@ window.initMap = initMap;
       ['DR SIMI', 'TRASLAVIÑA N°221', 'VALPARAISO', 'SAN FELIPE', -32.7500106610513, -70.7270127009622],
       ['IBERIA', 'VICTORIA Nº 3092', 'VALPARAISO', 'VALPARAISO', -33.0507821994016, -71.6029768890481, 'Si'], 
       ['BOTICA UNIÓN', 'CONDELL 1205', 'VALPARAISO', 'VALPARAISO', -33.0436526830044, -71.6243601197905, 'Si'], 
-      ['GALENICA', 'ARLEGUI N° 580 L - 7 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0236943992421, -71.5542400534807, 'Si'], 
-      ['GALENICA', 'AV. PEDRO MONTT N° 2060', 'VALPARAISO', 'VALPARAISO', -33.0471602357967, -71.615342743841, 'Si'], 
-      ['GALENICA', 'AMERICO VESPUCIO 7500 LOCAL B3-1B', 'METROPOLITANA', 'LA FLORIDA', -33.52163, -70.597311], 
-      ['GALENICA', 'IRARRAZAVAL 2661', 'METROPOLITANA', 'ÑUÑOA', -33.45427, -70.603641], 
-      ['GALENICA', 'TENIENTE CRUZ 540. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'PUDAHUEL', -33.458155, -70.738266], 
-      ['GALENICA', 'AV. CONCHA Y TORO 157', 'METROPOLITANA', 'PUENTE ALTO', -33.610491, -70.575739], 
-      ['GALENICA', 'AV. CARRASCAL 4436. INTERIOR EKONO', 'METROPOLITANA', 'QUINTA NORMAL', -33.422899, -70.694128], 
-      ['GALENICA', 'AV. CARRASCAL 6001. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'QUINTA NORMAL', -33.4164, -70.711824], 
-      ['GALENICA', 'EYZAGUIRRE  523', 'METROPOLITANA', 'SAN BERNARDO', -33.59314, -70.705474], 
-      ['GALENICA', 'SAN ANTONIO 380', 'METROPOLITANA', 'SANTIAGO', -33.438483, -70.648308], 
-      ['GALENICA', 'PROVIDENCIA 2592', 'METROPOLITANA', 'PROVIDENCIA', -33.41856159674302, -70.6031911075224], 
-      ['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917], 
       ['CENTRAL DE HOMEOPATIA SAN ANTONIO', 'PEDRO MONTT Nº 129 L - 3', 'VALPARAISO', 'SAN ANTONIO', -33.5800344387736, -71.6114727596172], 
       ['HOSPITAL 1', 'CARRERA N° 737', 'VALPARAISO', 'LA CALERA', -32.7872809066268, -71.1913238392171], 
       ['SAN NICOLAS', 'J.J. PEREZ N° 396', 'VALPARAISO', 'LA CALERA', -32.7862582411004, -71.189985617592], 
