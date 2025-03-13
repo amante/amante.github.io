@@ -126,64 +126,62 @@ function setMarkers(map) {
     }
 
     
-    }    
-  }
-
-
-for (let i = 0; i < PharmaciesGalenica.length; i++) {  
-  const marker = new google.maps.Marker(
-    {
-      map: map,
-      position: { lat: latitud, lng: longitud },
-      title: nombre,
-      icon: GalenicaIcon,
     }
-  );
-
-for (let j = 0; j < PharmaciesGalenica[i].length; j++) {
-  switch (j) {
-    case 0: nombre = PharmaciesGalenica[i][j];
-      break;
-    case 1: direccion = PharmaciesGalenica[i][j];
-      break;
-    case 2: region = PharmaciesGalenica[i][j];
-      break;
-    case 3: ciudad = PharmaciesGalenica[i][j];
-      break;
-    case 4: latitud = parseFloat(PharmaciesGalenica[i][j]);
-      break;
-    case 5: longitud = parseFloat(PharmaciesGalenica[i][j]);
-      break;
-    case 6: stock = PharmaciesGalenica[i][j];
-      break;
-  }
-  
-      google.maps.event.addListener(marker, "click", () => {
-        const content = document.createElement("div");
-  
-        const nameElement = document.createElement("h2");
-        nameElement.textContent = "Nombre: " + nombre;
-        content.appendChild(nameElement);
-  
-        const placeAddressElement = document.createElement("p");
-        placeAddressElement.textContent = "Dirección: " + direccion;
-        content.appendChild(placeAddressElement);
-  
-        const regionElement = document.createElement("p");
-        regionElement.textContent = "Region: " + region;
-        content.appendChild(regionElement);
-  
-        const cityElement = document.createElement("p");
-        cityElement.textContent = "Ciudad: " + ciudad;
-        content.appendChild(cityElement);
-
-        const stockElement = document.createElement("p");
-        stockElement.textContent = "Stock: " + stock + " Disponible";
-        content.appendChild(stockElement);
-  
-        infowindow.setContent(content);
-        infowindow.open(map, marker);
-      });       
-}
-}
+    for (let i = 0; i < PharmaciesGalenica.length; i++) {  
+      const marker = new google.maps.Marker(
+        {
+          map: map,
+          position: { lat: latitud, lng: longitud },
+          title: nombre,
+          icon: GalenicaIcon,
+        }
+      );
+    
+    for (let j = 0; j < PharmaciesGalenica[i].length; j++) {
+      switch (j) {
+        case 0: nombre = PharmaciesGalenica[i][j];
+          break;
+        case 1: direccion = PharmaciesGalenica[i][j];
+          break;
+        case 2: region = PharmaciesGalenica[i][j];
+          break;
+        case 3: ciudad = PharmaciesGalenica[i][j];
+          break;
+        case 4: latitud = parseFloat(PharmaciesGalenica[i][j]);
+          break;
+        case 5: longitud = parseFloat(PharmaciesGalenica[i][j]);
+          break;
+        case 6: stock = PharmaciesGalenica[i][j];
+          break;
+      }
+      
+          google.maps.event.addListener(marker, "click", () => {
+            const content = document.createElement("div");
+      
+            const nameElement = document.createElement("h2");
+            nameElement.textContent = "Nombre: " + nombre;
+            content.appendChild(nameElement);
+      
+            const placeAddressElement = document.createElement("p");
+            placeAddressElement.textContent = "Dirección: " + direccion;
+            content.appendChild(placeAddressElement);
+      
+            const regionElement = document.createElement("p");
+            regionElement.textContent = "Region: " + region;
+            content.appendChild(regionElement);
+      
+            const cityElement = document.createElement("p");
+            cityElement.textContent = "Ciudad: " + ciudad;
+            content.appendChild(cityElement);
+    
+            const stockElement = document.createElement("p");
+            stockElement.textContent = "Stock: " + stock + " Disponible";
+            content.appendChild(stockElement);
+      
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+          });       
+        }    
+      }
+    }
 window.initMap = initMap;
