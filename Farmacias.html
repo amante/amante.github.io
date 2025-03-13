@@ -1,72 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Mapa de Vacunatorios Chile">
-    <meta name="author" content="MSD Chile">
-
-    <head>
-    <title>Mapa de Farmacias de Chile</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script type="module" src="./Scripts/Farmacias.js"></script>
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
+<html>
+<div id='map'></div>
+<form>
+    <!--
+        Note that the names of these "SELECT" menus match the keys
+        within the JSON source data. This is important with the above
+        code as the name is used to filter the data.
+        
+        If the elements cannot be so named then a lookup matrix
+        would be required which just adds another layer of complexity.
+    -->
+    <select name='project_type' class='filter'>
+        <option selected>Please select "Project Type"
+        <option>Engineering
+        <option>Construction
+    </select>
     
-    <body>
-        <div id="map"></div>
     
-        
-          <form>
-            <!--
-                Note that the names of these "SELECT" menus match the keys
-                within the JSON source data. This is important with the above
-                code as the name is used to filter the data.
-                
-                If the elements cannot be so named then a lookup matrix
-                would be required which just adds another layer of complexity.
-            -->
-            <select name='project_type' class='filter'>
-                <option selected>Please select "Project Type"
-                <option>Engineering
-                <option>Construction
-            </select>
-            
-            
-            <select name='project_title' class='filter'>
-                <option selected>Please select "Project Title"
-                <option>Project #1 Title
-                <option>Project #2 Title
-                <option>Project #3 Title
-                <option>Project #4 Title
-                <option>Project #5 Title
-            </select>
-        
+    <select name='project_title' class='filter'>
+        <option selected>Please select "Project Title"
+        <option>Project #1 Title
+        <option>Project #2 Title
+        <option>Project #3 Title
+        <option>Project #4 Title
+        <option>Project #5 Title
+    </select>
 
-            <select name='region' class='filter'>
-                <option selected>Please select "Region"
-                <option>France
-                <option>Italy
-            </select>
 
-        
+    <select name='region' class='filter'>
+        <option selected>Select "Region"
+        <option>France
+        <option>Italy
+    </select>
 
-            <select name='company_name' class='filter'>
-                <option selected>Please select "Company Name"
-                <option>Google
-                <option>Yahoo
-            </select>
-            
 
-            <select name='value' class='filter'>
-                <option selected>Please select "Value"
-                <option>1000000
-                <option>2000000
-            </select>
-        </form>
-            <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&callback=initMap&libraries=places&v=weekly"
-            defer
-          ></script> 
-  </body>
+
+    <select name='company_name' class='filter'>
+        <option selected>Select "Company Name"
+        <option>Google
+        <option>Yahoo
+    </select>
+    
+
+    <select name='value' class='filter'>
+        <option selected>Select "Value"
+        <option>1000000
+        <option>2000000
+    </select>
+</form>
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&callback=initMap&libraries=places&v=weekly"></script>
 </html>
