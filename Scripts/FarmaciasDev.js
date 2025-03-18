@@ -37,7 +37,7 @@ const Pharmacies =
       ['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917,'NO'] 
       ];
   
-function initMap() {
+function initMap(){
   let mapOptions = {
     zoom: 15,
     center: { lat: -33.447487, lng: -70.673676 },
@@ -46,7 +46,7 @@ function initMap() {
   setMarkers(map);
 } 
 
-function setMarkers(map) {
+function setMarkers(map){
 
   let nombre;
   let direccion;
@@ -130,7 +130,7 @@ function setMarkers(map) {
     
     }
 
-    function FilterMarkerStock() {
+    function FilterMarkerStock(){
       console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
       var stockBoolean = document.getElementById("selector");
       console.log ('Calling stockBoolean: ' + stockBoolean );
