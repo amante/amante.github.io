@@ -132,8 +132,8 @@ function setMarkers(map){
     }
 
     function FilterMarkerStock(answer){
-      console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
-      var stockBoolean = document.getElementById("selector");
+      console.log ('Calling FilterMarkerStock, stockSelection: ' + answer );
+      var stockBoolean = answer;
       console.log ('Calling stockBoolean: ' + stockBoolean );
       for (let i = 0; i < Pharmacies.length; i++) {
         for (let j = 0; j < Pharmacies[i].length; j++){
