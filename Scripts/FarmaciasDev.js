@@ -132,11 +132,10 @@ function setMarkers(map){
     }
 
     function FilterMarkerStock(answer){
-      console.log ('Calling FilterMarkerStock, stockSelection: ' + answer);
       var stockBoolean = answer;
-      console.log ('Calling stockBoolean: ' + stockBoolean);
       for (let i = 0; i < Pharmacies.length; i++) {
-        for (let j = 0; j < Pharmacies[i].length; j++){
+        let j = Pharmacies.length;
+        console.log(j);
           if (Pharmacies[i][j] === "SI")
             {
               filterStocked.push(Pharmacies[i]);
