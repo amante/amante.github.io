@@ -1,4 +1,5 @@
 let map;
+let answer;
 let filterStocked = [];
 let filterNoStocked = [];
 
@@ -130,7 +131,7 @@ function setMarkers(map){
     
     }
 
-    function FilterMarkerStock(){
+    function FilterMarkerStock(answer){
       console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
       var stockBoolean = document.getElementById("selector");
       console.log ('Calling stockBoolean: ' + stockBoolean );
