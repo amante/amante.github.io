@@ -126,12 +126,11 @@ function setMarkers(map) {
             content.appendChild(stockElement);
       
             infowindow.setContent(content);
-            //infowindow.open(map, marker);
           });       
-    }
+        }
+      }
+      infowindow.open(map, marker);
 
-    
-    }
     for (let i = 0; i < PharmaciesGalenica.length; i++) {  
       const marker = new google.maps.Marker(
         {
@@ -181,12 +180,11 @@ function setMarkers(map) {
     
             const stockElement = document.createElement("p");
             stockElement.textContent = "Stock: " + stock + " Disponible";
-            content.appendChild(stockElement);
-      
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
+            content.appendChild(stockElement); 
           });       
         }    
       }
+      infowindow.setContent(content);
+      infowindow.open(map, marker);
     }
 window.initMap = initMap;
