@@ -184,8 +184,8 @@ function setMarkers(map) {
             content.appendChild(stockElement); 
 
             infowindow.setContent(content);
-          });
-          infowindow.open(map, marker);       
+            infowindow.open(map, marker); 
+          });   
         }    
       }     
     }
