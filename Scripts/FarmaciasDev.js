@@ -45,8 +45,7 @@ function initMap() {
 }
 
 function FilterMarkerStock(stock) {
-  let stockSelection = document.getElementById("stockElement").value;
-  console.log ('Calling FilterMarkerStock, stockSelection: ' + stockSelection );
+  console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
 
   /*for (let i = 0; i < Pharmacies.length; i++) { 
     if (Pharmacies[i][6] === stockSelection) {
