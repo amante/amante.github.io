@@ -46,19 +46,7 @@ function initMap() {
 
 function FilterMarkerStock(stock) {
   console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
-
-  /*for (let i = 0; i < Pharmacies.length; i++) { 
-    if (Pharmacies[i][6] === stockSelection) {
-       let markerStock = new google.maps.Marker({
-        map: map,
-        position: { lat: latitud, lng: longitud },
-        title: nombre,
-        stock: stockSelection,
-        icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
-      });
-    }
-  }*/
-} 
+  }
 
 function setMarkers(map) {
 
