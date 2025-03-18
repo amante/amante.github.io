@@ -132,20 +132,20 @@ function setMarkers(map){
     }
 
     function FilterMarkerStock(answer){
-      console.log ('Calling FilterMarkerStock, stockSelection: ' + answer );
+      console.log ('Calling FilterMarkerStock, stockSelection: ' + answer);
       var stockBoolean = answer;
-      console.log ('Calling stockBoolean: ' + stockBoolean );
+      console.log ('Calling stockBoolean: ' + stockBoolean);
       for (let i = 0; i < Pharmacies.length; i++) {
         for (let j = 0; j < Pharmacies[i].length; j++){
-          if (Pharmacies[i][j] === "Si")
+          if (Pharmacies[i][j] === "SI")
             {
               filterStocked.push(Pharmacies[i]);
-          console.log('Arreglo con Stock' + filterStocked);
             }else{
               filterNoStocked.push(Pharmacies[i]);
-              console.log('Arreglo sin Stock' + filterNoStocked);
             }
           }
+          console.log('Arreglo con Stock' + filterStocked); 
+          console.log('Arreglo sin Stock' + filterNoStocked);
         }
       } 
 window.initMap = initMap;
