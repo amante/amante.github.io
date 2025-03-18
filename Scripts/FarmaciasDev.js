@@ -146,5 +146,5 @@ function setMarkers(map){
         }
         console.log('Arreglo con Stock' + filterStocked); 
         console.log('Arreglo sin Stock' + filterNoStocked);
-      } 
+       
 window.initMap = initMap;
