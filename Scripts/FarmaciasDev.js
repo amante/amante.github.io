@@ -11,10 +11,10 @@ function initMap() {
   setMarkers(map);
 }
 
-function filterMarkers() {
+function filterMarkers(stock) {
   let stock = document.getElementById("stock").value;
-  let region = document.getElementById("region").value;
-  let ciudad = document.getElementById("ciudad").value;
+  //let region = document.getElementById("region").value;
+  //let ciudad = document.getElementById("ciudad").value;
 
   for (let i = 0; i < Pharmacies.length; i++) { 
     if (Pharmacies[i][6] === stock && Pharmacies[i][2] === region && Pharmacies[i][3] === ciudad) {
@@ -27,7 +27,6 @@ function filterMarkers() {
       });
     }
   }
-
 } 
 
 function setMarkers(map) {
