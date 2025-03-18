@@ -1,7 +1,7 @@
 let map;
 
 function initMap() {
-  const mapOptions = {
+  let mapOptions = {
     zoom: 15,
     center: { lat: -33.447487, lng: -70.673676 },
   };
@@ -58,7 +58,7 @@ function setMarkers(map) {
       ['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917,'NO'] 
       ];
   
-    /*const CruzVerdeIcon = {
+    const CruzVerdeIcon = {
       url: "https://images.ctfassets.net/ca03ioli1ast/1xGMXLosdwfK6wU6a8Gf4T/99daa806070e94667a3dd9c67a35c8ee/Logo_Cruz_FondoBlanco__3_.svg",
       scaledSize: new google.maps.Size(35, 35),
       origin: new google.maps.Point(0, 0),
@@ -70,14 +70,14 @@ function setMarkers(map) {
     scaledSize: new google.maps.Size(35, 35),
     origin: new google.maps.Point(0, 0),
     anchor: new google.maps.Point(0, 0)
-};*/
+};
   
     for (let i = 0; i < Pharmacies.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre,
-      icon: CruzVerdeIcon,
+      icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
     });
 
     for (let j = 0; j < Pharmacies[i].length; j++) {
