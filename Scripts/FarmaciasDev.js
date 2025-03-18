@@ -44,22 +44,7 @@ function initMap() {
   };
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
   setMarkers(map);
-}
-
-function FilterMarkerStock(stock) {
-  console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
-  var stockBoolean = stock;
-  console.log ('Calling stockBoolean: ' + stockBoolean );
-  for (let i = 0; i < Pharmacies.length; i++) {
-    for (let j = 0; j < Pharmacies[i].length; j++){
-      if (Pharmacies[i][j] === "Si")
-        filterStocked.push(Pharmacies[i]);
-      else filterNoStocked.push(Pharmacies[i]); 
-    }
-    console.log('Arreglo con Stock' + filterStocked);
-    console.log('Arreglo sin Stock' + filterNoStocked);
-  }
-}  
+} 
 
 function setMarkers(map) {
 
@@ -144,4 +129,20 @@ function setMarkers(map) {
       }
     
     }
+
+    function FilterMarkerStock(stock) {
+      console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
+      var stockBoolean = stock;
+      console.log ('Calling stockBoolean: ' + stockBoolean );
+      for (let i = 0; i < Pharmacies.length; i++) {
+        for (let j = 0; j < Pharmacies[i].length; j++){
+          if (Pharmacies[i][j] === "Si")
+            filterStocked.push(Pharmacies[i]);
+          else filterNoStocked.push(Pharmacies[i]); 
+        }
+        console.log('Arreglo con Stock' + filterStocked);
+        console.log('Arreglo sin Stock' + filterNoStocked);
+      }
+    } 
+    
 window.initMap = initMap;
