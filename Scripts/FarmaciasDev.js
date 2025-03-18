@@ -23,7 +23,6 @@ const Pharmacies =
       ['CRUZ VERDE', 'VICUÑA MACKENNA 184','COQUIMBO','OVALLE',-30.6052776,-71.2072376,'SI'],
       ['CRUZ VERDE', 'VICUÑA MACKENNA 890', 'STRIP CENTER MIRADOR','COQUIMBO','OVALLE',-30.60648485,-71.20913848,'SI'],
       ['CRUZ VERDE', 'PROLONGACIÓN BENAVENTE Nº1075 LOCAL 1270 MALL OPEN PLAZA OVALLE','COQUIMBO','OVALLE',-30.598981,-71.1833997,'NO'],
-      //["Nombre", direccion, region, comuna, latitud, longitud, stock]
       ['GALENICA', 'ARLEGUI N° 580 L - 7 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0236943992421, -71.5542400534807, 'SI'], 
       ['GALENICA', 'AV. PEDRO MONTT N° 2060', 'VALPARAISO', 'VALPARAISO', -33.0471602357967, -71.615342743841, 'SI'], 
       ['GALENICA', 'AMERICO VESPUCIO 7500 LOCAL B3-1B', 'METROPOLITANA', 'LA FLORIDA', -33.52163, -70.597311, 'SI'], 
@@ -135,14 +134,15 @@ function setMarkers(map){
       var stockBoolean = answer;
       for (let i = 0; i < Pharmacies.length; i++) {
         let j = Pharmacies.length;
-        console.log(j);
           if (Pharmacies[i][j] === stockBoolean)
             {
+              console.log (stockBoolean);
               filterStocked.push(Pharmacies[i]);
-              console.log('Arreglo con Stock' + filterStocked); 
+              console.log('Arreglo con Stock' + filterStocked.length); 
             }else{
+              console.log(stockBoolean);
               filterNoStocked.push(Pharmacies[i]);
-              console.log('Arreglo sin Stock' + filterNoStocked);
+              console.log('Arreglo sin Stock' + filterNoStocked.length);
             }
           }
         }
