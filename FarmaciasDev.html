@@ -15,10 +15,10 @@
     
     <body>
         <div id="filtros">
-                <select id="type" onchange="FilterMarkerStock(this.value)">
-                    <option selected>Stock Disponible
-                    <option>Si
-                    <option>No
+                <select id="selector" onchange="FilterMarkerStock()">
+                    <option value="">Stock Disponible</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
                 </select>
             </div>
             <div id="map"></div>   

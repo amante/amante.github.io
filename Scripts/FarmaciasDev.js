@@ -130,9 +130,9 @@ function setMarkers(map) {
     
     }
 
-    function FilterMarkerStock(stock) {
+    function FilterMarkerStock() {
       console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
-      var stockBoolean = stock;
+      var stockBoolean = document.getElementById("selector");
       console.log ('Calling stockBoolean: ' + stockBoolean );
       for (let i = 0; i < Pharmacies.length; i++) {
         for (let j = 0; j < Pharmacies[i].length; j++){
@@ -144,5 +144,5 @@ function setMarkers(map) {
         console.log('Arreglo sin Stock' + filterNoStocked);
       }
     } 
-    
+
 window.initMap = initMap;
