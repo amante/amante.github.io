@@ -138,12 +138,14 @@ function setMarkers(map){
       for (let i = 0; i < Pharmacies.length; i++) {
         for (let j = 0; j < Pharmacies[i].length; j++){
           if (Pharmacies[i][j] === "Si")
-            filterStocked.push(Pharmacies[i]);
-          else filterNoStocked.push(Pharmacies[i]); 
+            {
+              filterStocked.push(Pharmacies[i]);
+          console.log('Arreglo con Stock' + filterStocked);
+            }else{
+              filterNoStocked.push(Pharmacies[i]);
+              console.log('Arreglo sin Stock' + filterNoStocked);
+            }
+          }
         }
-        console.log('Arreglo con Stock' + filterStocked);
-        console.log('Arreglo sin Stock' + filterNoStocked);
-      }
-    } 
-
+      } 
 window.initMap = initMap;
