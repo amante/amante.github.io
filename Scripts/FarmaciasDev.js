@@ -1,47 +1,6 @@
 let map;
 
-function initMap() {
-  let mapOptions = {
-    zoom: 15,
-    center: { lat: -33.447487, lng: -70.673676 },
-  };
-
-  map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-  setMarkers(map);
-}
-
-function filterMarkers(stock) {
-  let stock = document.getElementById("stock").value;
-  //let region = document.getElementById("region").value;
-  //let ciudad = document.getElementById("ciudad").value;
-
-  for (let i = 0; i < Pharmacies.length; i++) { 
-    if (Pharmacies[i][6] === stock && Pharmacies[i][2] === region && Pharmacies[i][3] === ciudad) {
-      const marker = new google.maps.Marker({
-        map: map,
-        position: { lat: latitud, lng: longitud },
-        title: nombre,
-        stock: stock,
-        icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
-      });
-    }
-  }
-} 
-
-function setMarkers(map) {
-
-  let nombre;
-  let direccion;
-  let region;
-  let ciudad;
-  let latitud;
-  let longitud;
-  let stock;
-
-  const infowindow = new google.maps.InfoWindow();
-
-  const Pharmacies =
+const Pharmacies =
     [
       //["Nombre", direccion, region, comuna, latitud, longitud, stock]
       ['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603,'SI'], 
@@ -76,20 +35,61 @@ function setMarkers(map) {
       ['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917,'NO'] 
       ];
   
-    const CruzVerdeIcon = {
-      url: "https://images.ctfassets.net/ca03ioli1ast/1xGMXLosdwfK6wU6a8Gf4T/99daa806070e94667a3dd9c67a35c8ee/Logo_Cruz_FondoBlanco__3_.svg",
-      scaledSize: new google.maps.Size(35, 35),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(0, 0)
-  };
 
-  const GalenicaIcon = {
-    url: "https://farmaciagalenica.cl/wp-content/uploads/2023/03/lg_gl_n_.svg",
-    scaledSize: new google.maps.Size(35, 35),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0)
+const CruzVerdeIcon = {
+  url: "https://images.ctfassets.net/ca03ioli1ast/1xGMXLosdwfK6wU6a8Gf4T/99daa806070e94667a3dd9c67a35c8ee/Logo_Cruz_FondoBlanco__3_.svg",
+  scaledSize: new google.maps.Size(35, 35),
+  origin: new google.maps.Point(0, 0),
+  anchor: new google.maps.Point(0, 0)
 };
+
+const GalenicaIcon = {
+url: "https://farmaciagalenica.cl/wp-content/uploads/2023/03/lg_gl_n_.svg",
+scaledSize: new google.maps.Size(35, 35),
+origin: new google.maps.Point(0, 0),
+anchor: new google.maps.Point(0, 0)
+};
+
+function initMap() {
+  let mapOptions = {
+    zoom: 15,
+    center: { lat: -33.447487, lng: -70.673676 },
+  };
+  map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  setMarkers(map);
+}
+
+function FilterMarkerStock(stock) {
+  let stockSelection = document.getElementById("stockElement").value;
+  console.log ('Calling FilterMarkerStock, stockSelection: ' + stockSelection );
+
+  /*for (let i = 0; i < Pharmacies.length; i++) { 
+    if (Pharmacies[i][6] === stockSelection) {
+       let markerStock = new google.maps.Marker({
+        map: map,
+        position: { lat: latitud, lng: longitud },
+        title: nombre,
+        stock: stockSelection,
+        icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
+      });
+    }
+  }*/
+} 
+
+function setMarkers(map) {
+
+  let nombre;
+  let direccion;
+  let region;
+  let ciudad;
+  let latitud;
+  let longitud;
+  let stock;
+
+  const infowindow = new google.maps.InfoWindow();
+
   
+    
     for (let i = 0; i < Pharmacies.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
