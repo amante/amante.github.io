@@ -15,21 +15,11 @@
     
     <body>
         <div id="filtros" class="form">
-            <form>
-                <select name='farmacias' class='filter'>
-                    <option selected>Selecciona una Farmacia
-                    <option>Cruz Verde
-                    <option>Galenica
-                    <option>Otros
-                </select>
-                
-    
-                <select name='Stock' class='filter'>
+                <select id="type" name='Stock' class='filter' onchange="filterMarkers(this.value);">
                     <option selected>Stock Disponible
                     <option>SI
                     <option>NO
                 </select>
-            </form>
         </div>
         <div id="map">
             <script

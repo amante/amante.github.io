@@ -11,6 +11,25 @@ function initMap() {
   setMarkers(map);
 }
 
+function filterMarkers() {
+  let stock = document.getElementById("stock").value;
+  let region = document.getElementById("region").value;
+  let ciudad = document.getElementById("ciudad").value;
+
+  for (let i = 0; i < Pharmacies.length; i++) { 
+    if (Pharmacies[i][6] === stock && Pharmacies[i][2] === region && Pharmacies[i][3] === ciudad) {
+      const marker = new google.maps.Marker({
+        map: map,
+        position: { lat: latitud, lng: longitud },
+        title: nombre,
+        stock: stock,
+        icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
+      });
+    }
+  }
+
+} 
+
 function setMarkers(map) {
 
   let nombre;
@@ -77,6 +96,7 @@ function setMarkers(map) {
       map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre,
+      stock: stock,
       icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
     });
 
