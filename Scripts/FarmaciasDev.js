@@ -144,8 +144,8 @@ function setMarkers(map){
               filterNoStocked.push(Pharmacies[i]);
             }
           }
-          console.log('Arreglo con Stock' + filterStocked); 
-          console.log('Arreglo sin Stock' + filterNoStocked);
         }
+        console.log('Arreglo con Stock' + filterStocked); 
+        console.log('Arreglo sin Stock' + filterNoStocked);
       } 
 window.initMap = initMap;
