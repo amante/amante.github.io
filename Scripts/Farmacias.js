@@ -38,7 +38,7 @@ function setMarkers(map) {
       ['CRUZ VERDE', 'URMENETA 96', 'VALPARAISO', 'LIMACHE', -32.9853313679932, -71.2759083062112,'Si'], 
       ['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573, 'Si'], 
       ['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE',-33.0480884691307,-71.4429118882056,'NO'],
-      ['CRUZ VERDE', 'BENAVENTE 1','COQUIMBO','OVALLE',-30,6017851,-71,19722333,'SI'],
+      ['CRUZ VERDE', 'BENAVENTE 1','COQUIMBO','OVALLE',-30,6017851-71,19722333,'SI'],
       ['CRUZ VERDE', 'VICUÑA MACKENNA 56','COQUIMBO','OVALLE',-30,6029773,-71,20057228,'NO'],
       ['CRUZ VERDE', 'VICUÑA MACKENNA 184','COQUIMBO','OVALLE',-30,6052776,-71,2072376,'SI'],
       ['CRUZ VERDE', 'VICUÑA MACKENNA 890', 'STRIP CENTER MIRADOR','COQUIMBO','OVALLE',-30,60648485,-71,20913848,'SI']
@@ -123,7 +123,10 @@ function setMarkers(map) {
 
             const stockElement = document.createElement("p");
             stockElement.textContent = "Stock: " + stock + " Disponible";
-            content.appendChild(stockElement);      
+            content.appendChild(stockElement);
+      
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
           });       
     }
 
@@ -179,11 +182,10 @@ function setMarkers(map) {
             const stockElement = document.createElement("p");
             stockElement.textContent = "Stock: " + stock + " Disponible";
             content.appendChild(stockElement);
-
-          });
-               
-          infowindow.setContent(content);
-          infowindow.open(map, marker);
+      
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+          });       
         }    
       }
     }
