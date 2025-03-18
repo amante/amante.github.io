@@ -45,8 +45,7 @@ function initMap() {
 }
 
 function FilterMarkerStock(stock) {
-  console.log ('Calling FilterMarkerStock, stockSelection: ' + stock );
-  }
+  console.log ('Calling FilterMarkerStock, stockSelection: ' + stock )};  
 
 function setMarkers(map) {
 
@@ -128,6 +127,9 @@ function setMarkers(map) {
             infowindow.open(map, marker);   
           });    
         }
+      }
+      document.getElementById("Selector").onchange = function(){
+        
       }  
     }
 window.initMap = initMap;
