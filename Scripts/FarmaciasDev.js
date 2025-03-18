@@ -136,15 +136,17 @@ function setMarkers(map){
       for (let i = 0; i < Pharmacies.length; i++) {
         let j = Pharmacies.length;
         console.log(j);
-          if (Pharmacies[i][j] === "SI")
+          if (Pharmacies[i][j] === stockBoolean)
             {
               filterStocked.push(Pharmacies[i]);
+              console.log('Arreglo con Stock' + filterStocked); 
             }else{
               filterNoStocked.push(Pharmacies[i]);
+              console.log('Arreglo sin Stock' + filterNoStocked);
             }
           }
         }
-        console.log('Arreglo con Stock' + filterStocked); 
-        console.log('Arreglo sin Stock' + filterNoStocked);
+        
+        
        
 window.initMap = initMap;
