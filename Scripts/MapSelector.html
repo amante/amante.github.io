@@ -1,0 +1,51 @@
+<div id='map'></div>
+		<form>
+			<!--
+				Note that the names of these "SELECT" menus match the keys
+				within the JSON source data. This is important with the above
+				code as the name is used to filter the data.
+				
+				If the elements cannot be so named then a lookup matrix
+				would be required which just adds another layer of complexity.
+			-->
+			<select name='project_type' class='filter'>
+				<option selected>Please select "Project Type"
+				<option>Engineering
+				<option>Construction
+			</select>
+			
+			
+			<select name='project_title' class='filter'>
+				<option selected>Please select "Project Title"
+				<option>Project #1 Title
+				<option>Project #2 Title
+				<option>Project #3 Title
+				<option>Project #4 Title
+				<option>Project #5 Title
+			</select>
+		
+
+			<select name='region' class='filter'>
+				<option selected>Select "Region"
+				<option>France
+				<option>Italy
+			</select>
+
+		
+
+			<select name='company_name' class='filter'>
+				<option selected>Select "Company Name"
+				<option>Google
+				<option>Yahoo
+			</select>
+			
+
+			<select name='value' class='filter'>
+				<option selected>Select "Value"
+				<option>1000000
+				<option>2000000
+			</select>
+		</form>
+    
+    
+    <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&callback=initMap&libraries=places&v=weekly'></script>
