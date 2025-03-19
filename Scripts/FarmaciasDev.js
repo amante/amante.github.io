@@ -134,7 +134,7 @@ function setMarkers(map){
       var stockBoolean = answer;
       for (let i = 0; i < Pharmacies.length; i++) {
         let j = Pharmacies.length;
-        let actualStock = Pharmacies[i][j].textContent;
+        let actualStock = Pharmacies[i][j].toString();
         console.log(actualStock);
           if ( actualStock === stockBoolean)
             {
