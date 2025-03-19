@@ -1,7 +1,7 @@
 let map;
 let answer;
-let filterStocked = [];
-let filterNoStocked = [];
+let AfilterMarker = [];
+let Amarkers = [];
 
 const Pharmacies =
     [
@@ -43,10 +43,10 @@ function initMap(){
     center: { lat: -33.447487, lng: -70.673676 },
   };
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  setMarkers(map);
+  setMarkers(map, Pharmacies);
 } 
 
-function setMarkers(map){
+function setMarkers(map, Array){
 
   let nombre;
   let direccion;
@@ -55,6 +55,9 @@ function setMarkers(map){
   let latitud;
   let longitud;
   let stock;
+
+  Amarkers = [];
+  Amarkers = Array;
 
   const infowindow = new google.maps.InfoWindow();
 
@@ -72,7 +75,7 @@ function setMarkers(map){
   anchor: new google.maps.Point(0, 0)
   };
     
-    for (let i = 0; i < Pharmacies.length; i++) {  
+    for (let i = 0; i < Amarkers.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
       position: { lat: latitud, lng: longitud },
@@ -81,21 +84,21 @@ function setMarkers(map){
       icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
     });
 
-    for (let j = 0; j < Pharmacies[i].length; j++) {
+    for (let j = 0; j < Amarkers[i].length; j++) {
       switch (j) {
-        case 0: nombre = Pharmacies[i][j];
+        case 0: nombre = Amarkers[i][j];
           break;
-        case 1: direccion = Pharmacies[i][j];
+        case 1: direccion = Amarkers[i][j];
           break;
-        case 2: region = Pharmacies[i][j];
+        case 2: region = Amarkers[i][j];
           break;
-        case 3: ciudad = Pharmacies[i][j];
+        case 3: ciudad = Amarkers[i][j];
           break;
-        case 4: latitud = parseFloat(Pharmacies[i][j]);
+        case 4: latitud = parseFloat(Amarkers[i][j]);
           break;
-        case 5: longitud = parseFloat(Pharmacies[i][j]);
+        case 5: longitud = parseFloat(Amarkers[i][j]);
           break;
-        case 6: stock = Pharmacies[i][j];
+        case 6: stock = Amarkers[i][j];
           break;
       }
       
@@ -135,23 +138,15 @@ function setMarkers(map){
       for (let i = 0; i < Pharmacies.length; i++) {
         for (let j = 0; j < Pharmacies[i].length; j++){
           var x = Pharmacies[i][j];
-          console.log(x + "elementos en el arreglo");
         }
         var actualStock = x;
           
         if ( actualStock === stockBoolean)
             {
               console.log (stockBoolean);
-              filterStocked.push(Pharmacies[i]);
-              console.log('Arreglo con Stock' + filterStocked.length); 
-            }else{
-              console.log(stockBoolean);
-              filterNoStocked.push(Pharmacies[i]);
-              console.log('Arreglo sin Stock' + filterNoStocked.length);
+              AfilterMarker.push(Pharmacies[i]);
             }
           }
-        }
-        
-        
-       
+          setMarkers(map,AfilterMarker);
+        }     
 window.initMap = initMap;
