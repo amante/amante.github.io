@@ -37,14 +37,17 @@ const Pharmacies =
       ['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917,'NO'] 
       ];
   
-async function initMap(){
-  let mapOptions = {
-    zoom: 15,
+async function initMap() {
+  const { Map } = await google.maps.importLibrary("maps");
+
+  map = new Map(document.getElementById("map"), {
     center: { lat: -33.447487, lng: -70.673676 },
-  };
-  map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    zoom: 15,
+  });
+  
   setMarkers(map, Pharmacies);
-} 
+}
+
 
 function setMarkers(map, Array){
 
