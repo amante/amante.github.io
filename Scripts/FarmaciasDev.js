@@ -1,7 +1,9 @@
 let map;
 let answer;
-let AfilterMarker = [];
-let Amarkers = [];
+let marker;
+let AfilterData = [];
+let AMarkersData = [];
+let AfilteredMarkers = [];
 
 const Pharmacies =
     [
@@ -75,30 +77,23 @@ function setMarkers(map, Array){
   anchor: new google.maps.Point(0, 0)
   };
     
-    for (let i = 0; i < Amarkers.length; i++) {  
-      const marker = new google.maps.Marker({
-      map: map,
-      position: { lat: latitud, lng: longitud },
-      title: nombre,
-      stock: stock,
-      icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
-    });
+  addMarker();
 
-    for (let j = 0; j < Amarkers[i].length; j++) {
+    for (let j = 0; j < AMarkersData[i].length; j++) {
       switch (j) {
-        case 0: nombre = Amarkers[i][j];
+        case 0: nombre = AMarkersData[i][j];
           break;
-        case 1: direccion = Amarkers[i][j];
+        case 1: direccion = AMarkersData[i][j];
           break;
-        case 2: region = Amarkers[i][j];
+        case 2: region = AMarkersData[i][j];
           break;
-        case 3: ciudad = Amarkers[i][j];
+        case 3: ciudad = AMarkersData[i][j];
           break;
-        case 4: latitud = parseFloat(Amarkers[i][j]);
+        case 4: latitud = parseFloat(AMarkersData[i][j]);
           break;
-        case 5: longitud = parseFloat(Amarkers[i][j]);
+        case 5: longitud = parseFloat(AMarkersData[i][j]);
           break;
-        case 6: stock = Amarkers[i][j];
+        case 6: stock = AMarkersData[i][j];
           break;
       }
       
@@ -130,8 +125,6 @@ function setMarkers(map, Array){
           });    
         }
       }
-    
-    }
 
     function FilterMarkerStock(answer){
       
@@ -146,13 +139,27 @@ function setMarkers(map, Array){
           
         if ( actualStock === stockBoolean)
             {
-              AfilterMarker.push(Pharmacies[i]);
+              AfilterData.push(Pharmacies[i]);
             }
           }
-          setMarkers(map, AfilterMarker);
+          setMarkers(map, AfilterData);
         } 
         
-    function clearMarkers() {
+        function addMarker() {
+          for (let i = 0; i < AMarkersData.length; i++) {
+            Amarkers.push(
+            marker = new google.maps.Marker({
+              map: map,
+              position: { lat: latitud, lng: longitud },
+              title: nombre,
+              stock: stock,
+              icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
+            })
+          );
+      };
+    }
+        
+      function clearMarkers() {
       for (let i = 0; i < Amarkers.length; i++) {
         Amarkers[i].setMap(null);
       }};
