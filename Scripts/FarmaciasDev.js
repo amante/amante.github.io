@@ -133,7 +133,7 @@ function setMarkers(map){
     function FilterMarkerStock(answer){
       var stockBoolean = answer;
       for (let i = 0; i < Pharmacies.length; i++) {
-        let j = Pharmacies.length;
+        let j = Pharmacies.length -1;
         let actualStock = Pharmacies[i][j];
         console.log(actualStock);
           
