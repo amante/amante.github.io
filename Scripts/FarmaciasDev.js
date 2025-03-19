@@ -78,53 +78,7 @@ function setMarkers(map, Array){
   };
     
   addMarker();
-
-    for (let j = 0; j < AMarkersData[i].length; j++) {
-      switch (j) {
-        case 0: nombre = AMarkersData[i][j];
-          break;
-        case 1: direccion = AMarkersData[i][j];
-          break;
-        case 2: region = AMarkersData[i][j];
-          break;
-        case 3: ciudad = AMarkersData[i][j];
-          break;
-        case 4: latitud = parseFloat(AMarkersData[i][j]);
-          break;
-        case 5: longitud = parseFloat(AMarkersData[i][j]);
-          break;
-        case 6: stock = AMarkersData[i][j];
-          break;
-      }
-      
-          google.maps.event.addListener(marker, "click", () => {
-            const content = document.createElement("div");
-      
-            const nameElement = document.createElement("h2");
-            nameElement.textContent = "Nombre: " + nombre;
-            content.appendChild(nameElement);
-      
-            const placeAddressElement = document.createElement("p");
-            placeAddressElement.textContent = "Dirección: " + direccion;
-            content.appendChild(placeAddressElement);
-      
-            const regionElement = document.createElement("p");
-            regionElement.textContent = "Region: " + region;
-            content.appendChild(regionElement);
-      
-            const cityElement = document.createElement("p");
-            cityElement.textContent = "Ciudad: " + ciudad;
-            content.appendChild(cityElement);
-
-            const stockElement = document.createElement("p");
-            stockElement.textContent = "Stock: " + stock + " Disponible";
-            content.appendChild(stockElement);
-      
-            infowindow.setContent(content);
-            infowindow.open(map, marker);   
-          });    
-        }
-      }
+}
 
     function FilterMarkerStock(answer){
       
@@ -154,9 +108,53 @@ function setMarkers(map, Array){
               title: nombre,
               stock: stock,
               icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
-            })
-          );
+            }));
       };
+      for (let j = 0; j < AMarkersData[i].length; j++) {
+        switch (j) {
+          case 0: nombre = AMarkersData[i][j];
+            break;
+          case 1: direccion = AMarkersData[i][j];
+            break;
+          case 2: region = AMarkersData[i][j];
+            break;
+          case 3: ciudad = AMarkersData[i][j];
+            break;
+          case 4: latitud = parseFloat(AMarkersData[i][j]);
+            break;
+          case 5: longitud = parseFloat(AMarkersData[i][j]);
+            break;
+          case 6: stock = AMarkersData[i][j];
+            break;
+        }
+        
+            google.maps.event.addListener(marker, "click", () => {
+              const content = document.createElement("div");
+        
+              const nameElement = document.createElement("h2");
+              nameElement.textContent = "Nombre: " + nombre;
+              content.appendChild(nameElement);
+        
+              const placeAddressElement = document.createElement("p");
+              placeAddressElement.textContent = "Dirección: " + direccion;
+              content.appendChild(placeAddressElement);
+        
+              const regionElement = document.createElement("p");
+              regionElement.textContent = "Region: " + region;
+              content.appendChild(regionElement);
+        
+              const cityElement = document.createElement("p");
+              cityElement.textContent = "Ciudad: " + ciudad;
+              content.appendChild(cityElement);
+  
+              const stockElement = document.createElement("p");
+              stockElement.textContent = "Stock: " + stock + " Disponible";
+              content.appendChild(stockElement);
+        
+              infowindow.setContent(content);
+              infowindow.open(map, marker);   
+            });    
+          }
     }
         
       function clearMarkers() {
