@@ -137,7 +137,7 @@ function setMarkers(map, Array){
       
       var stockBoolean = answer;
       clearMarkers();
-      
+
       for (let i = 0; i < Pharmacies.length; i++) {
         for (let j = 0; j < Pharmacies[i].length; j++){
           var x = Pharmacies[i][j];
@@ -153,10 +153,9 @@ function setMarkers(map, Array){
         } 
         
     function clearMarkers() {
-      Amarkers.forEach((marker) => {
-        Amarkers.setMap(null);
-      });
-      Amarkers = [];
-    }     
+      for (let i = 0; i < Amarkers.length; i++) {
+        Amarkers[i].setMap(null);
+      }};
+      Amarkers = [];    
 
 window.initMap = initMap;
