@@ -134,10 +134,10 @@ function setMarkers(map){
       var stockBoolean = answer;
       for (let i = 0; i < Pharmacies.length; i++) {
         for (let j = 0; j < Pharmacies[i].length; j++){
-          let x = Pharmacies[i][j];
+          var x = Pharmacies[i][j];
           console.log(x + "elementos en el arreglo");
         }
-        actualStock = x;
+        var actualStock = x;
           
         if ( actualStock === stockBoolean)
             {
