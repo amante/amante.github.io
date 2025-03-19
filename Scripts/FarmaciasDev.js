@@ -136,7 +136,8 @@ function setMarkers(map){
         let j = Pharmacies.length;
         let actualStock = Pharmacies[i][j].toString();
         console.log(actualStock);
-          if ( actualStock === stockBoolean)
+          
+        if ( actualStock === stockBoolean)
             {
               console.log (stockBoolean);
               filterStocked.push(Pharmacies[i]);
