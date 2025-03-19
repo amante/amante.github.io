@@ -134,7 +134,9 @@ function setMarkers(map){
       var stockBoolean = answer;
       for (let i = 0; i < Pharmacies.length; i++) {
         let j = Pharmacies.length;
-          if (Pharmacies[i][j] == stockBoolean)
+        let actualStock = Pharmacies[i][j];
+        console.log(actualStock);
+          if ( actualStock === stockBoolean)
             {
               console.log (stockBoolean);
               filterStocked.push(Pharmacies[i]);
