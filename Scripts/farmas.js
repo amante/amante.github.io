@@ -1,4 +1,4 @@
-farmasChile({
+const farmasChile = [{
     'title': 'FARMACIAS DE CHILE',
     'farmacias':
         [{
@@ -234,4 +234,5 @@ farmasChile({
             "Longitude": -70.564917,
             "Stock": "NO"
         }]
-});
+}];
+export default farmasChile;
