@@ -1,6 +1,7 @@
 let map;
 let markers = [];
 let infoBoxes = [];
+let sharedFarmas = [];
 
   function initMap() {
   if (typeof google === 'undefined') {
@@ -41,14 +42,7 @@ function addMarker(title, location) {
   );
 }
 
-function FilterMarkerStock() {
-  const select = document.getElementById("selector").value;
-  clearMarkers();
 
-//console.log(results);
-console.log(farmasChile.title);
- 
-} 
 
 setupFarmacias = () => {
   const script = document.createElement("script");
@@ -61,7 +55,18 @@ const farmasChile = function(results) {
   for (let i = 0; i < results.farmacias.length; i++) {
       renderMarker(results.farmacias, i, farmasMarker);
     }
+    return results.farmacias;
   };
+
+  function FilterMarkerStock() {
+    const farmacias = farmasChile(data); 
+    const select = document.getElementById("selector").value;
+    clearMarkers();
+  
+  //console.log(results);
+  console.log(farmacias);
+   
+  } 
 
 function renderMarker(farmas, i, farmasMarker) {
   const CruzVerdeIcon = {
