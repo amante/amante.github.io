@@ -59,7 +59,7 @@ const farmasChile = function(results) {
   };
 
   function FilterMarkerStock() {
-    const farmacias = farmasChile(results); 
+    const farmacias = farmasChile; 
     const select = document.getElementById("selector").value;
     clearMarkers();
   
