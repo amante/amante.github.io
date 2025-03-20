@@ -113,6 +113,12 @@ function renderMarker(farmas, i, farmasMarker) {
 
   showInfoWindow(newMarker, farmas[i]);
 
+  function closeInfoBoxes() {
+    infoBoxes.forEach((infoBox) => {
+      infoBox.close();
+    });
+  } 
+
   function showInfoWindow(marker, farmas) {
     
     var infoBox = new google.maps.InfoWindow({
@@ -137,10 +143,5 @@ function renderMarker(farmas, i, farmasMarker) {
     });
   }
  
-  function closeInfoBoxes() {
-    infoBoxes.forEach((infoBox) => {
-      infoBox.close();
-    });
-  } 
 }
 window.initMap = initMap;
