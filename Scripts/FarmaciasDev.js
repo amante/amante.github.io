@@ -55,16 +55,12 @@ const farmasChile = function(results) {
   for (let i = 0; i < results.farmacias.length; i++) {
       renderMarker(results.farmacias, i, farmasMarker);
     }
-    return results.farmacias;
   };
 
   function FilterMarkerStock() {
     const farmacias = farmasChile; 
     const select = document.getElementById("selector").value;
     clearMarkers();
-  
-  //console.log(results);
-  console.log(farmacias);
    
   } 
 
