@@ -43,5 +43,5 @@ function actualizarMapa() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    initMap();
+    initMap;
 });
