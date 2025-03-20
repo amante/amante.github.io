@@ -1,9 +1,20 @@
-<select id="selector" onchange="actualizarMapa()">
-    <option value="todas">Mostrar Todas</option>
-    <option value="conStock">Mostrar con Stock</option>
-</select>
-<div id="map" style="height: 500px; width: 100%;"></div>
 
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&loading=async&callback=initMap&libraries=places&v=weekly">
-</script> 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacias con Stock</title>
+    <script defer src=".Scripts/nuevaFarma.js"></script> <!-- Conecta con tu archivo JavaScript -->
+    <script async  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&loading=async&callback=initMap&libraries=places&v=weekly">
+    </script> 
+</head>
+<body>
+    <select id="selector" onchange="actualizarMapa()">
+        <option value="todas">Mostrar Todas</option>
+        <option value="conStock">Mostrar con Stock</option>
+    </select>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+</body>
+</html>
