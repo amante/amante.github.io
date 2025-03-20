@@ -92,6 +92,7 @@ function renderMarker(farmas, i, farmasMarker) {
   };
 
   const OtrosIcon = {
+    url: "https://banner2.cleanpng.com/20240216/ogy/transparent-google-maps-logo-google-maps-marker-with-global-regions-and-1710875716456.webp",
     scaledSize: new google.maps.Size(35, 35),
     origin: new google.maps.Point(0, 0),
   };
