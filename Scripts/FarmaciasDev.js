@@ -49,20 +49,22 @@ const farmasChile = function(results) {
 
   function FilterMarkerStock(answer)
   {
-    console.log(farmasMarker);
-    /*var stockBoolean = answer;
-    clearMarkers();
+    var stockBoolean = answer;
+    //clearMarkers();
 
-    for (let i = 0; i < results.farmacias.length; i++)
+    for (let i = 0; i < farmasMarker.length; i++)
       {
-        for (let j = 0; j < results.farmacias[i].length; j++)
-          {var x = results.farmacias[i][j];}
+       if (farmasMarker.stock === stockBoolean){
+        console.log(farmasMarker[i] + "se debe mostrar");
+       } else {
+        console.log(farmasMarker[i] + "este no se muestra");
+       } 
         
-        var actualStock = x;
-        if ( actualStock === stockBoolean)
-          {AfilterMarker.push(results.farmacias[i]);}
+        //var actualStock = x;
+        //if ( actualStock === stockBoolean)
+          //{AfilterMarker.push(results.farmacias[i]);}
     }
-    renderMarker(AfilterMarker);*/
+    //renderMarker(AfilterMarker);
   } 
 
 function renderMarker(farmas, i, farmasMarker) {
