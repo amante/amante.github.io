@@ -51,27 +51,25 @@ const farmasChile = function(results) {
       farmasMarker[i].setMap(null);
     }
     farmasMarker = [];
+    AfilterMarker = [];
   }
 
   function FilterMarkerStock(answer)
   {
     var stockBoolean = answer;
-    //clearMarkers();
+    clearMarkers();
 
-    for (let i = 0; i < farmasMarker.length; i++)
-      {
-       if (farmasMarker[i].stock === stockBoolean){
-        console.log(farmasMarker[i].stock + "se debe mostrar");
-       } else {
-        console.log(farmasMarker[i].stock + "este no se muestra"); //login iif stock its yes or no
-       } 
-        
-        //var actualStock = x;
-        //if ( actualStock === stockBoolean)
-          //{AfilterMarker.push(results.farmacias[i]);}
+    if (stockBoolean === "SI"){
+      for (let i = 0; i < farmasMarker.length; i++)
+        {
+         if (farmasMarker[i].stock === stockBoolean){
+          AfilterMarker.push(farmasMarker[i]);
+          console.log(farmasMarker[i] + " se debe mostrar");
+        }
+        renderMarker(AfilterMarker);
+      }
     }
-    //renderMarker(AfilterMarker);
-  } 
+  }
 
 function renderMarker(farmas, i, farmasMarker) {
   const CruzVerdeIcon = {
