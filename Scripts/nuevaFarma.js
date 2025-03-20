@@ -42,5 +42,5 @@ function mostrarFarmacias(listaFarmacias) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    initMap();
+    initMap;
 });
