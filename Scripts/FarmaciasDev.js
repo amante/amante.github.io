@@ -3,45 +3,43 @@ let answer;
 let AfilterMarker = [];
 let Amarkers = [];
 
-const Pharmacies =
-    [
-      ['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603,'SI'],
-      ['CRUZ VERDE', 'CENTRAL 129 (EX 145)', 'METROPOLITANA', 'MAIPU', -33.513669, -70.826522, 'NO'],
-      ['GALENICA', 'ARLEGUI N° 580 L - 7 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0236943992421, -71.5542400534807, 'SI'],
-      ['GALENICA', 'AV. PEDRO MONTT N° 2060', 'VALPARAISO', 'VALPARAISO', -33.0471602357967, -71.615342743841, 'NO'],
-      ['SALCOBRAND', 'PROVIDENCIA 2592', 'METROPOLITANA', 'PROVIDENCIA', -33.41856159674302, -70.6031911075224,'SI'],
-      ['SALCOBRAND', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917,'NO'],
-      ['AHUMADA', 'AMERICO VESPUCIO 7500 LOCAL B3-1B', 'METROPOLITANA', 'LA FLORIDA', -33.52163, -70.597311, 'SI'],
-      ['AHUMADA', 'IRARRAZAVAL 2661', 'METROPOLITANA', 'ÑUÑOA', -33.45427, -70.603641, 'NO'],   
-      ];
-  
-async function initMap() {
-  const { Map } = await google.maps.importLibrary("maps");
+  async function initMap() {
+  if (typeof google === 'undefined') {
+    console.error('Google Maps API is not loaded.');
+    return;
+  }
 
   map = new Map(document.getElementById("map"), {
-    center: { lat: -33.447487, lng: -70.673676 },
-    zoom: 15,
+    center: { 
+      lat: -33.447487, 
+      lng: -70.673676 
+    },
+    zoom: 8,
+    mapTypeControl: false
   });
   
+  google.maps.event.addListener(map, "click", function(event) {
+    closeInfoBoxes();
+});
+
+setupFarmas();
   setMarkers(map, Pharmacies);
 }
 
+setupFarmacias = () => {
+  const script = document.createElement("script");
+  script.src = "./Scripts/farmas.js";
+  document.getElementsByTagName("head")[0].appendChild(script);
+}
 
-function setMarkers(map, Array)
-{
-  let nombre;
-  let direccion;
-  let region;
-  let ciudad;
-  let latitud;
-  let longitud;
-  let stock;
+const farmasChile = function(results) {
+  var farmasMarker = [];
+  for (let i = 0; i < results.farmacias.length; i++) {
+      renderMarker(results.farmacias, i, farmasMarker);
+    }
+  };
 
-  Amarkers = [];
-  Amarkers = Array;
-
-  const infowindow = new google.maps.InfoWindow();
-
+function renderMarker(farmas, i, farmasMarker) {
   const CruzVerdeIcon = {
     url: "https://images.ctfassets.net/ca03ioli1ast/1xGMXLosdwfK6wU6a8Gf4T/99daa806070e94667a3dd9c67a35c8ee/Logo_Cruz_FondoBlanco__3_.svg",
     scaledSize: new google.maps.Size(35, 35),
@@ -69,14 +67,98 @@ function setMarkers(map, Array)
     origin: new google.maps.Point(0, 0),
   };
 
+  const latLng = new google.maps.LatLng(farmas[i].Latitude, farmas[i].Longitude);
+
+  var newMarker = new google.maps.Marker({
+    position: latLng,
+    title: farmas[i].Nombre,
+    stock: farmas[i].Stock,
+    map: map,
+    icon: farmas[i].Nombre === 'CRUZ VERDE' ? CruzVerdeIcon : farmas[i].Nombre === 'GALENICA' ? GalenicaIcon : farmas[i].Nombre === 'SALCOBRAND' ? SalcoIcon : AhumadaIcon,
+  });
+
+  var url = 'https://www.google.com/maps/place/' + newMarker.position.lat() + ',' + newMarker.position.lng();
+  newMarker.set('url', url);
+  
+  farmasMarker.push(newMarker);
+
+  showInfoWindow(newMarker, farmas[i]);
+
+  function showInfoWindow(marker, farmas) {
     
+    var infoBox = new google.maps.InfoWindow({
+      content: '<div id="content">' +
+      '<h1 id="firstHeading" class="firstHeading">' + farmas.Nombre + '</h1>' + '<div id="bodyContent">' +
+      '<p><b>Dirección: </b>' + farmas.Direccion + '</p>' +
+      '<p><b>Region: </b>' + farmas.Region + '</p>' +
+      '<p><b>Ciudad: </b>' + farmas.Comuna + '</p>' +
+      '<p><b>Stock: </b>' + farmas.Stock + '</p>' +
+      (marker.url ? '<p><a target="_blank" style="font-weight: bold; font-size: 16px;" id="' + marker.name + '" href="' + marker.url + '">Cómo llegar</a></p>' : '') +
+      '</div>' +
+      '</div>'
+    });
+
+    infoBoxes.push(infoBox);
+
+    marker.addListener("click", () => {
+      closeInfoBoxes();
+      infoBox.open(map, marker);
+      map.setZoom(14);
+      map.setCenter(marker.getPosition());  
+    });
+  }
+
+  function FilterMarkerStock(answer)
+  {
+    var stockBoolean = answer;
+    clearMarkers(); 
+    for (let i = 0; i < results.farmacias.length; i++)
+      {
+        for (let j = 0; j < results.farmacias[i].length; j++)
+          {var x = results.farmacias[i][j];}
+        
+        var actualStock = x;
+        if ( actualStock === stockBoolean)
+          {AfilterMarker.push(results.farmacias[i]);}
+    }
+    renderMarker(AfilterMarker);
+  } 
+  
+  function closeInfoBoxes() {
+    infoBoxes.forEach((infoBox) => {
+      infoBox.close();
+    });
+  } 
+
+  function clearMarkers() {
+    for (let i = 0; i < farmasMarker.length; i++) {
+      farmasMarker[i].setMap(null);
+    }
+    farmasMarker = [];
+  }
+
+/*function setMarkers(map, Array)
+{
+  let nombre;
+  let direccion;
+  let region;
+  let ciudad;
+  let latitud;
+  let longitud;
+  let stock;
+
+  Amarkers = [];
+  Amarkers = Array;
+
+  const infowindow = new google.maps.InfoWindow();
+ 
     for (let i = 0; i < Amarkers.length; i++) {  
       const marker = new google.maps.Marker({
       map: map,
       position: { lat: latitud, lng: longitud },
       title: nombre,
       stock: stock,
-      icon: Pharmacies[i][0] === 'CRUZ VERDE' ? CruzVerdeIcon : Pharmacies[i][0] === 'GALENICA' ? GalenicaIcon : Pharmacies[i][0] === 'SALCOBRAND' ? SalcoIcon : AhumadaIcon
+      icon: Pharmacies[i][0] === 'CRUZ VERDE' ? CruzVerdeIcon : Pharmacies[i][0] === 'GALENICA' ? GalenicaIcon : Pharmacies[i][0] === 'SALCOBRAND' ? SalcoIcon : AhumadaIcon,
     });
     
     for (let j = 0; j < Amarkers[i].length; j++) {
@@ -125,51 +207,7 @@ function setMarkers(map, Array)
           });    
         }
       }
-    }
+    }*/
 
-    function FilterMarkerStock(answer)
-    {
-      var stockBoolean = answer;
-      for (let i = 0; i < Pharmacies.length; i++)
-        {
-          for (let j = 0; j < Pharmacies[i].length; j++)
-            {var x = Pharmacies[i][j];}
-          
-          var actualStock = x;
-          if ( actualStock === stockBoolean)
-            {AfilterMarker.push(Pharmacies[i]);}
-      }
-          setMarkers(map, AfilterMarker);
-    }     
+}
 window.initMap = initMap;
-
-/*/["Nombre", direccion, region, comuna, latitud, longitud, stock]
-['CRUZ VERDE', 'ALFREDO SILVA CARVALLO 1401. INTERIOR MONTSERRAT', 'METROPOLITANA', 'MAIPU', -33.531915, -70.775603,'SI'], 
-['CRUZ VERDE', 'CENTRAL 129 (EX 145)', 'METROPOLITANA', 'MAIPU', -33.513669, -70.826522, 'SI'], 
-['CRUZ VERDE', 'AV. WALKER MARTINEZ 1642. INTERIOR MONTSERRAT', 'METROPOLITANA', 'QUINTA NORMAL', -33.430501, -70.692356,'SI'], 
-['CRUZ VERDE', 'AV. DOMINGO SANTA MARIA 4112. INTERIOR MONTSERRAT', 'METROPOLITANA', 'RENCA', -33.405687, -70.704351, 'SI'],      
-['CRUZ VERDE', 'OHIGGINS 195, LOCAL 1', 'VALPARAISO', 'QUILLOTA', -32.8793428949969, -71.2467871500868, 'NO'], 
-['CRUZ VERDE', 'J.J. PEREZ 202', 'VALPARAISO', 'LA CALERA', -32.788066282624, -71.1897310126255, 'SI'], 
-['CRUZ VERDE', 'URMENETA 99', 'VALPARAISO', 'LIMACHE', -32.9849921792696, -71.2757177058683, 'SI'], 
-['CRUZ VERDE', 'REPUBLICA 281', 'VALPARAISO', 'LIMACHE', -33.0025007197382, -71.2654977848501, 'NO'], 
-['CRUZ VERDE', 'CHACABUCO 281', 'VALPARAISO', 'QUILLOTA', -32.878335491624, -71.246141889165, 'SI'], 
-['CRUZ VERDE', 'URMENETA 96', 'VALPARAISO', 'LIMACHE', -32.9853313679932, -71.2759083062112, 'SI'], 
-['CRUZ VERDE', 'PALMIRA ROMANO 405', 'VALPARAISO', 'LIMACHE', -33.0021934734243, -71.2680155185573, 'SI'], 
-['CRUZ VERDE', 'AV. LOS CARRERA Nº 754, PRIMER NIVEL MALL PASEO QUILPUé, LOCAL 100-102', 'VALPARAISO', 'QUILPUE', -33.0480884691307, -71.4429118882056, 'NO'],
-['CRUZ VERDE', 'BENAVENTE 1','COQUIMBO','OVALLE',-30.6017851,-71.19722333,'SI'],
-['CRUZ VERDE', 'VICUÑA MACKENNA 56','COQUIMBO','OVALLE',-30.6029773,-71.20057228,'NO'],
-['CRUZ VERDE', 'VICUÑA MACKENNA 184','COQUIMBO','OVALLE',-30.6052776,-71.2072376,'SI'],
-['CRUZ VERDE', 'VICUÑA MACKENNA 890', 'STRIP CENTER MIRADOR','COQUIMBO','OVALLE',-30.60648485,-71.20913848,'SI'],
-['CRUZ VERDE', 'PROLONGACIÓN BENAVENTE Nº1075 LOCAL 1270 MALL OPEN PLAZA OVALLE','COQUIMBO','OVALLE',-30.598981,-71.1833997,'NO'],
-['GALENICA', 'ARLEGUI N° 580 L - 7 OF. 201', 'VALPARAISO', 'VIÑA DEL MAR', -33.0236943992421, -71.5542400534807, 'SI'], 
-['GALENICA', 'AV. PEDRO MONTT N° 2060', 'VALPARAISO', 'VALPARAISO', -33.0471602357967, -71.615342743841, 'SI'], 
-['GALENICA', 'AMERICO VESPUCIO 7500 LOCAL B3-1B', 'METROPOLITANA', 'LA FLORIDA', -33.52163, -70.597311, 'SI'], 
-['GALENICA', 'IRARRAZAVAL 2661', 'METROPOLITANA', 'ÑUÑOA', -33.45427, -70.603641, 'NO'], 
-['GALENICA', 'TENIENTE CRUZ 540. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'PUDAHUEL', -33.458155, -70.738266, 'SI'], 
-['GALENICA', 'AV. CONCHA Y TORO 157', 'METROPOLITANA', 'PUENTE ALTO', -33.610491, -70.575739, 'SI'], 
-['GALENICA', 'AV. CARRASCAL 4436. INTERIOR EKONO', 'METROPOLITANA', 'QUINTA NORMAL', -33.422899, -70.694128, 'SI'], 
-['GALENICA', 'AV. CARRASCAL 6001. INTERIOR SUPERBODEGA ACUENTA', 'METROPOLITANA', 'QUINTA NORMAL', -33.4164, -70.711824, 'NO'], 
-['GALENICA', 'EYZAGUIRRE  523', 'METROPOLITANA', 'SAN BERNARDO', -33.59314, -70.705474, 'SI'], 
-['GALENICA', 'SAN ANTONIO 380', 'METROPOLITANA', 'SANTIAGO', -33.438483, -70.648308, 'SI'], 
-['GALENICA', 'PROVIDENCIA 2592', 'METROPOLITANA', 'PROVIDENCIA', -33.41856159674302, -70.6031911075224,'SI'],
-['GALENICA', 'GERóNIMO DE ALDERETE N° 1554, LOCAL 1', 'METROPOLITANA', 'VITACURA', -33.388055, -70.564917,'NO'] */
