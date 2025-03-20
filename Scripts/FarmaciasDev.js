@@ -41,19 +41,13 @@ function addMarker(title, location) {
   );
 }
 
-function FilterMarkerStock()
-  {
-    const select = document.getElementById("selector").value;
-    if (select === "SI")
-    {
-      console.log(infoBoxes);
-      console.log(farmasChile);
-    }
-    else
-    {
-      console.log("No hay stock");
-    }  
-  } 
+function FilterMarkerStock() {
+  const select = document.getElementById("selector").value;
+  clearMarkers(); // Clear existing markers
+  
+  const filteredPharmacies = farmasChile.filter(f => f.Stock === (select === "SI" ? true : false));
+  filteredPharmacies.forEach(f => renderMarker(farmas, i, farmasMarker));
+} 
 
 setupFarmacias = () => {
   const script = document.createElement("script");
@@ -110,7 +104,6 @@ function renderMarker(farmas, i, farmasMarker) {
   marker.set('url', url);
   
   farmasMarker.push(marker);
-console.log(farmasMarker)
 
   showInfoWindow(marker, farmas[i]);
 
