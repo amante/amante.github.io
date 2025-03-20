@@ -1,7 +1,9 @@
 let map;
 let markers = [];
 let infoBoxes = [];
-let sharedFarmas = [];
+let answer;
+let AfilterMarker = [];
+let Amarkers = [];
 
   function initMap() {
   if (typeof google === 'undefined') {
@@ -25,25 +27,6 @@ let sharedFarmas = [];
 setupFarmacias();
 }
 
-function clearMarkers() {
-  markers.forEach((marker) => {
-      marker.setMap(null);
-  });
-  markers = [];
-}
-
-function addMarker(title, location) {
-  markers.push(
-      new google.maps.Marker({
-          position: location,
-          map,
-          title: title,
-      })
-  );
-}
-
-
-
 setupFarmacias = () => {
   const script = document.createElement("script");
   script.src = "./Scripts/farmas.js";
@@ -57,13 +40,27 @@ const farmasChile = function(results) {
     }
   };
 
-  function FilterMarkerStock() {
-    const select = document.getElementById("selector").value;
-    clearMarkers();
-  
-  //console.log(results);
-  console.log(farmasChile.results);
-   
+  function clearMarkers() {
+    for (let i = 0; i < farmasMarker.length; i++) {
+      farmasMarker[i].setMap(null);
+    }
+    farmasMarker = [];
+  }
+
+  function FilterMarkerStock(answer)
+  {
+    var stockBoolean = answer;
+    clearMarkers(); 
+    for (let i = 0; i < results.farmacias.length; i++)
+      {
+        for (let j = 0; j < results.farmacias[i].length; j++)
+          {var x = results.farmacias[i][j];}
+        
+        var actualStock = x;
+        if ( actualStock === stockBoolean)
+          {AfilterMarker.push(results.farmacias[i]);}
+    }
+    renderMarker(AfilterMarker);
   } 
 
 function renderMarker(farmas, i, farmasMarker) {
@@ -96,7 +93,7 @@ function renderMarker(farmas, i, farmasMarker) {
 
   const latLng = new google.maps.LatLng(farmas[i].Latitude, farmas[i].Longitude);
 
-  var marker = new google.maps.Marker({
+  var newMarker = new google.maps.Marker({
     position: latLng,
     title: farmas[i].Nombre,
     stock: farmas[i].Stock,
@@ -104,12 +101,12 @@ function renderMarker(farmas, i, farmasMarker) {
     icon: farmas[i].Nombre === 'CRUZ VERDE' ? CruzVerdeIcon : farmas[i].Nombre === 'GALENICA' ? GalenicaIcon : farmas[i].Nombre === 'SALCOBRAND' ? SalcoIcon : AhumadaIcon,
   });
 
-  var url = 'https://www.google.com/maps/place/' + marker.position.lat() + ',' + marker.position.lng();
-  marker.set('url', url);
+  var url = 'https://www.google.com/maps/place/' + newMarker.position.lat() + ',' + newMarker.position.lng();
+  newMarker.set('url', url);
   
-  farmasMarker.push(marker);
+  farmasMarker.push(newMarker);
 
-  showInfoWindow(marker, farmas[i]);
+  showInfoWindow(newMarker, farmas[i]);
 
   function showInfoWindow(marker, farmas) {
     
@@ -134,8 +131,7 @@ function renderMarker(farmas, i, farmasMarker) {
       map.setCenter(marker.getPosition());  
     });
   }
-
-  
+ 
   function closeInfoBoxes() {
     infoBoxes.forEach((infoBox) => {
       infoBox.close();
