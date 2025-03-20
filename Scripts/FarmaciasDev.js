@@ -43,8 +43,10 @@ function addMarker(title, location) {
 
 function FilterMarkerStock() {
   const select = document.getElementById("selector").value;
-  clearMarkers(); // Clear existing markers
-  
+  clearMarkers();
+
+  var elements = farmasChile.farmacias;
+  console.log(elements);
  
 } 
 
