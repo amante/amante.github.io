@@ -132,7 +132,7 @@ function renderMarker(farmas, i, farmasMarker) {
     marker.addListener("click", () => {
       closeInfoBoxes();
       infoBox.open(map, marker);
-      map.setZoom(14);
+      map.setZoom(10);
       map.setCenter(marker.getPosition());  
     });
   }

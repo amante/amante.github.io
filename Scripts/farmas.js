@@ -304,11 +304,20 @@ farmasChile({
             "Latitude":	-30.6052776,
             "Longitude":-71.2072376,
             "Stock":"NO"
-                }]
+        },
+        {
+            "Nombre":	"AHUMADA",	
+            "Direccion":"J J PEREZ 199",	
+            "Region":"VALPARAISO",
+            "Comuna":"LA CALERA",
+            "Latitude":-32.78820653,
+            "Longitude":-71.1894462,
+            "Stock":"SI"}
+            ]
 });
 
 
-/*{"Nombre":	"AHUMADA"	"Direccion":	J J PEREZ 199	"Region":	VALPARAISO	,"Comuna":	LA CALERA	,"Latitude":	-32,78820653	,"Longitude":	-71,1894462	,"Stock":"SI"}
+/*
 {"Nombre":	"AHUMADA"	"Direccion":	PROLONGACION JJ. PEREZ 12010	"Region":	VALPARAISO	,"Comuna":	LA CALERA	,"Latitude":	-32,7908926	,"Longitude":	-71,19209574	,"Stock":"SI"}
 {"Nombre":	"AHUMADA"	"Direccion":	AV. 21 DE MAYO 311	"Region":	VALPARAISO	,"Comuna":	QUILLOTA	,"Latitude":	-32,87438962	,"Longitude":	-71,24190673	,"Stock":	"SI"}
 {"Nombre":	"AHUMADA"	"Direccion":	O`HIGGINS 114-116	"Region":	VALPARAISO	,"Comuna":	QUILLOTA	,"Latitude":	-32,87858575	,"Longitude":	-71,24676804	,"Stock":	"NO"}
