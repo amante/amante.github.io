@@ -60,6 +60,7 @@ const farmasChile = function(results) {
   for (let i = 0; i < results.farmacias.length; i++) {
       renderMarker(results.farmacias, i, farmasMarker);
     }
+    console.log(results);
     console.log(farmasMarker);
   };
 
