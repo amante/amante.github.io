@@ -1,4 +1,4 @@
-const farmasChile = [{
+farmasChile = [{
     'title': 'FARMACIAS DE CHILE',
     'farmacias':
         [{
