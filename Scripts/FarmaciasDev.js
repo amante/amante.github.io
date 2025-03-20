@@ -34,11 +34,7 @@ function clearMarkers() {
 function FilterMarkerStock()
   {
     const select = document.getElementById("selector").value;
-    if (select === "SI")
-      {answer = "SI";}
-    else
-      {answer = "NO";}  
-  
+  if (select === "SI"){
     clearMarkers(); 
     for (let i = 0; i < markers.length; i++)
       {
@@ -48,8 +44,11 @@ function FilterMarkerStock()
         var actualStock = x;
         if ( actualStock === stockBoolean)
           {AfilterMarker.push(markers[i]);}
+      }
     }
-    renderMarker(AfilterMarker);
+    else {
+      console.log("No hay stock");
+    }
   } 
 
 setupFarmacias = () => {
