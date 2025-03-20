@@ -1,4 +1,6 @@
 let map;
+let markers = [];
+let infoBoxes = [];
 let answer;
 let AfilterMarker = [];
 let Amarkers = [];
