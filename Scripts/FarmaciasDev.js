@@ -31,14 +31,22 @@ function clearMarkers() {
   markers = [];
 }
 
+function addMarker(title, location) {
+  markers.push(
+      new google.maps.Marker({
+          position: location,
+          map,
+          title: title,
+      })
+  );
+}
+
 function FilterMarkerStock()
   {
     const select = document.getElementById("selector").value;
     if (select === "SI")
     {console.log(markers);
-      console.log(farmasMarker);
       console.log(infoBoxes);
-      console.log(farmasMarker);
     }
     else
     {console.log("No hay stock");}  
