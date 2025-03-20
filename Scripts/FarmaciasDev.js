@@ -27,6 +27,22 @@ let Amarkers = [];
 setupFarmacias();
 }
 
+function FilterMarkerStock(answer)
+  {
+    var stockBoolean = answer;
+    clearMarkers(); 
+    for (let i = 0; i < results.farmacias.length; i++)
+      {
+        for (let j = 0; j < results.farmacias[i].length; j++)
+          {var x = results.farmacias[i][j];}
+        
+        var actualStock = x;
+        if ( actualStock === stockBoolean)
+          {AfilterMarker.push(results.farmacias[i]);}
+    }
+    renderMarker(AfilterMarker);
+  } 
+
 setupFarmacias = () => {
   const script = document.createElement("script");
   script.src = "./Scripts/farmas.js";
@@ -109,21 +125,6 @@ function renderMarker(farmas, i, farmasMarker) {
     });
   }
 
-  function FilterMarkerStock(answer)
-  {
-    var stockBoolean = answer;
-    clearMarkers(); 
-    for (let i = 0; i < results.farmacias.length; i++)
-      {
-        for (let j = 0; j < results.farmacias[i].length; j++)
-          {var x = results.farmacias[i][j];}
-        
-        var actualStock = x;
-        if ( actualStock === stockBoolean)
-          {AfilterMarker.push(results.farmacias[i]);}
-    }
-    renderMarker(AfilterMarker);
-  } 
   
   function closeInfoBoxes() {
     infoBoxes.forEach((infoBox) => {
@@ -137,78 +138,5 @@ function renderMarker(farmas, i, farmasMarker) {
     }
     farmasMarker = [];
   }
-
-/*function setMarkers(map, Array)
-{
-  let nombre;
-  let direccion;
-  let region;
-  let ciudad;
-  let latitud;
-  let longitud;
-  let stock;
-
-  Amarkers = [];
-  Amarkers = Array;
-
-  const infowindow = new google.maps.InfoWindow();
- 
-    for (let i = 0; i < Amarkers.length; i++) {  
-      const marker = new google.maps.Marker({
-      map: map,
-      position: { lat: latitud, lng: longitud },
-      title: nombre,
-      stock: stock,
-      icon: Pharmacies[i][0] === 'CRUZ VERDE' ? CruzVerdeIcon : Pharmacies[i][0] === 'GALENICA' ? GalenicaIcon : Pharmacies[i][0] === 'SALCOBRAND' ? SalcoIcon : AhumadaIcon,
-    });
-    
-    for (let j = 0; j < Amarkers[i].length; j++) {
-      switch (j) {
-        case 0: nombre = Amarkers[i][j];
-          break;
-        case 1: direccion = Amarkers[i][j];
-          break;
-        case 2: region = Amarkers[i][j];
-          break;
-        case 3: ciudad = Amarkers[i][j];
-          break;
-        case 4: latitud = parseFloat(Amarkers[i][j]);
-          break;
-        case 5: longitud = parseFloat(Amarkers[i][j]);
-          break;
-        case 6: stock = Amarkers[i][j];
-          break;
-      }
-      
-          google.maps.event.addListener(marker, "click", () => {
-            const content = document.createElement("div");
-      
-            const nameElement = document.createElement("h2");
-            nameElement.textContent = "Nombre: " + nombre;
-            content.appendChild(nameElement);
-      
-            const placeAddressElement = document.createElement("p");
-            placeAddressElement.textContent = "Dirección: " + direccion;
-            content.appendChild(placeAddressElement);
-      
-            const regionElement = document.createElement("p");
-            regionElement.textContent = "Region: " + region;
-            content.appendChild(regionElement);
-      
-            const cityElement = document.createElement("p");
-            cityElement.textContent = "Ciudad: " + ciudad;
-            content.appendChild(cityElement);
-
-            const stockElement = document.createElement("p");
-            stockElement.textContent = "Stock: " + stock + " Disponible";
-            content.appendChild(stockElement);
-      
-            infowindow.setContent(content);
-            infowindow.open(map, marker);   
-          });    
-        }
-      }
-    }*/
-
 }
 window.initMap = initMap;
