@@ -45,7 +45,7 @@ function FilterMarkerStock() {
   const select = document.getElementById("selector").value;
   clearMarkers();
 
-console.log(results);
+//console.log(results);
 console.log(farmasChile.title);
  
 } 
