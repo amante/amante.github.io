@@ -8,21 +8,19 @@
     <meta name="author" content="MSD Chile">
 
     <head>
-    <title>Mapa de Farmacias de Chile</title>
-    <script src="https://cdnjs.cloudflare.com/polyfill/polyfill.min.js?flags=gated&features=Array.prototype.flat"></script>
-    <script type="module" src="./Scripts/Farmacias.js" defer></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&callback=initMap&libraries=places&v=weekly" defer></script>
+    <title>Mapa de Stock de Farmacias - Desarrollo</title>
+    <script src="./Scripts/Farmacias.js"></script>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
     
     <body>
         <div id="filtros">
-                <select id="type" onchange="FilterMarkerStock(this.value);">
-                    <option selected>Stock Disponible
-                    <option>Si
-                    <option>No
+                <select id="selector"  class='filter' onchange="FilterMarkerStock(this.value)">
+                    <option value="">Todas las Farmacias</option>
+                    <option value="SI">Farmacias con Stock Disponible</option>
+                    <option value="NO">Farmacias sin Stock Disponible</option>
                 </select>
-        </div>
-        <div id="map">
-        </div>   
+            </div>
+            <div id="map"></div>
+            <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&loading=async&callback=initMap&libraries=places&v=weekly" defer></script> 
   </body>
 </html>
