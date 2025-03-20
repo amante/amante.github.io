@@ -3,13 +3,13 @@ let answer;
 let AfilterMarker = [];
 let Amarkers = [];
 
-  async function initMap() {
+  function initMap() {
   if (typeof google === 'undefined') {
     console.error('Google Maps API is not loaded.');
     return;
   }
 
-  map = new Map(document.getElementById("map"), {
+  map = new google.maps.Map(document.getElementById("map"), {
     center: { 
       lat: -33.447487, 
       lng: -70.673676 
