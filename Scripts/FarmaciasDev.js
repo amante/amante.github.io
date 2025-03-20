@@ -91,6 +91,11 @@ function renderMarker(farmas, i, farmasMarker) {
     origin: new google.maps.Point(0, 0),
   };
 
+  const OtrosIcon = {
+    scaledSize: new google.maps.Size(35, 35),
+    origin: new google.maps.Point(0, 0),
+  };
+
   const latLng = new google.maps.LatLng(farmas[i].Latitude, farmas[i].Longitude);
 
   var newMarker = new google.maps.Marker({
@@ -98,7 +103,7 @@ function renderMarker(farmas, i, farmasMarker) {
     title: farmas[i].Nombre,
     stock: farmas[i].Stock,
     map: map,
-    icon: farmas[i].Nombre === 'CRUZ VERDE' ? CruzVerdeIcon : farmas[i].Nombre === 'GALENICA' ? GalenicaIcon : farmas[i].Nombre === 'SALCOBRAND' ? SalcoIcon : AhumadaIcon,
+    icon: farmas[i].Nombre === 'CRUZ VERDE' ? CruzVerdeIcon : farmas[i].Nombre === 'GALENICA' ? GalenicaIcon : farmas[i].Nombre === 'SALCOBRAND' ? SalcoIcon : farmas[i].Nombre === "AHUMADA" ? AhumadaIcon : OtrosIcon
   });
 
   var url = 'https://www.google.com/maps/place/' + newMarker.position.lat() + ',' + newMarker.position.lng();
