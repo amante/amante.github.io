@@ -57,7 +57,7 @@ const farmasChile = function(results) {
        if (farmasMarker[i].stock === stockBoolean){
         console.log(farmasMarker[i].stock + "se debe mostrar");
        } else {
-        console.log(farmasMarker[i],stock + "este no se muestra");
+        console.log(farmasMarker[i].stock + "este no se muestra"); //login iif stock its yes or no
        } 
         
         //var actualStock = x;
