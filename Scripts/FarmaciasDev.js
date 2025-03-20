@@ -41,8 +41,6 @@ function FilterMarkerStock()
   
     clearMarkers(); 
     for (let i = 0; i < markers.length; i++)
-      console.log(markers.length)
-      console.log(markers[i]);
       {
         for (let j = 0; j < markers[i].length; j++)
           {var x = markers[i][j];}
