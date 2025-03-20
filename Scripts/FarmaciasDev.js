@@ -4,6 +4,7 @@ let infoBoxes = [];
 let answer;
 let AfilterMarker = [];
 let Amarkers = [];
+var farmasMarker = [];
 
   function initMap() {
   if (typeof google === 'undefined') {
@@ -34,7 +35,6 @@ setupFarmacias = () => {
 }
 
 const farmasChile = function(results) {
-  var farmasMarker = [];
   for (let i = 0; i < results.farmacias.length; i++) {
       renderMarker(results.farmacias, i, farmasMarker);
     }
@@ -49,8 +49,10 @@ const farmasChile = function(results) {
 
   function FilterMarkerStock(answer)
   {
-    var stockBoolean = answer;
-    clearMarkers(); 
+    console.log(farmasMarker);
+    /*var stockBoolean = answer;
+    clearMarkers();
+
     for (let i = 0; i < results.farmacias.length; i++)
       {
         for (let j = 0; j < results.farmacias[i].length; j++)
@@ -60,7 +62,7 @@ const farmasChile = function(results) {
         if ( actualStock === stockBoolean)
           {AfilterMarker.push(results.farmacias[i]);}
     }
-    renderMarker(AfilterMarker);
+    renderMarker(AfilterMarker);*/
   } 
 
 function renderMarker(farmas, i, farmasMarker) {
