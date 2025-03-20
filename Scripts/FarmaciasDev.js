@@ -1,9 +1,6 @@
 let map;
 let markers = [];
 let infoBoxes = [];
-let answer;
-let AfilterMarker = [];
-let Amarkers = [];
 
   function initMap() {
   if (typeof google === 'undefined') {
@@ -34,9 +31,14 @@ function clearMarkers() {
   markers = [];
 }
 
-function FilterMarkerStock(answer)
+function FilterMarkerStock()
   {
-    var stockBoolean = answer;
+    const select = document.getElementById("selector").value;
+    if (select === "SI")
+      {answer = "SI";}
+    else
+      {answer = "NO";}  
+  
     clearMarkers(); 
     for (let i = 0; i < markers.length; i++)
       console.log(markers.length)
@@ -95,7 +97,7 @@ function renderMarker(farmas, i, farmasMarker) {
 
   const latLng = new google.maps.LatLng(farmas[i].Latitude, farmas[i].Longitude);
 
-  var newMarker = new google.maps.Marker({
+  const marker = new google.maps.Marker({
     position: latLng,
     title: farmas[i].Nombre,
     stock: farmas[i].Stock,
@@ -103,12 +105,12 @@ function renderMarker(farmas, i, farmasMarker) {
     icon: farmas[i].Nombre === 'CRUZ VERDE' ? CruzVerdeIcon : farmas[i].Nombre === 'GALENICA' ? GalenicaIcon : farmas[i].Nombre === 'SALCOBRAND' ? SalcoIcon : AhumadaIcon,
   });
 
-  var url = 'https://www.google.com/maps/place/' + newMarker.position.lat() + ',' + newMarker.position.lng();
-  newMarker.set('url', url);
+  var url = 'https://www.google.com/maps/place/' + marker.position.lat() + ',' + marker.position.lng();
+  marker.set('url', url);
   
-  farmasMarker.push(newMarker);
+  farmasMarker.push(marker);
 
-  showInfoWindow(newMarker, farmas[i]);
+  showInfoWindow(marker, farmas[i]);
 
   function showInfoWindow(marker, farmas) {
     
@@ -129,7 +131,7 @@ function renderMarker(farmas, i, farmasMarker) {
     marker.addListener("click", () => {
       closeInfoBoxes();
       infoBox.open(map, marker);
-      map.setZoom(14);
+      map.setZoom(12);
       map.setCenter(marker.getPosition());  
     });
   }
