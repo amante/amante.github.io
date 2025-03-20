@@ -1,4 +1,4 @@
-import farmacias from './farmas.js';
+import farmacias from '.Scripts/farmas.js';
 
 let map;
 let markers = [];
@@ -43,5 +43,5 @@ function actualizarMapa() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    initMap;
+    initMap();
 });
