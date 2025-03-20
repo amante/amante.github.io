@@ -45,8 +45,7 @@ function FilterMarkerStock() {
   const select = document.getElementById("selector").value;
   clearMarkers(); // Clear existing markers
   
-  const filteredPharmacies = farmasChile.filter(f => f.Stock === (select === "SI" ? true : false));
-  filteredPharmacies.forEach(f => renderMarker(farmas, i, farmasMarker));
+ 
 } 
 
 setupFarmacias = () => {
@@ -60,6 +59,7 @@ const farmasChile = function(results) {
   for (let i = 0; i < results.farmacias.length; i++) {
       renderMarker(results.farmacias, i, farmasMarker);
     }
+    console.log(farmasMarker);
   };
 
 function renderMarker(farmas, i, farmasMarker) {
