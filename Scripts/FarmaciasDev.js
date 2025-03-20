@@ -38,14 +38,14 @@ function FilterMarkerStock(answer)
   {
     var stockBoolean = answer;
     clearMarkers(); 
-    for (let i = 0; i < results.farmacias.length; i++)
+    for (let i = 0; i < farmasChile.length; i++)
       {
-        for (let j = 0; j < results.farmacias[i].length; j++)
-          {var x = results.farmacias[i][j];}
+        for (let j = 0; j < farmasChile[i].length; j++)
+          {var x = farmasChile[i][j];}
         
         var actualStock = x;
         if ( actualStock === stockBoolean)
-          {AfilterMarker.push(results.farmacias[i]);}
+          {AfilterMarker.push(farmasChile[i]);}
     }
     renderMarker(AfilterMarker);
   } 
