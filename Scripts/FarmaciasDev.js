@@ -36,22 +36,17 @@ function FilterMarkerStock()
     const select = document.getElementById("selector").value;
   if (select === "SI"){
     clearMarkers(); 
-    for (let i = 0; i < farmasMarker.length; i++)
-      {
-        for (let j = 0; j < farmasMarker[i].length; j++)
-          {var x = farmasMarker[i][j];}
-        
-        var actualStock = x;
-        if ( actualStock === stockBoolean)
-          {AfilterMarker.push(farmasMarker[i]);}
+    farmasMarker.forEach((marker) => {
+      if (marker.stock === "SI") {
+        marker.setMap(map);
+        markers.push(marker);
         console.log("Hay stock");
-        console.log(AfilterMarker);
-      }
-    }
-    else {
+
+      } else {
       console.log("No hay stock");
     }
-  } 
+  }
+  ); 
 
 setupFarmacias = () => {
   const script = document.createElement("script");
