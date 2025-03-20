@@ -49,8 +49,8 @@ async function initMap() {
 }
 
 
-function setMarkers(map, Array){
-
+function setMarkers(map, Array)
+{
   let nombre;
   let direccion;
   let region;
@@ -86,7 +86,7 @@ function setMarkers(map, Array){
       stock: stock,
       icon: Pharmacies[i][0] === "CRUZ VERDE" ? CruzVerdeIcon : GalenicaIcon  
     });
-
+    
     for (let j = 0; j < Amarkers[i].length; j++) {
       switch (j) {
         case 0: nombre = Amarkers[i][j];
@@ -133,22 +133,20 @@ function setMarkers(map, Array){
           });    
         }
       }
-    
     }
 
-    function FilterMarkerStock(answer){
+    function FilterMarkerStock(answer)
+    {
       var stockBoolean = answer;
-      for (let i = 0; i < Pharmacies.length; i++) {
-        for (let j = 0; j < Pharmacies[i].length; j++){
-          var x = Pharmacies[i][j];
-        }
-        var actualStock = x;
+      for (let i = 0; i < Pharmacies.length; i++)
+        {
+          for (let j = 0; j < Pharmacies[i].length; j++)
+            {var x = Pharmacies[i][j];}
           
-        if ( actualStock === stockBoolean)
-            {
-              AfilterMarker.push(Pharmacies[i]);
-            }
-          }
+          var actualStock = x;
+          if ( actualStock === stockBoolean)
+            {AfilterMarker.push(Pharmacies[i]);}
+      }
           setMarkers(map, AfilterMarker);
-        }     
+    }     
 window.initMap = initMap;
