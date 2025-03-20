@@ -28,11 +28,12 @@ setupFarmacias();
 }
 
 function clearMarkers() {
-  for (let i = 0; i < farmasMarker.length; i++) {
-    farmasMarker[i].setMap(null);
-  }
-  farmasMarker = [];
+  markers.forEach((marker) => {
+      marker.setMap(null);
+  });
+  markers = [];
 }
+
 function FilterMarkerStock(answer)
   {
     var stockBoolean = answer;
