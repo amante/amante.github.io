@@ -6,9 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmacias con Stock</title>
-    <script type=module defer src="./Scripts/nuevaFarma.js"></script> <!-- Conecta con tu archivo JavaScript -->
-    <script async  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&loading=async&callback=initMap&libraries=places&v=weekly">
-    </script> 
+    <script type=module defer src="./Scripts/nuevaFarma.js"></script> <!-- Conecta con tu archivo JavaScript --> 
 </head>
 <body>
     <select id="selector" onchange="actualizarMapa()">
@@ -16,5 +14,7 @@
         <option value="SI">Mostrar con Stock</option>
     </select>
     <div id="map" style="height: 500px; width: 100%;"></div>
+    <script async  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhJl6rw5TMLfX1yzETqJ2jzRT3qyiC5LQ&loading=async&callback=initMap&libraries=places&v=weekly">
+    </script>
 </body>
 </html>
