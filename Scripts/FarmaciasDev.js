@@ -44,6 +44,8 @@ function FilterMarkerStock()
         var actualStock = x;
         if ( actualStock === stockBoolean)
           {AfilterMarker.push(markers[i]);}
+        console.log("Hay stock");
+        console.log(AfilterMarker);
       }
     }
     else {
