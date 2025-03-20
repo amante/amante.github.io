@@ -45,7 +45,7 @@ function FilterMarkerStock() {
   const select = document.getElementById("selector").value;
   clearMarkers();
 
-console.log(farmasChile);
+console.log(results);
  
 } 
 
@@ -60,8 +60,6 @@ const farmasChile = function(results) {
   for (let i = 0; i < results.farmacias.length; i++) {
       renderMarker(results.farmacias, i, farmasMarker);
     }
-    console.log(results);
-    console.log(farmasMarker);
   };
 
 function renderMarker(farmas, i, farmasMarker) {
