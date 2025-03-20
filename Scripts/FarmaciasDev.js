@@ -35,9 +35,13 @@ function FilterMarkerStock()
   {
     const select = document.getElementById("selector").value;
     if (select === "SI")
-      console.log(markers);
+    {console.log(markers);
+      console.log(farmasMarker);
+      console.log(infoBoxes);
+      console.log(farmasMarker);
+    }
     else
-      {console.log("No hay stock");}  
+    {console.log("No hay stock");}  
   
     clearMarkers(); 
     for (let i = 0; i < markers.length; i++)
