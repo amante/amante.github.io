@@ -45,24 +45,15 @@ function FilterMarkerStock()
   {
     const select = document.getElementById("selector").value;
     if (select === "SI")
-    {console.log(markers);
+    {
       console.log(infoBoxes);
+      console.log(farmasChile);
     }
     else
-    {console.log("No hay stock");}  
+    {
+      console.log("No hay stock");
+    }  
   
-    clearMarkers(); 
-    for (let i = 0; i < markers.length; i++)
-      console.log(markers.length)
-      console.log(markers[i]);
-      {
-        for (let j = 0; j < markers[i].length; j++)
-          {var x = markers[i][j];}
-        
-        var actualStock = x;
-        if ( actualStock === stockBoolean)
-          {AfilterMarker.push(markers[i]);}
-    }
     renderMarker(AfilterMarker);
   } 
 
