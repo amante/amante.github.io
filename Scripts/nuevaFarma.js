@@ -1,4 +1,4 @@
-import farmacias from './Scripts/farmas.js';
+import farmacias from './farmas.js';
 
 let map; // Mapa de Google
 let markers = []; // Marcadores en el mapa
