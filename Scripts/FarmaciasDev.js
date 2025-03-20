@@ -27,6 +27,12 @@ let Amarkers = [];
 setupFarmacias();
 }
 
+function clearMarkers() {
+  for (let i = 0; i < farmasMarker.length; i++) {
+    farmasMarker[i].setMap(null);
+  }
+  farmasMarker = [];
+}
 function FilterMarkerStock(answer)
   {
     var stockBoolean = answer;
@@ -131,12 +137,5 @@ function renderMarker(farmas, i, farmasMarker) {
       infoBox.close();
     });
   } 
-
-  function clearMarkers() {
-    for (let i = 0; i < farmasMarker.length; i++) {
-      farmasMarker[i].setMap(null);
-    }
-    farmasMarker = [];
-  }
 }
 window.initMap = initMap;
