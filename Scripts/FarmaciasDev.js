@@ -53,8 +53,6 @@ function FilterMarkerStock()
     {
       console.log("No hay stock");
     }  
-  
-    renderMarker(AfilterMarker);
   } 
 
 setupFarmacias = () => {
@@ -112,6 +110,7 @@ function renderMarker(farmas, i, farmasMarker) {
   marker.set('url', url);
   
   farmasMarker.push(marker);
+console.log(farmasMarker)
 
   showInfoWindow(marker, farmas[i]);
 
