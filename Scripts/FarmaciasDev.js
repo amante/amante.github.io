@@ -39,6 +39,8 @@ function FilterMarkerStock(answer)
     var stockBoolean = answer;
     clearMarkers(); 
     for (let i = 0; i < farmasChile.length; i++)
+      console.log(farmasChile.length)
+      console.log(farmasChile[i]);
       {
         for (let j = 0; j < farmasChile[i].length; j++)
           {var x = farmasChile[i][j];}
