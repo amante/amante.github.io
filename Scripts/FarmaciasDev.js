@@ -34,19 +34,25 @@ function clearMarkers() {
 function FilterMarkerStock()
   {
     const select = document.getElementById("selector").value;
-  if (select === "SI"){
+    if (select === "SI")
+      console.log(markers);
+    else
+      {console.log("No hay stock");}  
+  
     clearMarkers(); 
-    farmasMarker.forEach((marker) => {
-      if (marker.stock === "SI") {
-        marker.setMap(map);
-        markers.push(marker);
-        console.log("Hay stock");
-
-      } else {
-      console.log("No hay stock");
+    for (let i = 0; i < markers.length; i++)
+      console.log(markers.length)
+      console.log(markers[i]);
+      {
+        for (let j = 0; j < markers[i].length; j++)
+          {var x = markers[i][j];}
+        
+        var actualStock = x;
+        if ( actualStock === stockBoolean)
+          {AfilterMarker.push(markers[i]);}
     }
-  }
-  ); 
+    renderMarker(AfilterMarker);
+  } 
 
 setupFarmacias = () => {
   const script = document.createElement("script");
@@ -91,7 +97,7 @@ function renderMarker(farmas, i, farmasMarker) {
 
   const latLng = new google.maps.LatLng(farmas[i].Latitude, farmas[i].Longitude);
 
-  const marker = new google.maps.Marker({
+  var marker = new google.maps.Marker({
     position: latLng,
     title: farmas[i].Nombre,
     stock: farmas[i].Stock,
@@ -125,7 +131,7 @@ function renderMarker(farmas, i, farmasMarker) {
     marker.addListener("click", () => {
       closeInfoBoxes();
       infoBox.open(map, marker);
-      map.setZoom(12);
+      map.setZoom(14);
       map.setCenter(marker.getPosition());  
     });
   }
