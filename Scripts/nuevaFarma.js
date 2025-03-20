@@ -12,6 +12,16 @@ function initMap() {
     // Mostrar todos los marcadores al inicio
     mostrarFarmacias(farmacias);
 }
+function actualizarMapa() {
+    const select = document.getElementById("selector").value;
+
+    if (select === "todas") {
+        mostrarFarmacias(farmacias); // Muestra todas las farmacias
+    } else if (select === "conStock") {
+        const farmaciasConStock = farmacias.filter(farmacia => farmacia.Stock === "SI");
+        mostrarFarmacias(farmaciasConStock); // Solo muestra las farmacias con stock
+    }
+}
 
 function mostrarFarmacias(listaFarmacias) {
     // Limpia los marcadores anteriores
@@ -29,17 +39,6 @@ function mostrarFarmacias(listaFarmacias) {
         // Guardamos el marcador
         markers.push({ marker: marker, stock: farmacia.stock });
     });
-}
-
-function actualizarMapa() {
-    const select = document.getElementById("selector").value;
-
-    if (select === "todas") {
-        mostrarFarmacias(farmacias); // Muestra todas las farmacias
-    } else if (select === "conStock") {
-        const farmaciasConStock = farmacias.filter(farmacia => farmacia.Stock === "SI");
-        mostrarFarmacias(farmaciasConStock); // Solo muestra las farmacias con stock
-    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
