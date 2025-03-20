@@ -22,8 +22,7 @@ let Amarkers = [];
     closeInfoBoxes();
 });
 
-setupFarmas();
-  setMarkers(map, Pharmacies);
+setupFarmacias();
 }
 
 setupFarmacias = () => {
