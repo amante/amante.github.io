@@ -6,6 +6,12 @@ let AfilterMarker = [];
 let Amarkers = [];
 var farmasMarker = [];
 
+function closeInfoBoxes() {
+  infoBoxes.forEach((infoBox) => {
+    infoBox.close();
+  });
+} 
+
   function initMap() {
   if (typeof google === 'undefined') {
     console.error('Google Maps API is not loaded.');
@@ -118,11 +124,6 @@ function renderMarker(farmas, i, farmasMarker) {
 
   showInfoWindow(newMarker, farmas[i]);
 
-  function closeInfoBoxes() {
-    infoBoxes.forEach((infoBox) => {
-      infoBox.close();
-    });
-  } 
 
   function showInfoWindow(marker, farmas) {
     
