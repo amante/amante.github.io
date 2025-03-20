@@ -5973,4 +5973,4 @@ farmasChile({
 {"Nombre":	FARMACIA CHBS	,"Direccion":	San Martín 661	,"Region":	BIOBIO	,"Comuna":	CONCEPCION	,"Latitude":	-36,8285097	,"Longitude":	-73,0492271	,"Stock":	"SI"},
 {"Nombre":	FARMACIA BIOVIDA	,"Direccion":	Lincoyán 370	,"Region":	BIOBIO	,"Comuna":	CONCEPCION	,"Latitude":	-36,829155	,"Longitude":	-73,0526337	,"Stock":	"NO"},
 {"Nombre":	DEL "DR. SIMI"	,"Direccion":	Avenida San Pablo 2303, LOCAL 1	,"Region":	METROPOLITANA	,"Comuna":	SANTIAGO	,"Latitude":	-33,434814	,"Longitude":	-70,6691144	,"Stock":	"SI"},
-{"Nombre":	"CRUZ VERDE"	,"Direccion":	Ruta A 16 3550	,"Region":	TARAPACA	,"Comuna":	ALTO HOSPICIO	,"Latitude":	-20,2585161	,"Longitude":	-70,0726418	,"Stock":	"SI"
+{"Nombre":	"CRUZ VERDE"	,"Direccion":	Ruta A 16 3550	,"Region":	TARAPACA	,"Comuna":	ALTO HOSPICIO	,"Latitude":	-20,2585161	,"Longitude":	-70,0726418	,"Stock":	"SI"*/
