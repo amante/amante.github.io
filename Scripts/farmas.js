@@ -243,13 +243,67 @@ farmasChile({
             "Longitude":	-72.95697665,
             "Stock":	"NO"
         },{
-                "Nombre":	"FARMACIA CERRADA HOSPITAL EDUARDO SCHUTZ SCHROEDER",
-                "Direccion":	"LOS AROMOS 65",	
-                "Region":	"LOS LAGOS"	,
-                "Comuna":	"PUERTO MONTT",
-                "Latitude":	-41.44688049,
-                    "Longitude":	-72.95693373,
-                    "Stock":"NO"
+            "Nombre":	"FARMACIA CERRADA HOSPITAL EDUARDO SCHUTZ SCHROEDER",
+            "Direccion":	"LOS AROMOS 65",	
+            "Region":	"LOS LAGOS"	,
+            "Comuna":	"PUERTO MONTT",
+            "Latitude":	-41.44688049,
+                "Longitude":	-72.95693373,
+                 "Stock":"NO"
+        },
+            {
+                "Nombre":	"SALCOBRAND",
+                "Direccion":"CORDOVEZ 601 - 607",
+                "Region":	"COQUIMBO"	,
+                "Comuna":	"LA SERENA"	,
+                "Latitude":-29.9031511	,
+                "Longitude":	-71.2484874,
+                "Stock":"NO"
+            } ,
+            
+            {"Nombre":	"SALCOBRAND",	
+            "Direccion":	"VICUÑA MACKENNA 1802",
+            "Region":	"COQUIMBO"	,
+            "Comuna":	"OVALLE"	,
+            "Latitude":	-30.6052776	,
+            "Longitude":	-71.2072376	,
+            "Stock":	"NO"}
+           
+        ,{
+            "Nombre":	"CRUZ VERDE",	
+            "Direccion":	"ALDUNATE 1310-1312",
+            	"Region":	"COQUIMBO",
+                "Comuna":	"COQUIMBO",
+                "Latitude":	-29.9557066,
+                "Longitude":-71.3389743,
+                "Stock":	"SI"
+        },
+        {
+            "Nombre":"SANTO REMEDIO",
+            "Direccion":"INDEPENDENCIA 41",
+            "Region":"COQUIMBO",
+            "Comuna":"ILLAPEL",
+            "Latitude":-31.6323167,
+            "Longitude":-71.1689148,
+            "Stock":"SI"
+        },
+        {
+            "Nombre":	"SAN ALFONSO",	
+            "Direccion":	"ANDRES BELLO 339",	
+            "Region":"COQUIMBO",
+            "Comuna":	"MONTE PATRIA",
+            "Latitude":	-30.76850063,
+            "Longitude":-70.94136016,
+            "Stock":	"SI"
+        },
+        {
+            "Nombre":	"CRUZ VERDE",	
+            "Direccion":"VICUÑA MACKENNA 184",
+            "Region":	"COQUIMBO"	,
+            "Comuna":	"OVALLE",
+            "Latitude":	-30.6052776,
+            "Longitude":-71.2072376,
+            "Stock":"NO"
                 }]
 });
 
@@ -2107,12 +2161,6 @@ farmasChile({
 {"Nombre":	"CRUZ VERDE"	"Direccion":	AVDA. EL SAUCE 981, LOCAL 105, SINDEMPART	"Region":	COQUIMBO	,"Comuna":	COQUIMBO	,"Latitude":	-29,98737	,"Longitude":	-71,34243	,"Stock":	"SI"}
 {"Nombre":	FARMACIA "AHUMADA"	"Direccion":	CARRETERA EL COBRE N°190	"Region":	OHIGGINS	,"Comuna":	RANCAGUA	,"Latitude":	-34,18106599	,"Longitude":	-70,73014684	,"Stock":	"NO"}
 {"Nombre":	"AHUMADA"	"Direccion":	BALMACEDA 2154	"Region":	COQUIMBO	,"Comuna":	LA SERENA	,"Latitude":	-29,92142938	,"Longitude":	-71,25498984	,"Stock":	"SI"}
-{"Nombre":	"SALCOBRAND"	"Direccion":	CORDOVEZ 601 - 607	"Region":	COQUIMBO	,"Comuna":	LA SERENA	,"Latitude":	-29,9031511	,"Longitude":	-71,2484874	,"Stock":	"NO"}
-{"Nombre":	"SALCOBRAND"	"Direccion":	VICUÑA MACKENNA 180	"Region":	COQUIMBO	,"Comuna":	OVALLE	,"Latitude":	-30,6052776	,"Longitude":	-71,2072376	,"Stock":	"NO"}
-{"Nombre":	"CRUZ VERDE"	"Direccion":	ALDUNATE 1310-1312	"Region":	COQUIMBO	,"Comuna":	COQUIMBO	,"Latitude":	-29,9557066	,"Longitude":	-71,3389743	,"Stock":	"SI"}
-{"Nombre":	SANTO REMEDIO	"Direccion":	INDEPENDENCIA 41	"Region":	COQUIMBO	,"Comuna":	ILLAPEL	,"Latitude":	-31,6323167	,"Longitude":	-71,1689148	,"Stock":	"SI"}
-{"Nombre":	SAN ALFONSO	"Direccion":	ANDRES BELLO 339	"Region":	COQUIMBO	,"Comuna":	MONTE PATRIA	,"Latitude":	-30,76850063	,"Longitude":	-70,94136016	,"Stock":	"SI"}
-{"Nombre":	"CRUZ VERDE"	"Direccion":	VICUÑA MACKENNA 184	"Region":	COQUIMBO	,"Comuna":	OVALLE	,"Latitude":	-30,6052776	,"Longitude":	-71,2072376	,"Stock":	"NO"}
 {"Nombre":	ESBAL	"Direccion":	LAS ORQUIDEAS 4369, LOCAL 19, VILLA LA FLORIDA	"Region":	COQUIMBO	,"Comuna":	LA SERENA	,"Latitude":	-29,91576275	,"Longitude":	-71,21378148	,"Stock":	"SI"}
 {"Nombre":	"CRUZ VERDE"	"Direccion":	NICARAGUA 1571, LAS COMPAÑIAS	"Region":	COQUIMBO	,"Comuna":	LA SERENA	,"Latitude":	-29,8868057	,"Longitude":	-71,2427822	,"Stock":	"NO"}
 {"Nombre":	"CRUZ VERDE"	"Direccion":	AVDA. EL LIBERTADOR 1401, LOCAL 1618, CENTRO COMERCIAL SISA NORTE, LAS COMPAÑIAS	"Region":	COQUIMBO	,"Comuna":	LA SERENA	,"Latitude":	-29,88825697	,"Longitude":	-71,24346629	,"Stock":	"NO"}
