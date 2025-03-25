@@ -11,21 +11,17 @@ function ShowCampaign(){
   var HeatMapData = [
 
     {
-      "Latitude": -32.8793428949969,
-      "Longitude": -71.2467871500868,
-      "weight": "2"
+      location: new google.maps.LatLng(-32.8793428949969,-71.2467871500868),
+      weight: 2
   }, {
-      "Latitude": -32.788066282624,
-      "Longitude": -71.1897310126255,
-      "weight": "3"
+      location: new google.maps.LatLng(-32.788066282624,-71.1897310126255),
+      weight: 3
   }, {
-      "Latitude": -32.9849921792696,
-      "Longitude": -71.2757177058683,
-      "weight": "3"
+    location: new google.maps.LatLng(-32.9849921792696,-71.2757177058683),
+      weight: 3
   }, {
-      "Latitude": -33.0025007197382,
-      "Longitude": -71.2654977848501,
-      "weight": "3"
+    location: new google.maps.LatLng(-33.0025007197382,-71.2654977848501),
+      weight: 3
   }, {
       "Latitude": -32.878335491624,
       "Longitude": -71.246141889165,
