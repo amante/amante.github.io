@@ -6,6 +6,50 @@ let AfilterMarker = [];
 let Amarkers = [];
 var farmasMarker = [];
 
+function ShowCampaign(){
+
+  var HeatMapData = [
+
+    {
+      "Latitude": -32.8793428949969,
+      "Longitude": -71.2467871500868,
+      "weight": "2"
+  }, {
+      "Latitude": -32.788066282624,
+      "Longitude": -71.1897310126255,
+      "weight": "3"
+  }, {
+      "Latitude": -32.9849921792696,
+      "Longitude": -71.2757177058683,
+      "weight": "3"
+  }, {
+      "Latitude": -33.0025007197382,
+      "Longitude": -71.2654977848501,
+      "weight": "3"
+  }, {
+      "Latitude": -32.878335491624,
+      "Longitude": -71.246141889165,
+      "weight": "3"
+  }, {
+      "Latitude": -32.9853313679932,
+      "Longitude": -71.2759083062112,
+      "weight": "3"
+  }, {
+    "Latitude": -33.0021934734243,
+    "Longitude": -71.2680155185573,
+    "weight": "3"
+  }, {
+    "Latitude": -33.0480884691307,
+    "Longitude": -71.4429118882056,
+    "weight": "3"}
+  ];
+
+  var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: HeatMapData
+  })
+  heatmap.setMap(map);
+}
+
 function closeInfoBoxes() {
   infoBoxes.forEach((infoBox) => {
     infoBox.close();
@@ -145,50 +189,6 @@ function renderMarker(farmas, i, farmasMarker) {
       map.setZoom(10);
       map.setCenter(marker.getPosition());  
     });
-  }
- 
-  function ShowCampaign(){
-
-    var HeatMapData = [
-
-      {
-        "Latitude": -32.8793428949969,
-        "Longitude": -71.2467871500868,
-        "weight": "2"
-    }, {
-        "Latitude": -32.788066282624,
-        "Longitude": -71.1897310126255,
-        "weight": "3"
-    }, {
-        "Latitude": -32.9849921792696,
-        "Longitude": -71.2757177058683,
-        "weight": "3"
-    }, {
-        "Latitude": -33.0025007197382,
-        "Longitude": -71.2654977848501,
-        "weight": "3"
-    }, {
-        "Latitude": -32.878335491624,
-        "Longitude": -71.246141889165,
-        "weight": "3"
-    }, {
-        "Latitude": -32.9853313679932,
-        "Longitude": -71.2759083062112,
-        "weight": "3"
-    }, {
-      "Latitude": -33.0021934734243,
-      "Longitude": -71.2680155185573,
-      "weight": "3"
-    }, {
-      "Latitude": -33.0480884691307,
-      "Longitude": -71.4429118882056,
-      "weight": "3"}
-    ];
-
-    var heatmap = new google.maps.visualization.HeatmapLayer({
-      data: HeatMapData
-    })
-    heatmap.setMap(map);
-  }
+  } 
 }
 window.initMap = initMap;
