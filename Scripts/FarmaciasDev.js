@@ -12,28 +12,28 @@ function ShowCampaign(){
 
     {
       location: new google.maps.LatLng(-32.8793428949969,-71.2467871500868),
-      weight: 2
+      weight: 10
   }, {
       location: new google.maps.LatLng(-32.788066282624,-71.1897310126255),
-      weight: 3
+      weight: 20
   }, {
     location: new google.maps.LatLng(-32.9849921792696,-71.2757177058683),
-      weight: 3
+      weight: 30
   }, {
     location: new google.maps.LatLng(-33.0025007197382,-71.2654977848501),
-      weight: 3
+      weight: 40
   }, {
     location: new google.maps.LatLng(-32.878335491624,-71.246141889165),
-      weight: 3
+      weight: 50
   }, {
     location: new google.maps.LatLng(-32.9853313679932,-71.2759083062112),
-      weight: 3
+      weight: 60
   }, {
     location: new google.maps.LatLng(-33.0021934734243,-71.2680155185573),
-      weight: 3
+      weight: 70
   }, {
     location: new google.maps.LatLng(-33.0480884691307,-71.4429118882056),
-      weight: 3
+      weight: 80
     }
   ];
 
