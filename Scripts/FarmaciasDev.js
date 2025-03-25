@@ -23,21 +23,18 @@ function ShowCampaign(){
     location: new google.maps.LatLng(-33.0025007197382,-71.2654977848501),
       weight: 3
   }, {
-      "Latitude": -32.878335491624,
-      "Longitude": -71.246141889165,
-      "weight": "3"
+    location: new google.maps.LatLng(-32.878335491624,-71.246141889165),
+      weight: 3
   }, {
-      "Latitude": -32.9853313679932,
-      "Longitude": -71.2759083062112,
-      "weight": "3"
+    location: new google.maps.LatLng(-32.9853313679932,-71.2759083062112),
+      weight: 3
   }, {
-    "Latitude": -33.0021934734243,
-    "Longitude": -71.2680155185573,
-    "weight": "3"
+    location: new google.maps.LatLng(-33.0021934734243,-71.2680155185573),
+      weight: 3
   }, {
-    "Latitude": -33.0480884691307,
-    "Longitude": -71.4429118882056,
-    "weight": "3"}
+    location: new google.maps.LatLng(-33.0480884691307,-71.4429118882056),
+      weight: 3
+    }
   ];
 
   var heatmap = new google.maps.visualization.HeatmapLayer({
