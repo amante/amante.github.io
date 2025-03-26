@@ -11,43 +11,43 @@ function ShowCampaign(){
   const CircleMapData = {
     Zona0: {
       center: { lat: -32.8793428949969, lng: -71.2467871500868 },
-      population: 8405837,
+      population: 840583,
     },
     Zona1: {
       center: { lat: -18.478643, lng: -70.3183619 },
-      population: 2714856,
+      population: 271485,
     },
     Zona2: {
       center: { lat: -32.8793428949969, lng: -71.2467871500868 },
-      population: 8405837,
+      population: 840537,
     },
     Zona3: {
       center: { lat: -32.788066282624, lng: -71.2467871500868 },
-      population: 3857799,
+      population: 385799,
     },
     Zona4: {
       center: { lat: -32.9849921792696, lng: -71.2757177058683 }, 
-      population: 1603502,
+      population: 160352,
     },
     Zona5: {
       center: { lat: -33.0025007197382, lng: -71.2654977848501 },
-      population: 2714856,
+      population: 271856,
     },
     Zona6: {
       center: { lat: -23.09989857, lng: -70.44747479 },
-      population: 8405837,
+      population: 840837,
     },
     Zona7: {
       center: { lat: -41.44697699, lng: -72.95697665 },
-      population: 3857799,
+      population: 385799,
     },
     Zona8: {
       center: { lat: -32.9849921792696, lng: -71.2757177058683 },
-      population: 1603502,
+      population: 160352,
     },
     Zona9: {
       center: { lat: -30.598981, lng: -71.1833997 },
-      population: 2714856,
+      population: 271485,
     },
   };
 
@@ -80,7 +80,7 @@ function ShowCampaign(){
     }
   ];*/
   var circleMap = null;
-  
+
   for (const campaign in CircleMapData) {
     // Add the circle for this city to the map.
       circleMap = new google.maps.Circle({
