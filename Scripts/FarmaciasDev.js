@@ -8,10 +8,13 @@ var farmasMarker = [];
 
 function ShowCampaign(){
 
-
   const CircleMapData = {
+    Zona0: {
+      center: { lat: -32.8793428949969, lng: -71.2467871500868 },
+      population: 8405837,
+    },
     Zona1: {
-      center: { lat: -33.0025007197382, lng: -71.2654977848501 },
+      center: { lat: -18.478643, lng: -70.3183619 },
       population: 2714856,
     },
     Zona2: {
@@ -23,8 +26,28 @@ function ShowCampaign(){
       population: 3857799,
     },
     Zona4: {
+      center: { lat: -32.9849921792696, lng: -71.2757177058683 }, 
+      population: 1603502,
+    },
+    Zona5: {
+      center: { lat: -33.0025007197382, lng: -71.2654977848501 },
+      population: 2714856,
+    },
+    Zona6: {
+      center: { lat: -23.09989857, lng: -70.44747479 },
+      population: 8405837,
+    },
+    Zona7: {
+      center: { lat: -41.44697699, lng: -72.95697665 },
+      population: 3857799,
+    },
+    Zona8: {
       center: { lat: -32.9849921792696, lng: -71.2757177058683 },
       population: 1603502,
+    },
+    Zona9: {
+      center: { lat: -30.598981, lng: -71.1833997 },
+      population: 2714856,
     },
   };
 
@@ -56,10 +79,11 @@ function ShowCampaign(){
     population: 700000
     }
   ];*/
-
+  var circleMap = null;
+  
   for (const campaign in CircleMapData) {
     // Add the circle for this city to the map.
-    var circleMap = new google.maps.Circle({
+      circleMap = new google.maps.Circle({
       strokeColor: "#FF0000",
       strokeOpacity: 0.8,
       strokeWeight: 2,
