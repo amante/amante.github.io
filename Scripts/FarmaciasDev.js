@@ -57,7 +57,7 @@ function ShowCampaign(){
     }
   ];*/
 
-  for (const city in CircleMapData) {
+  for (const campaign in CircleMapData) {
     // Add the circle for this city to the map.
     var circleMap = new google.maps.Circle({
       strokeColor: "#FF0000",
@@ -66,8 +66,8 @@ function ShowCampaign(){
       fillColor: "#FF0000",
       fillOpacity: 0.35,
       map,
-      center: CircleMapData[city].center,
-      radius: Math.sqrt(CircleMapData[city].population) * 100,
+      center: CircleMapData[campaign].center,
+      radius: Math.sqrt(CircleMapData[campaign].population),
     });
   }
   circleMap.setMap(map);
