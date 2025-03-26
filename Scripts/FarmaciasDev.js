@@ -79,11 +79,11 @@ function ShowCampaign(){
     population: 700000
     }
   ];*/
-  var circleMap = null;
+
 
   for (const campaign in CircleMapData) {
     // Add the circle for this city to the map.
-      circleMap = new google.maps.Circle({
+      var circleMap = new google.maps.Circle({
       strokeColor: "#FF0000",
       strokeOpacity: 0.8,
       strokeWeight: 2,
