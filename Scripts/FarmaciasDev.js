@@ -8,7 +8,27 @@ var farmasMarker = [];
 
 function ShowCampaign(){
 
-  var HeatMapData = [
+
+  const CircleMapData = {
+    Zona1: {
+      center: { lat: -33.0025007197382, lng: -71.2654977848501 },
+      population: 2714856,
+    },
+    Zona2: {
+      center: { lat: -32.8793428949969, lng: -71.2467871500868 },
+      population: 8405837,
+    },
+    Zona3: {
+      center: { lat: -32.788066282624, lng: -71.2467871500868 },
+      population: 3857799,
+    },
+    Zona4: {
+      center: { lat: -32.9849921792696, lng: -71.2757177058683 },
+      population: 1603502,
+    },
+  };
+
+/*  var CircleMapData = [
 
     {
       location: new google.maps.LatLng(-32.8793428949969,-71.2467871500868),
@@ -18,29 +38,39 @@ function ShowCampaign(){
       weight: 20
   }, {
     location: new google.maps.LatLng(-32.9849921792696,-71.2757177058683),
-      weight: 30
+    population: 500000
   }, {
     location: new google.maps.LatLng(-33.0025007197382,-71.2654977848501),
-      weight: 40
+    population: 550000
   }, {
     location: new google.maps.LatLng(-32.878335491624,-71.246141889165),
-      weight: 50
+    population: 600000
   }, {
     location: new google.maps.LatLng(-32.9853313679932,-71.2759083062112),
-      weight: 60
+    population: 900000
   }, {
     location: new google.maps.LatLng(-33.0021934734243,-71.2680155185573),
-      weight: 70
+    population: 850000
   }, {
     location: new google.maps.LatLng(-33.0480884691307,-71.4429118882056),
-      weight: 80
+    population: 700000
     }
-  ];
+  ];*/
 
-  var heatmap = new google.maps.visualization.HeatmapLayer({
-    data: HeatMapData
-  })
-  heatmap.setMap(map);
+  for (const city in CircleMapData) {
+    // Add the circle for this city to the map.
+    var circleMap = new google.maps.Circle({
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.35,
+      map,
+      center: CircleMapData[city].center,
+      radius: Math.sqrt(CircleMapData[city].population) * 100,
+    });
+  }
+  circleMap.setMap(map);
 }
 
 function closeInfoBoxes() {
