@@ -1,0 +1,224 @@
+      :root {
+        color-scheme: light dark;
+        supported-color-schemes: light dark;
+      }
+      body {
+        margin: 0px !important;
+        padding: 0px !important;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      table {
+        margin: 0px !important;
+        padding: 0px !important;
+        border-collapse: collapse;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      .title {
+        font-size: 32px;  /* Tamaño grande */
+        font-weight: bold; /* Negritas */
+        color: #011C39;
+        padding: 10%;
+      }
+      .titlecentered {
+        font-size: 32px;  /* Tamaño grande */
+        font-weight: bold; /* Negritas */
+        color: #011C39;
+        text-align: left;
+      }
+      .subtitle {
+        font-size: 24px;  
+        color: #011C39;
+      }
+      .subtitlegreen {
+        font-size: 24px;
+        font-weight: bold;  
+        color: #00857C;
+        text-align: left; 
+      }
+      .texto {
+        font-size: 18px;  
+        color: #011C39;
+        padding:  0px;
+        margin: 0px;
+        text-align: left;
+      }
+      .texto-verde {
+        font-size: 19px;  
+        font-weight: bold; /* Negritas */
+        color: #00857C;
+        padding: 0px;
+      }
+      .blue-box {
+          background-color: #6E88C5;  /* Fondo verde */
+          color: white;
+          font-size: 16px;  
+          padding: 0px;
+          margin: 100;
+      }
+      .ii a[href] {
+        color: none !important;
+      }
+      .gt a {
+        color: none !important;
+      }
+      a[href],
+      a,
+      a:link,
+      a:visited,
+      a:active {
+        color: none !important;
+        text-decoration: none !important;
+      }
+      .button {
+        box-sizing: content-box;
+      }
+      .visible-outlook {
+        display: none !important;
+      }
+      @media screen and (max-width: 599px), print and (max-width: 552px) {
+        * {
+          box-sizing: border-box;
+          word-break: break-word;
+          -webkit-text-size-adjust: none;
+          text-size-adjust: none;
+          mso-line-height-rule: exactly;
+        }
+        html,
+        body {
+          width: 100vw;
+        }
+        body {
+          margin: 0px !important;
+          padding: 0px !important;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        span.email-line-break {
+                 display: block;
+                 word-wrap: break-word;
+        }
+        .mobile_padding {
+          padding-left: 25px !important;
+          padding-right: 25px !important;
+        }
+        .wrapper {
+          background-color: #ffffff !important;
+        }
+        .device_width {
+          width: 100% !important;
+          display: table;
+        }
+        .brand-top {
+          padding-top: 30px;
+        }
+        .brand-bottom {
+          padding-bottom: 30px;
+        }
+        .body_copy {
+          font-size: 16px !important;
+          line-height: 22px !important;
+        }
+        .body_copy,
+        .headline,
+        .subhead {
+          padding-bottom: 15px !important;
+        }
+        .mobile_text a {
+          display: inline-block;
+          padding-bottom: 0px !important;
+        }
+        .center {
+          text-align: center !important;
+        }
+        .hidden {
+          display: none !important;
+        }
+        .button {
+          box-sizing: content-box;
+        }
+        .smallText {
+          font-size: 12px !important;
+        }
+        .textSmall {
+          font-size: 12px !important;
+        }
+        .columns .column_20,
+        .columns .column_25,
+        .columns .column_30,
+        .columns .column_33,
+        .columns .column_40,
+        .columns .column_50,
+        .columns .column_60,
+        .columns .column_70,
+        .columns .column_75,
+        .columns .column_80 {
+          width: 100% !important;
+          display: block !important;
+          padding: 0 !important;
+        }
+        .columns_mobile .column_20 {
+          width: 20% !important;
+        }
+        .columns_mobile .column_25 {
+          width: 25% !important;
+        }
+        .columns_mobile .column_30 {
+          width: 30% !important;
+        }
+        .columns_mobile .column_33 {
+          width: 33% !important;
+        }
+        .columns_mobile .column_40 {
+          width: 40% !important;
+        }
+        .columns_mobile .column_50 {
+          width: 50% !important;
+        }
+        .columns_mobile .column_60 {
+          width: 60% !important;
+        }
+        .columns_mobile .column_70 {
+          width: 70% !important;
+        }
+        .columns_mobile .column_75 {
+          width: 75% !important;
+        }
+        .columns_mobile .column_80 {
+          width: 80% !important;
+        }
+        .columns_mobile .column_icon {
+          width: 35% !important;
+        }
+        .columns_mobile .column_icon_text {
+          width: 65% !important;
+        }
+      }
+      *[x-apple-data-detectors],
+      /* iOS */
+      .x-gmail-data-detectors,
+      /* Gmail */
+      .x-gmail-data-detectors * {
+        border-bottom: 0 !important;
+        cursor: default !important;
+        color: inherit !important;
+        text-decoration-line: none !important;
+        font-size: inherit !important;
+        font-family: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+      }
+      .buttonselect {
+        background-color: #6E88C5;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 2px 1px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 200px;
+      }
+      .access {
+        border-radius: 14px;
+      }
