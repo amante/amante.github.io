@@ -4,18 +4,56 @@
   <meta charset="utf-8" />
   <title>Calculadora de probabilidad de yardas (NFL)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Tailwind (CDN) -->
+  <!-- Tailwind (si falla, la app aún funciona sin estilos) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- React 18 + ReactDOM (UMD) -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <!-- Recharts (UMD) -->
-  <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
-  <!-- Babel para transpilar JSX en el navegador -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    /* Fallback mínimo si Tailwind no carga */
+    .border{border:1px solid #e5e7eb}
+    .rounded-2xl{border-radius:1rem}
+    .shadow-sm{box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  </style>
 </head>
 <body class="bg-neutral-50">
   <div id="root"></div>
-  <script type="text/babel" data-presets="react" src="./Scripts/app.jsx"></script>
+
+  <script>
+    (function(){
+      function load(src){
+        return new Promise(function(resolve, reject){
+          var s = document.createElement('script');
+          s.src = src;
+          s.crossOrigin = 'anonymous';
+          s.onload = function(){ resolve(src); };
+          s.onerror = function(){ reject(new Error('No se pudo cargar: ' + src)); };
+          document.head.appendChild(s);
+        });
+      }
+
+      async function boot(){
+        try { await load('https://unpkg.com/react@18/umd/react.production.min.js'); }
+        catch(e){ console.warn(e.message); await load('https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js'); }
+
+        try { await load('https://unpkg.com/react-dom@18/umd/react-dom.production.min.js'); }
+        catch(e){ console.warn(e.message); await load('https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js'); }
+
+        try { await load('https://unpkg.com/recharts/umd/Recharts.min.js'); }
+        catch(e){ console.warn(e.message); await load('https://cdn.jsdelivr.net/npm/recharts/umd/Recharts.min.js'); }
+
+        try { await load('https://unpkg.com/@babel/standalone/babel.min.js'); }
+        catch(e){ console.warn(e.message); await load('https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js'); }
+
+        // Finalmente cargamos tu app JSX (transpilada por Babel standalone)
+        var s = document.createElement('script');
+        s.type = 'text/babel';
+        s.setAttribute('data-presets', 'react');
+        s.src = './Scripts/app.jsx';
+        document.body.appendChild(s);
+      }
+
+      boot();
+    })();
+  </script>
+
+  <noscript>Esta app requiere JavaScript habilitado.</noscript>
 </body>
 </html>
