@@ -1,10 +1,14 @@
 const { useMemo, useState, useEffect } = React;
-const { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } = Recharts;
+
+// Accede a la variable global UMD: window.Recharts (ojo con mayúsculas)
+const RechartsGlobal = (typeof window !== 'undefined') ? window.Recharts : null;
+if (!RechartsGlobal) {
+  throw new Error("Recharts UMD no está disponible. Verifica el <script src=\"https://unpkg.com/recharts/umd/Recharts.min.js\"></script> y que se cargue antes de app.jsx.");
+}
+const { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } = RechartsGlobal;
 
 /** ------------------------------------------------------------------
  *  MOCKS y HOOKS para integrar API real más adelante
- *  - Reemplaza las funciones getPlayerSurfaceAverages y getDefenseAllow
- *    por fetch() a tu API cuando la tengas.
  * ------------------------------------------------------------------ */
 const PLAYERS = [
   { id: "rb_a", name: "RB A", kind: "rushing", avgGrass: 98, avgTurf: 104, minY: 56, maxY: 145 },
@@ -18,26 +22,16 @@ const OPPONENTS = [
   { id: "hard", name: "Defensa dura", allowRushing: 95,  allowReceiving: 220, leagueMeanRushing: 115, leagueMeanReceiving: 230 },
 ];
 
-/** Simula llamada a API para promedios por superficie del jugador */
 async function getPlayerSurfaceAverages(playerId) {
-  // TODO: Reemplazar con tu API real, por ejemplo:
-  // const res = await fetch(`https://tuapi.com/player-surfaces?playerId=${playerId}`);
-  // const data = await res.json();
-  // return { avgGrass: data.avgGrass, avgTurf: data.avgTurf, minY: data.min, maxY: data.max, kind: data.kind };
   const found = PLAYERS.find(p => p.id === playerId);
-  await new Promise(r => setTimeout(r, 200)); // simula red
+  await new Promise(r => setTimeout(r, 50));
   if (!found) throw new Error("Jugador no encontrado");
   return { avgGrass: found.avgGrass, avgTurf: found.avgTurf, minY: found.minY, maxY: found.maxY, kind: found.kind };
 }
 
-/** Simula llamada a API para yardas permitidas por la defensa (rushing/receiving) */
 async function getDefenseAllow(opponentId, kind) {
-  // TODO: Reemplazar con tu API real, por ejemplo:
-  // const res = await fetch(`https://tuapi.com/defense-allow?teamId=${opponentId}&kind=${kind}`);
-  // const d = await res.json();
-  // return { defenseAllow: d.allow, leagueMean: d.leagueMean };
   const o = OPPONENTS.find(x => x.id === opponentId);
-  await new Promise(r => setTimeout(r, 150)); // simula red
+  await new Promise(r => setTimeout(r, 50));
   if (!o) throw new Error("Rival no encontrado");
   const defenseAllow = (kind === "rushing") ? o.allowRushing : o.allowReceiving;
   const leagueMean = (kind === "rushing") ? o.leagueMeanRushing : o.leagueMeanReceiving;
@@ -70,39 +64,32 @@ const formatPct = (x, d=1) => `${(x*100).toFixed(d)}%`;
 
 // ----------------------------- App Component ----------------------------- //
 function App(){
-  // Selección de jugador y rival
   const [playerId, setPlayerId] = useState(PLAYERS[0].id);
   const [opponentId, setOpponentId] = useState(OPPONENTS[0].id);
   const [autoFetch, setAutoFetch] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Tipo de yardas (podemos auto-ajustarlo según jugador)
   const [kind, setKind] = useState(PLAYERS[0].kind); // rushing | receiving
 
-  // Superficie, métricas del jugador y rango (para σ)
   const [surface, setSurface] = useState("grass");
   const [avgGrass, setAvgGrass] = useState(PLAYERS[0].avgGrass);
   const [avgTurf, setAvgTurf] = useState(PLAYERS[0].avgTurf);
   const [minY, setMinY] = useState(PLAYERS[0].minY);
   const [maxY, setMaxY] = useState(PLAYERS[0].maxY);
 
-  // Defensa rival y promedio liga
   const [defenseAllow, setDefenseAllow] = useState(OPPONENTS[0].allowRushing);
   const [leagueMean, setLeagueMean] = useState(OPPONENTS[0].leagueMeanRushing);
   const [elasticity, setElasticity] = useState(0.5);
 
-  // Clima/horario
   const [tempC, setTempC] = useState(20);
   const [hourLocal, setHourLocal] = useState(16);
 
-  // Umbrales y grilla
   const [thresholdsText, setThresholdsText] = useState("50,75,100,125");
   const [gridMin, setGridMin] = useState(25);
   const [gridMax, setGridMax] = useState(175);
   const [gridStep, setGridStep] = useState(5);
 
-  // Hook para autocompletar datos cuando cambie jugador/rival/superficie/tipo
   useEffect(() => {
     if (!autoFetch) return;
     let alive = true;
@@ -114,7 +101,7 @@ function App(){
           getDefenseAllow(opponentId, kind),
         ]);
         if (!alive) return;
-        setKind(p.kind || kind); // si la API define kind para el jugador
+        setKind(p.kind || kind);
         setAvgGrass(p.avgGrass); setAvgTurf(p.avgTurf);
         setMinY(p.minY); setMaxY(p.maxY);
         setDefenseAllow(d.defenseAllow);
@@ -130,13 +117,11 @@ function App(){
   }, [playerId, opponentId, kind, autoFetch]);
 
   function handleRefresh() {
-    // fuerza el efecto aunque autoFetch=false (llamada manual)
     const prev = autoFetch;
     setAutoFetch(true);
     setTimeout(()=> setAutoFetch(prev), 0);
   }
 
-  // Media, desviación y datos derivados
   const muSurface = surface === "grass" ? Number(avgGrass) : Number(avgTurf);
   const adjDefense = useMemo(()=> opponentAdjustment(Number(defenseAllow), Number(leagueMean), Number(elasticity)), [defenseAllow, leagueMean, elasticity]);
   const adjTemp = useMemo(()=> tempAdjustment(Number(tempC), { kind }), [tempC, kind]);
@@ -234,7 +219,7 @@ function App(){
               </div>
             </div>
 
-            {/* Averages (can be overridden by user) */}
+            {/* Averages */}
             <div>
               <label className="text-sm">Yardas promedio en pasto</label>
               <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={avgGrass} onChange={e=>setAvgGrass(Number(e.target.value))} />
@@ -305,7 +290,6 @@ function App(){
           </div>
         </section>
 
-        {/* Columna central: resumen y tabla */}
         <section className="lg:col-span-3 bg-white border rounded-2xl p-5 shadow-sm">
           <h2 className="text-lg font-medium mb-4">Resumen</h2>
           <ul className="space-y-2">
@@ -340,7 +324,6 @@ function App(){
           </div>
         </section>
 
-        {/* Columna derecha: gráfico */}
         <section className="lg:col-span-4 bg-white border rounded-2xl p-5 shadow-sm">
           <h2 className="text-lg font-medium mb-4">Curva de probabilidad P(Y ≥ X)</h2>
           <div className="h-72">
