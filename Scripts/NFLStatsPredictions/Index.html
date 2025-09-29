@@ -1,0 +1,311 @@
+import React, { useMemo, useState } from "react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+
+// ----------------------------- Utils (math) ----------------------------- //
+function clamp(x, lo, hi) {
+  return Math.max(lo, Math.min(hi, x));
+}
+
+// Approximate error function
+function erf(x) {
+  // Abramowitz and Stegun formula 7.1.26
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
+  const sign = x < 0 ? -1 : 1;
+  const t = 1 / (1 + p * Math.abs(x));
+  const y = 1 - (
+    (
+      (((a5 * t + a4) * t + a3) * t + a2) * t + a1
+    ) * t * Math.exp(-x * x)
+  );
+  return sign * y;
+}
+
+function phi(z) {
+  // standard normal CDF
+  return 0.5 * (1 + erf(z / Math.SQRT2));
+}
+
+function probGE(target, mean, sd) {
+  const z = (target - mean) / sd;
+  return 1 - phi(z);
+}
+
+// ----------------------------- Domain model ----------------------------- //
+function opponentAdjustment(defenseAllow, leagueMean = 115, elasticity = 0.5) {
+  const ratio = clamp(defenseAllow / (leagueMean || 1), 0.2, 5.0);
+  return Math.pow(ratio, elasticity);
+}
+
+function tempAdjustment(tempC, { optimal = 18, perDegPct = 0.005, floor = 0.85, cap = 1.05, kind = "rushing" } = {}) {
+  let base = 1 - perDegPct * Math.abs(tempC - optimal);
+  base = clamp(base, floor, cap);
+  if (kind === "rushing" && tempC <= 10) {
+    const coldBoost = 1 + Math.min(0.07, (10 - tempC) * 0.01); // up to +7%
+    base *= coldBoost;
+  }
+  return clamp(base, 0.75, 1.15);
+}
+
+function timeAdjustment(hourLocal) {
+  if (hourLocal <= 11) return 0.99;
+  if (hourLocal >= 20) return 0.98;
+  return 1.0;
+}
+
+function estimateSD(minYards, maxYards) {
+  if (minYards == null || maxYards == null) return 20; // fallback
+  return Math.max(1, (maxYards - minYards) / 4); // empirical rule
+}
+
+function formatPct(x, digits = 1) {
+  return `${(x * 100).toFixed(digits)}%`;
+}
+
+// ----------------------------- Component ----------------------------- //
+export default function YardageProbabilityApp() {
+  // Defaults inspired by our earlier example
+  const [kind, setKind] = useState("rushing"); // rushing | receiving
+  const [surface, setSurface] = useState("grass"); // grass | turf
+  const [avgGrass, setAvgGrass] = useState(98);
+  const [avgTurf, setAvgTurf] = useState(104);
+  const [minY, setMinY] = useState(56);
+  const [maxY, setMaxY] = useState(145);
+
+  const [defenseAllow, setDefenseAllow] = useState(130);
+  const [leagueMean, setLeagueMean] = useState(115);
+  const [elasticity, setElasticity] = useState(0.5);
+
+  const [tempC, setTempC] = useState(20);
+  const [hourLocal, setHourLocal] = useState(16);
+
+  const [thresholdsText, setThresholdsText] = useState("50,75,100,125");
+  const [gridMin, setGridMin] = useState(25);
+  const [gridMax, setGridMax] = useState(175);
+  const [gridStep, setGridStep] = useState(5);
+
+  const muSurface = surface === "grass" ? Number(avgGrass) : Number(avgTurf);
+
+  const adjDefense = useMemo(
+    () => opponentAdjustment(Number(defenseAllow), Number(leagueMean), Number(elasticity)),
+    [defenseAllow, leagueMean, elasticity]
+  );
+  const adjTemp = useMemo(() => tempAdjustment(Number(tempC), { kind }), [tempC, kind]);
+  const adjTime = useMemo(() => timeAdjustment(Number(hourLocal)), [hourLocal]);
+
+  const mu = useMemo(() => muSurface * adjDefense * adjTemp * adjTime, [muSurface, adjDefense, adjTemp, adjTime]);
+  const sd = useMemo(() => estimateSD(Number(minY), Number(maxY)), [minY, maxY]);
+
+  const thresholds = useMemo(() => {
+    const nums = thresholdsText
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .map((s) => Number(s))
+      .filter((x) => !Number.isNaN(x))
+      .sort((a, b) => a - b);
+    return nums.length ? nums : [50, 75, 100, 125];
+  }, [thresholdsText]);
+
+  const tableData = useMemo(() => {
+    return thresholds.map((t) => ({ threshold: t, probability: probGE(t, mu, sd) }));
+  }, [thresholds, mu, sd]);
+
+  const chartData = useMemo(() => {
+    const lo = Number(gridMin);
+    const hi = Number(gridMax);
+    const step = Math.max(1, Number(gridStep));
+    const pts = [];
+    for (let x = lo; x <= hi; x += step) {
+      pts.push({ x, p: probGE(x, mu, sd) });
+    }
+    return pts;
+  }, [gridMin, gridMax, gridStep, mu, sd]);
+
+  const summary = [
+    { label: "Superficie", value: surface === "grass" ? "Pasto" : "Turf" },
+    { label: "Tipo de yardas", value: kind === "rushing" ? "Carrera" : "Recepción" },
+    { label: "μ (media estimada)", value: `${mu.toFixed(2)} yd` },
+    { label: "σ (desvío est.)", value: `${sd.toFixed(2)} yd` },
+    { label: "Ajuste defensa", value: `${adjDefense.toFixed(3)}x` },
+    { label: "Ajuste temperatura", value: `${adjTemp.toFixed(3)}x` },
+    { label: "Ajuste horario", value: `${adjTime.toFixed(3)}x` },
+  ];
+
+  function downloadCSV() {
+    const rows = [["threshold_yards", "prob_>=threshold"]];
+    chartData.forEach((r) => rows.push([r.x, r.p]));
+    const csv = rows.map((r) => r.join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "probabilidades_yardas.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  return (
+    <div className="min-h-screen bg-neutral-50 text-neutral-900">
+      <header className="px-6 py-6 border-b bg-white sticky top-0 z-10">
+        <h1 className="text-2xl md:text-3xl font-semibold">Calculadora de probabilidad de yardas (NFL)</h1>
+        <p className="text-sm text-neutral-500 mt-1">Modela la probabilidad de que un jugador alcance o supere un umbral de yardas, con ajustes por defensa, superficie, temperatura y horario.</p>
+      </header>
+
+      <main className="p-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Inputs */}
+        <section className="lg:col-span-5 bg-white border rounded-2xl p-5 shadow-sm">
+          <h2 className="text-lg font-medium mb-4">Parámetros de entrada</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Kind */}
+            <div className="col-span-1 md:col-span-2">
+              <label className="text-sm font-medium">Tipo de yardas</label>
+              <div className="mt-2 flex gap-3">
+                <button className={`px-3 py-1.5 rounded-xl border ${kind === "rushing" ? "bg-black text-white" : "bg-white"}`} onClick={() => setKind("rushing")}>Carrera</button>
+                <button className={`px-3 py-1.5 rounded-xl border ${kind === "receiving" ? "bg-black text-white" : "bg-white"}`} onClick={() => setKind("receiving")}>Recepción</button>
+              </div>
+            </div>
+
+            {/* Surface */}
+            <div className="col-span-1 md:col-span-2">
+              <label className="text-sm font-medium">Superficie</label>
+              <div className="mt-2 flex gap-3">
+                <button className={`px-3 py-1.5 rounded-xl border ${surface === "grass" ? "bg-black text-white" : "bg-white"}`} onClick={() => setSurface("grass")}>Pasto</button>
+                <button className={`px-3 py-1.5 rounded-xl border ${surface === "turf" ? "bg-black text-white" : "bg-white"}`} onClick={() => setSurface("turf")}>Turf</button>
+              </div>
+            </div>
+
+            {/* Averages */}
+            <div>
+              <label className="text-sm">Yardas promedio en pasto</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={avgGrass} onChange={(e) => setAvgGrass(Number(e.target.value))} />
+            </div>
+            <div>
+              <label className="text-sm">Yardas promedio en turf</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={avgTurf} onChange={(e) => setAvgTurf(Number(e.target.value))} />
+            </div>
+
+            {/* Range for SD */}
+            <div>
+              <label className="text-sm">Menor cantidad de yardas (mín)</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={minY} onChange={(e) => setMinY(Number(e.target.value))} />
+            </div>
+            <div>
+              <label className="text-sm">Mayor cantidad de yardas (máx)</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={maxY} onChange={(e) => setMaxY(Number(e.target.value))} />
+            </div>
+
+            {/* Defense */}
+            <div>
+              <label className="text-sm">Yardas que permite la defensa (rubro)</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={defenseAllow} onChange={(e) => setDefenseAllow(Number(e.target.value))} />
+            </div>
+            <div>
+              <label className="text-sm">Promedio de liga (mismo rubro)</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={leagueMean} onChange={(e) => setLeagueMean(Number(e.target.value))} />
+            </div>
+            <div className="md:col-span-2">
+              <label className="text-sm">Elasticidad de ajuste defensa ({elasticity.toFixed(2)})</label>
+              <input type="range" min={0} max={1} step={0.05} className="mt-2 w-full" value={elasticity} onChange={(e) => setElasticity(Number(e.target.value))} />
+            </div>
+
+            {/* Weather & time */}
+            <div>
+              <label className="text-sm">Temperatura (°C)</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={tempC} onChange={(e) => setTempC(Number(e.target.value))} />
+            </div>
+            <div>
+              <label className="text-sm">Hora inicio local (0–23)</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={hourLocal} onChange={(e) => setHourLocal(Number(e.target.value))} />
+            </div>
+
+            {/* Thresholds */}
+            <div className="md:col-span-2">
+              <label className="text-sm">Umbrales clave (separados por comas)</label>
+              <input type="text" className="mt-1 w-full rounded-xl border px-3 py-2" value={thresholdsText} onChange={(e) => setThresholdsText(e.target.value)} placeholder="50,75,100,125" />
+            </div>
+
+            {/* Grid for CSV/Chart */}
+            <div>
+              <label className="text-sm">Grilla: mínimo</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={gridMin} onChange={(e) => setGridMin(Number(e.target.value))} />
+            </div>
+            <div>
+              <label className="text-sm">Grilla: máximo</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={gridMax} onChange={(e) => setGridMax(Number(e.target.value))} />
+            </div>
+            <div className="md:col-span-2">
+              <label className="text-sm">Grilla: paso</label>
+              <input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={gridStep} onChange={(e) => setGridStep(Number(e.target.value))} />
+            </div>
+          </div>
+
+          <div className="mt-5 flex gap-3">
+            <button onClick={downloadCSV} className="px-4 py-2 rounded-xl bg-neutral-900 text-white shadow hover:opacity-90">Descargar CSV</button>
+          </div>
+        </section>
+
+        {/* Summary + table */}
+        <section className="lg:col-span-3 bg-white border rounded-2xl p-5 shadow-sm">
+          <h2 className="text-lg font-medium mb-4">Resumen</h2>
+          <ul className="space-y-2">
+            {summary.map((s) => (
+              <li key={s.label} className="flex justify-between text-sm">
+                <span className="text-neutral-500">{s.label}</span>
+                <span className="font-medium">{s.value}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6">
+            <h3 className="text-sm font-semibold mb-2">Probabilidades clave</h3>
+            <div className="border rounded-xl overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-neutral-50">
+                  <tr>
+                    <th className="text-left px-3 py-2">Umbral (yd)</th>
+                    <th className="text-right px-3 py-2">P(Y ≥ X)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableData.map((r) => (
+                    <tr key={r.threshold} className="border-t">
+                      <td className="px-3 py-2">{r.threshold}</td>
+                      <td className="px-3 py-2 text-right">{formatPct(r.probability, 1)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* Chart */}
+        <section className="lg:col-span-4 bg-white border rounded-2xl p-5 shadow-sm">
+          <h2 className="text-lg font-medium mb-4">Curva de probabilidad P(Y ≥ X)</h2>
+          <div className="h-72">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData} margin={{ top: 10, right: 10, bottom: 10, left: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="x" tick={{ fontSize: 12 }} label={{ value: "Umbral (yd)", position: "insideBottom", dy: 10 }} />
+                <YAxis domain={[0, 1]} tickFormatter={(v) => `${Math.round(v * 100)}` + "%"} tick={{ fontSize: 12 }} />
+                <Tooltip formatter={(v) => formatPct(Number(v), 2)} labelFormatter={(l) => `Umbral: ${l} yd`} />
+                <Line type="monotone" dataKey="p" strokeWidth={2} dot={false} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          <p className="text-xs text-neutral-500 mt-3">Modelo: Normal(μ, σ) con μ ajustada por defensa, superficie, temperatura y horario. σ estimada vía rango ≈ (máx − mín)/4. Parámetros editables arriba.</p>
+        </section>
+      </main>
+
+      <footer className="p-6 text-center text-xs text-neutral-500">
+        Hecho para análisis rápidos. No constituye consejo de apuestas.
+      </footer>
+    </div>
+  );
+}
