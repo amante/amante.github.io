@@ -357,6 +357,85 @@
 
     function getTeamById(id){ return state.items.find(t=>t.id===id); }
 
+    // ===== Modelo de probabilidad (heurístico) =====
+    function leagueStats(keys){
+      // Calcula media y desvío estándar para las métricas disponibles
+      const items = state.items;
+      const means = {}; const stds = {};
+      for(const k of keys){
+        const vals = items.map(it=> it[k]).filter(v=> typeof v==='number' && Number.isFinite(v));
+        const mean = vals.length? vals.reduce((a,b)=>a+b,0)/vals.length : 0;
+        const variance = vals.length? vals.reduce((a,b)=> a + Math.pow(b-mean,2), 0) / vals.length : 0;
+        means[k] = mean; stds[k] = Math.sqrt(variance) || 1; // evita división por 0
+      }
+      return {means, stds};
+    }
+
+    function z(v, mean, sd){ if(v==null || !Number.isFinite(v)) return 0; return (v-mean)/ (sd || 1); }
+
+    function modelScore(A,B){
+      // Definimos métricas: para defensa usamos el signo para que "más alto = mejor"
+      const KEYS = ['rating','off_pts','off_yds','off_rush','off_pass','off_3rd','def_pts','def_yds','def_rush','def_pass','def_sacks','def_ta'];
+      const {means, stds} = leagueStats(KEYS);
+      const featA = {
+        rating: z(A.rating??0, means.rating, stds.rating),
+        off_pts: z(A.off_pts, means.off_pts, stds.off_pts),
+        off_yds: z(A.off_yds, means.off_yds, stds.off_yds),
+        off_rush: z(A.off_rush, means.off_rush, stds.off_rush),
+        off_pass: z(A.off_pass, means.off_pass, stds.off_pass),
+        off_3rd: z(A.off_3rd, means.off_3rd, stds.off_3rd),
+        def_pts: -z(A.def_pts, means.def_pts, stds.def_pts), // menos puntos permitidos = mejor
+        def_yds: -z(A.def_yds, means.def_yds, stds.def_yds),
+        def_rush: -z(A.def_rush, means.def_rush, stds.def_rush),
+        def_pass: -z(A.def_pass, means.def_pass, stds.def_pass),
+        def_sacks: z(A.def_sacks, means.def_sacks, stds.def_sacks),
+        def_ta: z(A.def_ta, means.def_ta, stds.def_ta),
+      };
+      const featB = {
+        rating: z(B.rating??0, means.rating, stds.rating),
+        off_pts: z(B.off_pts, means.off_pts, stds.off_pts),
+        off_yds: z(B.off_yds, means.off_yds, stds.off_yds),
+        off_rush: z(B.off_rush, means.off_rush, stds.off_rush),
+        off_pass: z(B.off_pass, means.off_pass, stds.off_pass),
+        off_3rd: z(B.off_3rd, means.off_3rd, stds.off_3rd),
+        def_pts: -z(B.def_pts, means.def_pts, stds.def_pts),
+        def_yds: -z(B.def_yds, means.def_yds, stds.def_yds),
+        def_rush: -z(B.def_rush, means.def_rush, stds.def_rush),
+        def_pass: -z(B.def_pass, means.def_pass, stds.def_pass),
+        def_sacks: z(B.def_sacks, means.def_sacks, stds.def_sacks),
+        def_ta: z(B.def_ta, means.def_ta, stds.def_ta),
+      };
+      // Pesos heurísticos (suman ~5.0) — puedes ajustarlos
+      const W = {
+        rating: 1.2,
+        off_pts: 0.8,
+        off_yds: 0.4,
+        off_rush: 0.2,
+        off_pass: 0.2,
+        off_3rd: 0.3,
+        def_pts: 0.8,
+        def_yds: 0.4,
+        def_rush: 0.2,
+        def_pass: 0.2,
+        def_sacks: 0.3,
+        def_ta: 0.3,
+      };
+      let score=0;
+      for(const k in W){ score += W[k] * ((featA[k]||0) - (featB[k]||0)); }
+      // Escala suave para evitar extremos con pocos datos
+      const scale = 0.9;
+      return score * scale;
+    }
+
+    function sigmoid(x){ return 1/(1+Math.exp(-x)); }
+
+    function modelProbabilities(A,B){
+      const s = modelScore(A,B);
+      const pA = sigmoid(s);
+      const pB = 1 - pA;
+      return {pA, pB, score:s};
+    }
+
     function compareTeams(A,B){
       if(!A || !B) return null;
       const metrics = [
@@ -382,7 +461,8 @@
         const diff = (va==null || vb==null)? null : Math.round((va - vb)*10)/10;
         return {label:m.label, va, vb, better, diff};
       });
-      return {rows, scoreA, scoreB};
+      const probs = modelProbabilities(A,B);
+      return {rows, scoreA, scoreB, probs};
     }
 
     function renderComparison(){
@@ -392,11 +472,31 @@
       if(!A || !B){ out.innerHTML = '<p class="hint">Selecciona Equipo A y Equipo B y pulsa <b>Comparar</b>.</p>'; return; }
       const cmp = compareTeams(A,B);
       const badge = (w)=> w==='A'? 'style="background:#0f2a1a;border-color:#1f5c3b"' : w==='B'? 'style="background:#2a1a0f;border-color:#5c3b1f"' : '';
+      const pct = (x)=> (x*100).toFixed(1)+'%';
       out.innerHTML = `
         <div class="row" style="margin-bottom:10px">
           <div class="pill" style="display:flex; gap:8px; align-items:center; justify-content:center">🏈 <b>${escapeHTML(A.team)}</b></div>
           <div class="pill" style="display:flex; gap:8px; align-items:center; justify-content:center">🏈 <b>${escapeHTML(B.team)}</b></div>
         </div>
+
+        <div class="card" style="background:#0e172c;border:1px solid rgba(255,255,255,.06);margin-bottom:12px">
+          <div class="row" style="align-items:center">
+            <div>
+              <div class="hint" style="margin-bottom:6px">Probabilidad de victoria (modelo por promedios)</div>
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; align-items:center">
+                <div><b>${escapeHTML(A.team)}</b></div>
+                <div style="text-align:right"><b>${escapeHTML(B.team)}</b></div>
+                <div style="grid-column:1/-1; height:14px; background:#0c1322; border-radius:999px; overflow:hidden; border:1px solid rgba(255,255,255,.08)">
+                  <div style="height:100%; width:${(cmp.probs.pA*100).toFixed(1)}%; background:linear-gradient(90deg,#1f54ff,#54d28a)"></div>
+                </div>
+                <div>${pct(cmp.probs.pA)}</div>
+                <div style="text-align:right">${pct(cmp.probs.pB)}</div>
+              </div>
+              <div class="hint" style="margin-top:6px">Nota: Heurístico. Usa z-scores y pesos sobre PTS/YDS of/def, 3rd%, sacks, takeaways y un rating compuesto.</div>
+            </div>
+          </div>
+        </div>
+
         <div style="overflow:auto">
           <table style="width:100%">
             <thead>
@@ -420,8 +520,8 @@
           </table>
         </div>
         <div class="btns" style="margin-top:10px">
-          <span class="pill">Marcadores: ${cmp.scoreA} – ${cmp.scoreB}</span>
-          <span class="hint">(Se otorga 1 punto por cada métrica en la que un equipo es superior)</span>
+          <span class="pill">Marcadores de métricas: ${cmp.scoreA} – ${cmp.scoreB}</span>
+          <span class="pill">Pick sugerido: <b>${cmp.probs.pA>=cmp.probs.pB? escapeHTML(A.team): escapeHTML(B.team)}</b></span>
         </div>
       `;
     }
@@ -433,11 +533,13 @@
       const date = $('#match_date').value || '';
       const site = $('#match_site').value.trim();
       const cmp = compareTeams(A,B);
+      const p = cmp?.probs || {pA:0.5,pB:0.5};
+      const pStr = `${(p.pA*100).toFixed(1)}%–${(p.pB*100).toFixed(1)}%`;
       const m = {
         id: crypto.randomUUID(),
         aId, bId, date, site,
         createdAt: Date.now(),
-        summary: `${A.team} vs ${B.team} — ${cmp.scoreA}-${cmp.scoreB}`
+        summary: `${A.team} vs ${B.team} — Prob: ${pStr}`
       };
       state.matches.unshift(m);
       saveMatches();
@@ -522,12 +624,9 @@
         const v = it[k];
         if(v==null) return '';
         const s = typeof v==='number'? v : String(v).replaceAll('"','""');
-        return /[",
-]/.test(String(s))? `"${s}"` : s;
-      }).join(',')).join('
-');
-      return head+'
-'+body;
+        return /[",]/.test(String(s))? `"${s}"` : s;
+      }).join(',')).join('');
+      return head+''+body;
     }
 
     function download(filename, text){
@@ -538,9 +637,7 @@
 
     function parseCSV(text){
       // Muy simple parser para CSV con comillas
-      const lines = text.split(/
-?
-/).filter(l=>l.trim().length);
+      const lines = text.split(/?/).filter(l=>l.trim().length);
       const head = splitCSVLine(lines.shift());
       const rows = lines.map(splitCSVLine);
       const idx = (k)=> head.indexOf(k);
@@ -577,6 +674,9 @@
     }
 
     // init
+    load();
+    render();
+  // init END
     load();
     render();
   </script>
