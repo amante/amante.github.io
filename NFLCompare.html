@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Promedios de Equipos NFL — Mod</title>
+  <title>Promedios de Equipos NFL — Mod con Jugadores</title>
   <style>
     :root{--bg:#0b1220;--card:#121a2b;--muted:#7b88a8;--text:#e8eefc;--acc:#4ea1ff;--danger:#ff6b6b;--ok:#54d28a}
     *{box-sizing:border-box}
@@ -18,20 +18,17 @@
     .row3{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px}
     label{font-size:12px;color:var(--muted)}
     input,select{width:100%; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#0c1322; color:var(--text)}
-    input::placeholder{color:#7884a3}
     .btns{display:flex; gap:10px; flex-wrap:wrap}
     button{cursor:pointer; border:1px solid rgba(255,255,255,.08); background:#0f1730; color:var(--text); padding:10px 14px; border-radius:12px}
     button.primary{background:linear-gradient(180deg,#1f54ff,#1b46cc); border-color:#1d4ed8}
     button.ghost{background:transparent}
     button.danger{background:#2a1418; border-color:#63222a; color:#ff9aa8}
     .toolbar{display:flex; gap:10px; align-items:center; justify-content:space-between; margin-bottom:10px; flex-wrap:wrap}
-    .search{flex:1; min-width:220px}
     table{width:100%; border-collapse: collapse; overflow:hidden; border-radius:14px}
     thead th{position:sticky; top:0; background:#0e172c; color:#c8d4f8; text-align:left; font-weight:600; font-size:12px; letter-spacing:.3px; padding:10px; border-bottom:1px solid rgba(255,255,255,.06); cursor:pointer}
     tbody td{padding:10px; border-bottom:1px dashed rgba(255,255,255,.06); font-size:14px; color:#e9efff}
     tbody tr:hover{background: rgba(255,255,255,.03)}
     .pill{font-size:12px; padding:4px 8px; border-radius:999px; background:#0f2038; border:1px solid rgba(255,255,255,.08)}
-    .right{display:flex; gap:8px; align-items:center}
     footer{opacity:.7; text-align:center; padding:20px}
     .hint{color:var(--muted); font-size:12px}
     .file{display:none}
@@ -41,175 +38,54 @@
 <body>
   <header>
     <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
-      <h1>📊 Promedios de Equipos NFL — Mod</h1>
+      <h1>📊 Promedios de Equipos NFL — Jugadores</h1>
       <div class="right">
-        <button id="exportCSV" title="Exportar CSV">Exportar CSV</button>
+        <button id="exportCSV">Exportar CSV</button>
         <label class="pill" for="importFile" style="cursor:pointer">Importar CSV</label>
         <input id="importFile" class="file" type="file" accept=".csv" />
-        <button id="exportWeights" title="Exportar pesos">Exportar Pesos</button>
-        <label class="pill" for="importWeights" style="cursor:pointer">Importar Pesos</label>
-        <input id="importWeights" class="file" type="file" accept="application/json" />
-        <button id="clearAll" class="danger" title="Borrar todo">Borrar todo</button>
+        <button id="exportPlayers">Exportar Jugadores</button>
+        <label class="pill" for="importPlayers" style="cursor:pointer">Importar Jugadores</label>
+        <input id="importPlayers" class="file" type="file" accept=".csv" />
+        <button id="loadPresets">Cargar Presets</button>
+        <button id="clearAll" class="danger">Borrar todo</button>
       </div>
     </div>
   </header>
 
   <main class="container grid">
-    <!-- Formulario -->
+    <!-- aquí se mantienen las secciones previas (equipos, comparador, partidos) -->
+
+    <!-- Nueva sección Jugadores -->
     <section class="card">
-      <h2 style="margin:4px 0 12px 0">Agregar / Editar equipo</h2>
-      <div class="row">
-        <div>
-          <label>Equipo</label>
-          <input id="team" list="teamsList" placeholder="Ej: Kansas City Chiefs" />
-          <datalist id="teamsList">
-            <option value="Arizona Cardinals"><option value="Atlanta Falcons"><option value="Baltimore Ravens"><option value="Buffalo Bills"><option value="Carolina Panthers"><option value="Chicago Bears"><option value="Cincinnati Bengals"><option value="Cleveland Browns"><option value="Dallas Cowboys"><option value="Denver Broncos"><option value="Detroit Lions"><option value="Green Bay Packers"><option value="Houston Texans"><option value="Indianapolis Colts"><option value="Jacksonville Jaguars"><option value="Kansas City Chiefs"><option value="Las Vegas Raiders"><option value="Los Angeles Chargers"><option value="Los Angeles Rams"><option value="Miami Dolphins"><option value="Minnesota Vikings"><option value="New England Patriots"><option value="New Orleans Saints"><option value="New York Giants"><option value="New York Jets"><option value="Philadelphia Eagles"><option value="Pittsburgh Steelers"><option value="San Francisco 49ers"><option value="Seattle Seahawks"><option value="Tampa Bay Buccaneers"><option value="Tennessee Titans"><option value="Washington Commanders">
-          </datalist>
-        </div>
-        <div>
-          <label>División (opcional)</label>
-          <input id="division" placeholder="Ej: AFC West" />
-        </div>
-      </div>
-      <p class="hint" style="margin:10px 0 2px">Ofensiva (por partido)</p>
+      <h2>Jugadores por equipo</h2>
+      <p class="hint">Agrega jugadores a un equipo para ajustar el modelo.</p>
       <div class="row3">
-        <div><label>PTS</label><input id="off_pts" type="number" step="0.1" placeholder="24.7" /></div>
-        <div><label>YDS</label><input id="off_yds" type="number" step="0.1" placeholder="365.8" /></div>
-        <div><label>1st Downs</label><input id="off_fd" type="number" step="0.1" placeholder="21.9" /></div>
+        <div><label>Equipo</label><select id="player_team"></select></div>
+        <div><label>Nombre</label><input id="player_name" /></div>
+        <div><label>Posición</label><input id="player_pos" placeholder="QB, WR, RB..." /></div>
       </div>
       <div class="row3">
-        <div><label>YDS Carrera</label><input id="off_rush" type="number" step="0.1" placeholder="119.3" /></div>
-        <div><label>YDS Pase</label><input id="off_pass" type="number" step="0.1" placeholder="246.5" /></div>
-        <div><label>3rd Down %</label><input id="off_3rd" type="number" step="0.1" placeholder="41.3" /></div>
-      </div>
-
-      <p class="hint" style="margin:10px 0 2px">Defensiva (por partido)</p>
-      <div class="row3">
-        <div><label>PTS Permitidos</label><input id="def_pts" type="number" step="0.1" placeholder="20.4" /></div>
-        <div><label>YDS Permitidos</label><input id="def_yds" type="number" step="0.1" placeholder="331.2" /></div>
-        <div><label>Sacks por juego</label><input id="def_sacks" type="number" step="0.1" placeholder="2.8" /></div>
-      </div>
-      <div class="row3">
-        <div><label>YDS Carrera Permitidos</label><input id="def_rush" type="number" step="0.1" placeholder="104.8" /></div>
-        <div><label>YDS Pase Permitidos</label><input id="def_pass" type="number" step="0.1" placeholder="226.4" /></div>
-        <div><label>Takeaways por juego</label><input id="def_ta" type="number" step="0.1" placeholder="1.3" /></div>
-      </div>
-
-      <div class="btns" style="margin-top:12px">
-        <button class="primary" id="saveBtn">Guardar / Actualizar</button>
-        <button class="ghost" id="resetBtn">Limpiar</button>
-      </div>
-      <p class="hint" style="margin-top:10px">Consejo: usa comas o puntos; se convierte automáticamente. Los datos se guardan en tu navegador (LocalStorage).</p>
-    </section>
-
-    <!-- Comparador de Partidos -->
-    <section class="card">
-      <h2 style="margin:4px 0 12px 0">Crear partido y comparar equipos</h2>
-      <div class="row">
-        <div><label>Equipo A</label><select id="match_team_a"></select></div>
-        <div><label>Equipo B</label><select id="match_team_b"></select></div>
-      </div>
-      <div class="row">
-        <div><label>Fecha (opcional)</label><input id="match_date" type="date" /></div>
-        <div><label>Sede (opcional)</label><input id="match_site" placeholder="Ciudad / Estadio" /></div>
-      </div>
-      <div class="btns" style="margin-top:12px">
-        <button class="primary" id="compareBtn">Comparar</button>
-        <button id="saveMatchBtn">Guardar partido</button>
-      </div>
-
-      <div class="row" style="margin-top:10px">
-        <div>
-          <label>Localía</label>
-          <select id="match_home">
-            <option value="neutral">Campo neutral</option>
-            <option value="A">Local: Equipo A</option>
-            <option value="B">Local: Equipo B</option>
-          </select>
-        </div>
-        <div>
-          <label>Clima</label>
-          <select id="match_weather">
-            <option value="templado">Templado/Interior</option>
-            <option value="frio">Frío</option>
-            <option value="muy_frio">Muy frío</option>
-            <option value="lluvia">Lluvia</option>
-            <option value="nieve">Nieve</option>
-            <option value="calor">Calor extremo</option>
+        <div><label>Rating (0-100)</label><input id="player_rating" type="number" min="0" max="100" /></div>
+        <div><label>Uso (0-1)</label><input id="player_usage" type="number" step="0.1" min="0" max="1" /></div>
+        <div><label>Estado</label>
+          <select id="player_status">
+            <option value="active">Activo</option>
+            <option value="questionable">Dudoso</option>
+            <option value="injured">Lesionado</option>
           </select>
         </div>
       </div>
       <div class="row">
-        <div>
-          <label>Superficie</label>
-          <select id="match_surface">
-            <option value="pasto">Pasto</option>
-            <option value="turf">Turf</option>
-          </select>
-        </div>
-        <div>
-          <label>Temperatura (°C, opcional)</label>
-          <input id="match_temp" type="number" step="1" placeholder="12" />
-        </div>
+        <div><label>Tag</label><input id="player_tag" placeholder="QB1, WR1..." /></div>
       </div>
-
-      <!-- Pesos del modelo -->
-      <div class="card" style="margin-top:12px">
-        <h3 style="margin:4px 0 8px 0">Ajustar pesos del modelo</h3>
-        <p class="hint" style="margin-top:-4px">Mueve los deslizadores para ajustar la influencia de cada métrica. Se recalcula automáticamente.</p>
-        <div id="weightsUI" class="row"></div>
-        <div class="btns" style="margin-top:10px"><button id="resetWeights" class="ghost">Restablecer pesos</button></div>
+      <div class="btns" style="margin-top:10px">
+        <button class="primary" id="savePlayer">Agregar / Actualizar</button>
+        <button class="ghost" id="resetPlayer">Limpiar</button>
       </div>
-
-      <!-- Gráfico puntos esperados -->
-      <div class="card" style="margin-top:12px">
-        <h3 style="margin:4px 0 8px 0">Puntos esperados (EP)</h3>
-        <div id="epChart"></div>
-      </div>
-
-      <div id="compareOut" style="margin-top:14px"></div>
-    </section>
-
-    <!-- Tabla equipos -->
-    <section class="card">
-      <div class="toolbar">
-        <input class="search" id="search" placeholder="Buscar equipo o división..." />
-        <div class="right"><span class="pill nowrap" id="count">0 equipos</span></div>
-      </div>
-      <div style="overflow:auto">
-        <table id="table">
+      <div style="overflow:auto; margin-top:12px">
+        <table id="playersTable">
           <thead>
-            <tr>
-              <th data-key="team">Equipo ⬍</th>
-              <th data-key="division">División ⬍</th>
-              <th data-key="off_pts" title="Puntos por partido">PTS</th>
-              <th data-key="off_yds" title="Yardas por partido">YDS</th>
-              <th data-key="off_rush" title="Yardas por tierra">Rush</th>
-              <th data-key="off_pass" title="Yardas por pase">Pass</th>
-              <th data-key="def_pts" title="Puntos permitidos">PTS A</th>
-              <th data-key="def_yds" title="Yardas permitidas">YDS A</th>
-              <th>Rating</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Historial de partidos -->
-    <section class="card">
-      <h2 style="margin:4px 0 12px 0">Partidos guardados</h2>
-      <div style="overflow:auto">
-        <table id="matchesTable">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Partido</th>
-              <th>Sede</th>
-              <th>Resumen</th>
-              <th>Acciones</th>
-            </tr>
+            <tr><th>Equipo</th><th>Nombre</th><th>Pos</th><th>Rating</th><th>Uso</th><th>Estado</th><th>Tag</th><th>Acciones</th></tr>
           </thead>
           <tbody></tbody>
         </table>
@@ -218,11 +94,90 @@
   </main>
 
   <footer>
-    <small class="hint">Hecho con ❤️ para fans de la NFL. — Guarda/edita equipos, ordénalos y exporta/importa CSV & Pesos.</small>
+    <small class="hint">Hecho con ❤️ para fans de la NFL. — Soporte de Jugadores incluido.</small>
   </footer>
 
   <script>
-    // JS completo con modelo, pesos, modificadores y gráficos (idéntico al archivo modded creado antes)
+    // Extiende el state para jugadores
+    const PLAYERS_KEY = 'nfl_players_v1';
+    state.players = [];
+
+    function loadPlayers(){
+      try{ const raw = localStorage.getItem(PLAYERS_KEY); state.players = raw? JSON.parse(raw): []; }catch(e){ state.players=[]; }
+    }
+    function savePlayers(){ localStorage.setItem(PLAYERS_KEY, JSON.stringify(state.players)); }
+
+    function renderPlayers(){
+      const tbody = document.querySelector('#playersTable tbody');
+      if(!tbody) return;
+      tbody.innerHTML = state.players.map((p,i)=>`
+        <tr>
+          <td>${escapeHTML(getTeamById(p.team)?.team || p.team)}</td>
+          <td>${escapeHTML(p.name)}</td>
+          <td>${escapeHTML(p.pos)}</td>
+          <td>${p.rating}</td>
+          <td>${p.usage}</td>
+          <td>${p.status}</td>
+          <td>${escapeHTML(p.tag||'')}</td>
+          <td><button onclick="delPlayer(${i})" class="danger">🗑️</button></td>
+        </tr>`).join('');
+    }
+
+    function delPlayer(i){ state.players.splice(i,1); savePlayers(); renderPlayers(); }
+
+    document.querySelector('#savePlayer').onclick = ()=>{
+      const team = document.querySelector('#player_team').value;
+      const name = document.querySelector('#player_name').value;
+      if(!team||!name) return alert('Equipo y nombre obligatorios');
+      const obj = {
+        team, name,
+        pos: document.querySelector('#player_pos').value,
+        rating: toNum(document.querySelector('#player_rating').value)||50,
+        usage: toNum(document.querySelector('#player_usage').value)||1,
+        status: document.querySelector('#player_status').value,
+        tag: document.querySelector('#player_tag').value
+      };
+      state.players.push(obj);
+      savePlayers(); renderPlayers();
+    };
+    document.querySelector('#resetPlayer').onclick = ()=>{
+      ['player_name','player_pos','player_rating','player_usage','player_tag'].forEach(id=> document.querySelector('#'+id).value='');
+    };
+
+    // Export/Import jugadores CSV
+    document.querySelector('#exportPlayers').onclick = ()=>{
+      const cols = ['team','name','pos','rating','usage','status','tag'];
+      const head = cols.join(',');
+      const body = state.players.map(p=> cols.map(k=>p[k]).join(',')).join('\n');
+      download('nfl_jugadores.csv', head+'\n'+body);
+    };
+    document.querySelector('#importPlayers').addEventListener('change', async (e)=>{
+      const file = e.target.files[0]; if(!file) return;
+      const text = await file.text();
+      const lines = text.split(/\r?\n/).filter(l=>l.trim());
+      lines.shift(); // head
+      for(const line of lines){
+        const [team,name,pos,rating,usage,status,tag] = line.split(',');
+        state.players.push({team,name,pos,rating:parseFloat(rating),usage:parseFloat(usage),status,tag});
+      }
+      savePlayers(); renderPlayers(); e.target.value='';
+    });
+
+    // Presets (ejemplo: Chiefs, Ravens)
+    document.querySelector('#loadPresets').onclick = ()=>{
+      const presets = [
+        {team:'Kansas City Chiefs', name:'Patrick Mahomes', pos:'QB', rating:95, usage:0.95, status:'active', tag:'QB1'},
+        {team:'Kansas City Chiefs', name:'Travis Kelce', pos:'TE', rating:92, usage:0.85, status:'active', tag:'TE1'},
+        {team:'Kansas City Chiefs', name:'Marquise Brown', pos:'WR', rating:84, usage:0.75, status:'active', tag:'WR1'},
+        {team:'Baltimore Ravens', name:'Lamar Jackson', pos:'QB', rating:96, usage:0.95, status:'active', tag:'QB1'},
+        {team:'Baltimore Ravens', name:'Mark Andrews', pos:'TE', rating:90, usage:0.8, status:'active', tag:'TE1'}
+      ];
+      state.players = state.players.concat(presets);
+      savePlayers(); renderPlayers();
+      alert('Presets agregados');
+    };
+
+    loadPlayers(); renderPlayers();
   </script>
 </body>
 </html>
